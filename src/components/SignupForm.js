@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import "../App.css";
-import bgimg1 from "../images/bgimg1.webp";
+import "../styles/SignUpForm.css";
+import bgimg1 from "../images/img1.jpg";
 
 const SignupForm = () => {
   const [formData, setFormData] = useState({
@@ -24,6 +24,7 @@ const SignupForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    alert("Your account created successfully");
     // You can add your form submission logic here
     console.log(formData);
   };

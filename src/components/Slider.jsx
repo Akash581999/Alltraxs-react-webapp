@@ -1,16 +1,16 @@
 import React from "react";
-import img1 from "../images/img1.jpg";
-import img2 from "../images/img2.jpg";
-import img3 from "../images/img3.jpg";
+// import img1 from "../images/img1.jpg";
+// import img2 from "../images/img2.jpg";
+// import img3 from "../images/img3.jpg";
 
 const Slider = (props) => {
   return (
     <>
       <div className={`bg-${props.mode}`}>
-        <div className="container">
+        <div className="container border-success">
           <div
             id="carouselExampleCaptions"
-            className="carousel slide"
+            className="carousel carousel-dark slide"
             data-bs-ride="carousel"
           >
             <div className="carousel-indicators">
@@ -37,7 +37,12 @@ const Slider = (props) => {
             </div>
             <div className="carousel-inner">
               <div className="carousel-item active">
-                <img src={img1} className="d-block w-100" alt="..." />
+                {/* <img src={img1} className="d-block w-100" alt="..." /> */}
+                <img
+                  className="musicCover rounded"
+                  src={"https://picsum.photos/2400/800"}
+                  alt="bgimages"
+                />
                 <div className="carousel-caption d-none d-md-block">
                   <h5>First slide label</h5>
                   <p>
@@ -46,7 +51,12 @@ const Slider = (props) => {
                 </div>
               </div>
               <div className="carousel-item">
-                <img src={img2} className="d-block w-100" alt="..." />
+                {/* <img src={img2} className="d-block w-100" alt="..." /> */}
+                <img
+                  className="musicCover rounded"
+                  src={"https://picsum.photos/2400/800"}
+                  alt="bgimages"
+                />
                 <div className="carousel-caption d-none d-md-block">
                   <h5>Second slide label</h5>
                   <p>
@@ -56,7 +66,12 @@ const Slider = (props) => {
                 </div>
               </div>
               <div className="carousel-item">
-                <img src={img3} className="d-block w-100" alt="..." />
+                {/* <img src={img3} className="d-block w-100" alt="..." /> */}
+                <img
+                  className="musicCover rounded"
+                  src={"https://picsum.photos/2400/800"}
+                  alt="bgimages"
+                />
                 <div className="carousel-caption d-none d-md-block">
                   <h5>Third slide label</h5>
                   <p>

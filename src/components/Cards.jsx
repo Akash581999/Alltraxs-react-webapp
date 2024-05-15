@@ -23,7 +23,7 @@ const Cards = (props) => {
           <div className="row row-cols-md-8 g-2">
             <div className="col">
               <div
-                className="card h-100 text-light bg-dark border-light"
+                className="card h-100 text-light bg-dark border-success"
                 style={{ maxWidth: "360px" }}
               >
                 <img
@@ -33,11 +33,13 @@ const Cards = (props) => {
                   alt="songpic"
                   style={{ height: 240 }}
                 />
-                <div className="card-body text-light bg-dark border-light">
+                <div className="card-body text-light bg-dark border-success">
                   <h5 className="card-title">{props.title}</h5>
                   <p className="card-text">{props.description}</p>
                 </div>
-                <div className="card-footer bg-dark border-light">
+                <div className="card-footer bg-dark border-success">
+                <small className="text-secondary">{props.status}</small>
+                &nbsp;
                   <button
                     onClick={PlaySong}
                     type="button"
@@ -45,8 +47,6 @@ const Cards = (props) => {
                   >
                     Play now
                   </button>
-                  &nbsp;
-                  <small className="text-secondary">{props.status}</small>
                 </div>
               </div>
             </div>
