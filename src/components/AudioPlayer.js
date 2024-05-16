@@ -3,7 +3,7 @@ import useSound from "use-sound"; // for handling the sound
 import song from "../audios/song1.mp3"; // importing the music
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai"; // icons for play and pause
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi"; // icons for next and previous track
-import { IconContext } from "react-icons"; // for customizing the icons
+// import { IconContext } from "react-icons"; // for customizing the icons
 import "../styles/audioplayer.css"; // for audioplayer css
 
 const AudioPlayer = () => {
@@ -69,7 +69,7 @@ const AudioPlayer = () => {
         <span className="subTitle text-light">Benson Boone</span>
       </div>
       {/* Play buttons */}
-      <div>
+      {/* <div>
         <button className="playButton">
           <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
             <BiSkipPrevious />
@@ -92,6 +92,18 @@ const AudioPlayer = () => {
           <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
             <BiSkipNext />
           </IconContext.Provider>
+        </button>
+      </div> */}
+      {/*Old Play buttons */}
+      <div className="d-flex flex-row">
+        <button className="btn btn-success mx-1">
+          <BiSkipPrevious />
+        </button>
+        <button className="btn btn-success mx-1" onClick={playingButton}>
+          {isPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
+        </button>
+        <button className="btn btn-success mx-1">
+          <BiSkipNext />
         </button>
       </div>
       <div>

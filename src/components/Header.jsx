@@ -1,6 +1,6 @@
 import React from "react";
 // import { GiMusicSpell } from "react-icons/gi";
-import music from "../images/music.png";
+import AllTraxslogo from "../images/AllTraxslogo.png";
 import { Link } from "react-router-dom";
 import SearchSongs from "./SearchSongs";
 
@@ -12,10 +12,9 @@ const Header = (props) => {
         className={`navbar navbar-expand-lg navbar-dark bg-dark`}
       >
         <div className="container-fluid">
-          <button className="navbar-toggler" type="button"></button>
           {/* <GiMusicSpell /> */}
-          <a className="navbar-brand text-decoration-none fs-3" href="/" to="/">
-            <img src={music} alt="logo" className="mx-3" />
+          <img src={AllTraxslogo} alt="logo" className="mx-3" />
+          <a className="navbar-brand mb-3" href="/">
             <span
               style={{
                 color: "#8b08ff",
@@ -26,6 +25,17 @@ const Header = (props) => {
               AllTraxs
             </span>
           </a>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
@@ -49,15 +59,6 @@ const Header = (props) => {
               <div className="search">
                 <SearchSongs />
               </div>
-              {/* <input
-                className="form-control me-2"
-                type="search"
-                placeholder="Search songs..."
-                aria-label="Search"
-              />
-              <button className="btn btn-info mx-1" type="submit">
-                <i className="fa fa-search"></i>
-              </button> */}
               {/* Login button */}
               <div className="login">
                 <button

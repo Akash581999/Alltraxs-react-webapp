@@ -4,7 +4,7 @@ import { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import CardList from "./../components/CardList";
-import SimpleMusicPlayer from "./../components/SimpleMusicPlayer";
+import MusicPlayer from "./../components/MusicPlayer";
 
 const HomeScreen = () => {
   let [mode, setMode] = useState(`light`); //Dark mode
@@ -20,7 +20,7 @@ const HomeScreen = () => {
     <>
       <Header mode={mode} toggleMode={toggleMode} />
       <CardList mode={mode} toggleMode={toggleMode} />
-      <SimpleMusicPlayer />
+      <MusicPlayer />
       <Footer mode={mode} toggleMode={toggleMode} />
     </>
   );

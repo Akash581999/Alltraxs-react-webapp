@@ -7,16 +7,12 @@ import SignupScreen from "./pages/SignupScreen";
 import ForgotScreen from "./pages/ForgotScreen";
 // import PlaySong from "./components/PlaySong";
 // import SearchSongs from "./components/SearchSongs";
-// import AudioPlayer from "./components/AudioPlayer";
-// import SimpleMusicPlayer from "./components/SimpleMusicPlayer";
 
 function App() {
   return (
     <>
       {/* <PlaySong /> */}
       {/* <SearchSongs /> */}
-      {/* <AudioPlayer /> */}
-      {/* <SimpleMusicPlayer /> */}
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<HomeScreen />} />
