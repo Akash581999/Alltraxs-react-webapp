@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
@@ -14,6 +15,47 @@ import song7 from "../audios/song7.mp3";
 import song8 from "../audios/song8.mp3";
 
 const songs = [song1, song2, song3, song4, song5, song6, song7, song8];
+
+//Demo songs object for testing
+// const songs = [
+//   {
+//     song: "Stay",
+//     artist: "The Kid LAROI & Justin Bieber",
+//     pic: "stay_cover.jpg",
+//   },
+//   {
+//     song: "Industry Baby",
+//     artist: "Lil Nas X & Jack Harlow",
+//     pic: "industry_baby_cover.jpg",
+//   },
+//   { song: "Good 4 U",
+//     artist: "Olivia Rodrigo",
+//     pic: "good_4_u_cover.jpg" },
+//   {
+//     song: "Kiss Me More",
+//     artist: "Doja Cat ft. SZA",
+//     pic: "kiss_me_more_cover.jpg",
+//   },
+//   {
+//     song: "Montero (Call Me By Your Name)",
+//     artist: "Lil Nas X",
+//     pic: "montero_cover.jpg",
+//   },
+//   {
+//     song: "Levitating",
+//     artist: "Dua Lipa ft. DaBaby",
+//     pic: "levitating_cover.jpg",
+//   },
+//   { song: "Butter",
+//     artist: "BTS",
+//     pic: "butter_cover.jpg" },
+//   {
+//     song: "Save Your Tears",
+//     artist: "The Weeknd & Ariana Grande",
+//     pic: "save_your_tears_cover.jpg",
+//   },
+// ];
+// console.log(songs);
 
 const MusicPlayer = (props) => {
   const [audio] = useState(new Audio(songs[0]));
@@ -79,11 +121,8 @@ const MusicPlayer = (props) => {
   };
 
   return (
-    <div
-      className="component bg-dark text-light border-success"
-      style={{ position: "sticky" }}
-    >
-      <h2 className="text-light">Playing Now</h2>
+    <div className="component bg-dark text-light border-success navbar sticky-bottom z-1">
+      <h2 className="text-light">Playing</h2>
       <div className="d-flex">
         <div className="rounded">
           <img
@@ -156,6 +195,12 @@ const MusicPlayer = (props) => {
             {Math.floor(audio.duration / 60)}:{Math.floor(audio.duration % 60)}
           </p>
         </div>
+      </div>
+      <div className="mb-1">
+        <Link to="/SubscriptionScreen" className="text-success">
+          Get subscription for <br />
+          more premium features
+        </Link>
       </div>
     </div>
   );

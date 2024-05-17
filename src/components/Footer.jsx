@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div className="" style={{ position: "sticky", top: "0", zIndex: +1 }}>
+      <div className="w-100">
         <footer className="text-center text-light bg-dark">
           <div className="container">
             <section className="">

@@ -8,8 +8,7 @@ const Header = (props) => {
   return (
     <>
       <nav
-        style={{ position: "sticky", top: "0", zIndex: +1 }}
-        className={`navbar navbar-expand-lg navbar-dark bg-dark`}
+        className={`navbar sticky-top navbar-expand-lg navbar-dark bg-dark z-1`}
       >
         <div className="container-fluid">
           {/* <GiMusicSpell /> */}

@@ -1,0 +1,43 @@
+.container {
+  display: grid; /* Default to grid layout */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  border: 1px solid #ccc;
+  padding: 10px;
+}
+
+.card img {
+  width: 100%;
+  height: auto;
+}
+
+.card h3 {
+  margin: 5px 0;
+}
+
+.card p {
+  margin: 5px 0;
+}
+
+/* Styles for grid view */
+.grid-view .container {
+  display: grid !important; /* Ensure grid layout is applied */
+  width: 100px;
+  height: 500px;
+}
+
+/* Styles for tiles view */
+.tiles-view .container {
+  display: flex !important; /* Ensure flex layout is applied */
+  flex-wrap: nowrap;
+  width: 500px;
+  height: 100px;
+}
+
+.tiles-view .card {
+  width: calc(50% - 20px); /* Adjust card width for tiles view */
+  margin-bottom: 20px;
+}

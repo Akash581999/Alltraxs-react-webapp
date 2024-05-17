@@ -50,6 +50,7 @@ function Login(props) {
                 className="form-control mb-1"
                 type="email"
                 id="email"
+                placeholder="Enter email here"
                 required
               />
               <label className="text-dark" htmlFor="pass">
@@ -59,6 +60,7 @@ function Login(props) {
                 className="form-control mb-1"
                 type="password"
                 id="pass"
+                placeholder="Enter password here"
                 required
               />
               <div className="d-flex justify-content-between mx-4 mb-2">
@@ -68,14 +70,14 @@ function Login(props) {
                   <label htmlFor="remember">Remember me</label>
                 </div>
                 <Link to="/ForgotScreen" className="nav-link active">
-                <a href="/ForgotScreen">Forgot password?</a>
+                  <a href="/ForgotScreen">Forgot password?</a>
                 </Link>
               </div>
               <button type="submit" className="btn btn-primary mb-3 w-100">
                 Sign in
               </button>
               <div className="form-text">
-                <p className="">
+                <p className="text-secondary">
                   Don't have an account?{" "}
                   <a href="/SignUpScreen">Register now.</a>
                 </p>
@@ -100,7 +102,7 @@ function Login(props) {
                 onClick={signInWithFacebook}
               >
                 <i className="fa fa-facebook">&nbsp;</i>
-                Sign in with Facebook(Meta)
+                Sign in with Facebook
               </button>
             </form>
           </div>
