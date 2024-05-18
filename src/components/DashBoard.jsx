@@ -90,8 +90,16 @@ const DashBoard = (props) => {
                   >
                     <span className="fs-4">Profile</span>
                   </a>
-                  <hr />
                 </h5>
+                <img
+                  // src="https://github.com/mdo.png"
+                  src={user}
+                  alt=""
+                  width="48"
+                  height="48"
+                  className="rounded-circle"
+                />
+                <hr />
                 <button
                   type="button"
                   className="btn-close"
@@ -103,41 +111,46 @@ const DashBoard = (props) => {
                 <ul className="nav nav-pills flex-column mb-auto">
                   <li className="nav-item">
                     <a href="/" className="nav-link active" aria-current="page">
-                      <svg className="bi me-2" width="16" height="16">
+                      {/* <svg className="bi me-2" width="16" height="16">
                         <use xlinkHref="/home"></use>
-                      </svg>
+                      </svg> */}
+                      <i className="fa fa-home"></i>
                       Home
                     </a>
                   </li>
                   <li>
                     <a href="/DashBoardScreen" className="nav-link text-dark">
-                      <svg className="bi me-2" width="16" height="16">
+                      {/* <svg className="bi me-2" width="16" height="16">
                         <use xlinkHref="/speedometer2"></use>
-                      </svg>
+                      </svg> */}
+                      <i className="fa fa-dashboard"></i>
                       Dashboard
                     </a>
                   </li>
                   <li>
                     <a href="/DashBoardScreen" className="nav-link text-dark">
-                      <svg className="bi me-2" width="16" height="16">
+                      {/* <svg className="bi me-2" width="16" height="16">
                         <use xlinkHref="/table"></use>
-                      </svg>
+                      </svg> */}
+                      <i className="fa fa-search"></i>
                       Search
                     </a>
                   </li>
                   <li>
                     <a href="/" className="nav-link text-dark">
-                      <svg className="bi me-2" width="16" height="16">
+                      {/* <svg className="bi me-2" width="16" height="16">
                         <use xlinkHref="/grid"></use>
-                      </svg>
+                      </svg> */}
+                      <i className="fa fa-list"></i>
                       Playlists
                     </a>
                   </li>
                   <li>
                     <a href="/" className="nav-link text-dark">
-                      <svg className="bi me-2" width="16" height="16">
+                      {/* <svg className="bi me-2" width="16" height="16">
                         <use xlinkHref="/table"></use>
-                      </svg>
+                      </svg> */}
+                      <i className="fa fa-heart"></i>
                       Liked songs
                     </a>
                   </li>
@@ -146,9 +159,10 @@ const DashBoard = (props) => {
                       to="/SubscriptionScreen"
                       className="nav-link text-dark"
                     >
-                      <svg className="bi me-2" width="16" height="16">
+                      {/* <svg className="bi me-2" width="16" height="16">
                         <use xlinkHref="/people-circle"></use>
-                      </svg>
+                      </svg> */}
+                      <i className="fa fa-money"></i>
                       Get premium
                     </Link>
                   </li>
@@ -178,16 +192,21 @@ const DashBoard = (props) => {
                   >
                     <li>
                       <a className="dropdown-item" href="/">
+                        <i className="fa fa-user"></i>
                         Profile
                       </a>
                     </li>
                     <li>
                       <a className="dropdown-item" href="/">
+                        <i className="fa fa-lock"></i>
+                        {/* <i className="fa fa-key"></i>
+                        <i className="fa fa-bank"></i> */}
                         Account
                       </a>
                     </li>
                     <li>
                       <Link className="dropdown-item" to="/ForgotScreen">
+                        <i className="fa fa-wrench"></i>
                         Settings
                       </Link>
                     </li>
