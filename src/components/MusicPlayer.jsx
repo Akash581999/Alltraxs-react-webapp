@@ -199,7 +199,7 @@ const MusicPlayer = (props) => {
       <div className="mb-1">
         <Link to="/SubscriptionScreen" className="text-success">
           Get subscription for <br />
-          more premium features
+          premium features
         </Link>
       </div>
     </div>
