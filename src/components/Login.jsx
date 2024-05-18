@@ -74,7 +74,9 @@ function Login(props) {
                 </Link>
               </div>
               <button type="submit" className="btn btn-primary mb-3 w-100">
-                Sign in
+                <Link to="/DashBoardScreen" className="nav-link active">
+                  <span>Sign in</span>
+                </Link>
               </button>
               <div className="form-text">
                 <p className="text-secondary">
