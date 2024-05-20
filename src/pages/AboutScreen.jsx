@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 // import Slider from "../components/Slider";
-import ImageGallery from "./../components/ImageGallery";
+import ImageGallery from "../components/ImageGallery";
 import "../App.css";
 
 const AboutScreen = () => {

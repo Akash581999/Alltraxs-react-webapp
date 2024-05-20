@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Subscription = (props) => {
   return (
@@ -26,7 +27,9 @@ const Subscription = (props) => {
                       type="button"
                       className="w-100 btn btn-lg btn-outline-primary"
                     >
-                      Sign up for free
+                      <Link to="/LoginScreen" className="text-decoration-none">
+                        Sign up for free
+                      </Link>
                     </button>
                   </div>
                 </div>

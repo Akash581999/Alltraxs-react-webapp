@@ -1,10 +1,11 @@
 import { useState } from "react";
 import "../App.css";
-import rst from "../images/rst3.jpg";
+import rst from "../images/rst1.jpg";
 
 const ResetForm = (props) => {
   const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
   const [otp, setOTP] = useState("");
+  const [confirmOTP, setConfirmOTP] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -30,29 +31,27 @@ const ResetForm = (props) => {
     <div className={`bg-${props.mode}`}>
       <div className="container">
         <div className="row">
-          <div className="col-6 col-md-6">
-            <img src={rst} className="img-fluid rounded my-5" alt="resetpic" style={{height:"600px"}} />
+          <div className="col-lg-6 col-md-8 col-sm-12">
+            <img
+              src={rst}
+              className="img-fluid rounded my-5"
+              alt="resetpic"
+              style={{ maxHeight: "400px", width: "100%" }}
+            />
           </div>
-          <div className="col-6 col-md-6">
-            <h2
-              className="text-success my-5"
-              style={{
-                textAlign: "center",
-              }}
-            >
-              Reset Password
-            </h2>
+          <div className="col-lg-6 col-md-8 col-sm-12">
+            <h2 className="text-success my-5 text-center">Reset Password</h2>
             {!otp ? (
               <form onSubmit={handleSubmit} className="form-container bg-glass">
                 <div className="mb-3">
                   <label htmlFor="emailOrPhoneNumber" className="form-label">
-                    Enter your email address or phone number
+                    Enter your registered email or phone number :
                   </label>
                   <input
                     type="text"
                     className="form-control"
                     id="emailOrPhoneNumber"
-                    placeholder="Enter email or number here"
+                    placeholder="Enter email or number here.."
                     aria-describedby="emailOrPhoneNumberHelp"
                     name="emailOrPhoneNumber"
                     value={emailOrPhoneNumber}
@@ -61,9 +60,18 @@ const ResetForm = (props) => {
                     }}
                   />
                 </div>
-                <div className="mb-3 d-flex justify-content-end">
-                  <button type="submit" className="btn btn-success mx-3">
+                <div className="mb-3 d-flex justify-content-center">
+                  <button type="submit" className="btn btn-primary mx-3">
                     Get OTP
+                  </button>
+                  <button
+                    type="submit"
+                    className="btn btn-success mx-3"
+                    onClick={(e) => {
+                      setConfirmOTP(e.target.value);
+                    }}
+                  >
+                    Confirm
                   </button>
                 </div>
               </form>

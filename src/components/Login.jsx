@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import "../App.css";
 import profile from "../images/draw2.svg";
 
 function Login(props) {
+  const [showPassword, setShowPassword] = useState(false);
+
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     alert("You are welcome");
   };
 
   const signInWithGoogle = () => {
-    // Add Google sign-in logic here
     alert("Sign in with Google");
   };
 
   const signInWithFacebook = () => {
-    // Add Facebook sign-in logic here
     alert("Sign in with Facebook");
   };
 
@@ -23,33 +27,30 @@ function Login(props) {
     <div className={`bg-${props.mode}`}>
       <div className="container">
         <div className="row">
-          <div className="col-10 col-md-6">
+          <div className="col-md-6 d-md-block my-3">
             <img
               src={profile}
               className="img-fluid"
-              alt="profile"
-              style={{ height: 800 }}
+              alt="Login Img"
+              style={{ height: "100%" }}
             />
           </div>
-          <div className="col-4 col-md-6">
-            <h2
-              style={{
-                textAlign: "center",
-                position: "relative",
-                top: "50px",
-                color: "blue",
-              }}
+          <div className="col-md-6">
+            <h2 className="text-center text-primary my-3">Login</h2>
+            <form
+              className="form-container bg-glass"
+              onSubmit={handleSubmit}
+              autoComplete="off"
+              spellCheck="false"
             >
-              Login
-            </h2>
-            <form className="form-container bg-glass" onSubmit={handleSubmit}>
               <label className="text-dark" htmlFor="email">
                 Email:
               </label>
               <input
-                className="form-control mb-1"
+                className="form-control mb-2"
                 type="email"
                 id="email"
+                name="email"
                 placeholder="Enter email here"
                 required
               />
@@ -57,40 +58,65 @@ function Login(props) {
                 Password:
               </label>
               <input
-                className="form-control mb-1"
-                type="password"
+                className="form-control mb-2"
+                type={showPassword ? "text" : "password"}
                 id="pass"
+                name="pass"
                 placeholder="Enter password here"
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 required
               />
-              <div className="d-flex justify-content-between mx-4 mb-2">
-                <div className="align-center">
-                  <input type="checkbox" id="remember" name="remember" />
-                  &nbsp;
-                  <label htmlFor="remember">Remember me</label>
+              <div
+                className="show-pass position-absolute"
+                style={{ top: "114px", left: "382px" }}
+              >
+                <button
+                  type="button"
+                  className="show-pass-button btn btn-border-light"
+                  onClick={togglePasswordVisibility}
+                >
+                  <i className="fa fa-eye"></i>
+                </button>
+              </div>
+              <div className="d-flex justify-content-between mb-2">
+                <div className="form-check align-center">
+                  <input
+                    type="checkbox"
+                    id="remember"
+                    name="remember"
+                    className="form-check-input"
+                  />
+                  <label htmlFor="remember" className="text-wrap">
+                    Remember me
+                  </label>
                 </div>
-                <Link to="/ForgotScreen" className="nav-link active">
-                  <a href="/ForgotScreen">Forgot password?</a>
-                </Link>
+                <div className="align-items-center mb-2">
+                  <Link to="/ForgotScreen" className="text-decoration-none">
+                    Forgot password?
+                  </Link>
+                </div>
               </div>
               <button type="submit" className="btn btn-primary mb-3 w-100">
                 <Link to="/DashBoardScreen" className="nav-link active">
-                  <span>Sign in</span>
+                  Login
                 </Link>
               </button>
-              <div className="form-text">
-                <p className="text-secondary">
-                  Don't have an account?{" "}
-                  <a href="/SignUpScreen">Register now.</a>
+              <div className="form-text mb-2">
+                <p className="text-center text-secondary mb-3">
+                  Don't have an account?
+                  <Link to="/SignupScreen" className="text-decoration-none">
+                    &nbsp;Register now.
+                  </Link>
                 </p>
               </div>
               <button className="btn btn-primary mb-3 w-100">
-                <Link to="/SignUpScreen" className="nav-link active">
-                  <span>Register</span>
+                <Link to="/SignupScreen" className="nav-link active">
+                  Register
                 </Link>
               </button>
               <div className="divider d-flex align-items-center my-4">
-                <p className="text-center text-dark fw-bold mx-3 mb-0">OR</p>
+                <p className="text-center text-dark fw-bold mx-3 my-3">OR</p>
               </div>
               <button
                 className="btn btn-danger mb-2 w-100"

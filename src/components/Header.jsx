@@ -12,9 +12,10 @@ const Header = (props) => {
       >
         <div className="container-fluid">
           {/* <GiMusicSpell /> */}
-          <img src={AllTraxslogo} alt="logo" className="mx-3" />
-          <a className="navbar-brand mb-3" href="/">
+          <a className="navbar-brand mt-1" href="/">
+            <img src={AllTraxslogo} alt="logo" className="mx-3" />
             <span
+              className="my-3 mx-3"
               style={{
                 color: "#8b08ff",
                 fontWeight: "bolder",
@@ -28,15 +29,15 @@ const Header = (props) => {
             className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
+            data-bs-target="#navbarTogglerDemo01"
+            aria-controls="navbarTogglerDemo01"
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
             <span className="navbar-toggler-icon"></span>
           </button>
-          <div className="collapse navbar-collapse" id="navbarTogglerDemo03">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+          <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
+            <ul className="d-flex flex-row justify-content-evenly navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
                 <Link to="/" className="nav-link active">
                   <span>Home</span>
@@ -49,46 +50,49 @@ const Header = (props) => {
               </li>
               <li className="nav-item">
                 <Link to="/ContactScreen" className="nav-link active">
-                  <span>Contact us</span>
+                  <span>Contacts</span>
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
+            <form className="d-flex flex-row justify-content-evenly">
               {/* Search button */}
               <div className="search">
                 <SearchSongs />
               </div>
-              {/* Login button */}
-              <div className="login">
-                <button
-                  className="btn btn-primary mx-2"
-                  type="submit"
-                  href="/"
-                  tabIndex="-1"
-                  aria-disabled="true"
+              <div className="d-flex flex-row justify-content-between">
+                {/* Theme switch */}
+                <div
+                  className={`form-check form-switch text-${props.mode} mt-2`}
                 >
-                  <Link to="/LoginScreen" className="nav-link active">
-                    <span>Login</span>
-                  </Link>
-                </button>
-              </div>
-              {/* Theme switch */}
-              <div className={`form-check form-switch text-${props.mode} mt-2`}>
-                <input
-                  onClick={props.toggleMode}
-                  className="form-check-input"
-                  type="checkbox"
-                  role="switch"
-                  id="flexSwitchCheckDefault"
-                  unChecked
-                />
-                <label
-                  style={{ color: "Grey" }}
-                  className="form-check-label"
-                  htmlFor="flexSwitchCheckDefault"
-                >
-                  {props.mode}mode
-                </label>
+                  <input
+                    onClick={props.toggleMode}
+                    className="form-check-input"
+                    type="checkbox"
+                    role="switch"
+                    id="flexSwitchCheckDefault"
+                    unChecked
+                  />
+                  <label
+                    className="form-check-label text-wrap text-secondary"
+                    htmlFor="flexSwitchCheckDefault"
+                  >
+                    {props.mode}mode
+                  </label>
+                </div>
+                {/* Login button */}
+                <div className="login">
+                  <button
+                    className="btn btn-primary mx-2"
+                    type="submit"
+                    href="/"
+                    tabIndex="-1"
+                    aria-disabled="true"
+                  >
+                    <Link to="/LoginScreen" className="nav-link active">
+                      <span>Login</span>
+                    </Link>
+                  </button>
+                </div>
               </div>
             </form>
           </div>

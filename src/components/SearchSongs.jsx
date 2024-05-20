@@ -80,7 +80,8 @@ const SearchSongs = ({ onSearch }) => {
   return (
     <div className="search-container d-flex">
       <form
-        className="search-form"
+        role="search"
+        className="search-form d-flex"
         onSubmit={(event) => event.preventDefault()}
       >
         <input
@@ -93,7 +94,7 @@ const SearchSongs = ({ onSearch }) => {
           onFocus={() => setShowResults(true)}
         />
         <button
-          className="btn btn-secondary mx-2"
+          className="btn btn-outline-success mx-2"
           type="submit"
           onClick={() => setShowResults(!showResults)}
         >

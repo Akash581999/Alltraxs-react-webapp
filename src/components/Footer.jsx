@@ -7,8 +7,8 @@ const Footer = () => {
       <div className="w-100">
         <footer className="text-center text-light bg-dark">
           <div className="container">
-            <section className="">
-              <div className="row text-center d-flex justify-content-center pt-4">
+            <section className="mx-1">
+              <div className="row text-center pt-4 d-flex flex-row justify-content-center ">
                 <div className="col-md-2">
                   <h6 className="text-uppercase font-weight-bold">
                     <a href="/" className="text-light text-decoration-none">
@@ -36,7 +36,7 @@ const Footer = () => {
                 <div className="col-md-2">
                   <h6 className="text-uppercase font-weight-bold">
                     <Link to="/ContactScreen" className="nav-link active">
-                      <span>Contact us</span>
+                      <span>Contacts</span>
                     </Link>
                   </h6>
                 </div>

@@ -1,6 +1,6 @@
 import React from "react";
 
-const Slider = ({ images },props) => {
+const Slider = ({ images }, props) => {
   return (
     <>
       <div className={`bg-${props.mode}`}>
@@ -46,7 +46,10 @@ const Slider = ({ images },props) => {
               data-bs-target="#carouselExampleCaptions"
               data-bs-slide="prev"
             >
-              <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span
+                className="carousel-control-prev-icon"
+                aria-hidden="true"
+              ></span>
               <span className="visually-hidden">Previous</span>
             </button>
             <button
@@ -55,7 +58,10 @@ const Slider = ({ images },props) => {
               data-bs-target="#carouselExampleCaptions"
               data-bs-slide="next"
             >
-              <span className="carousel-control-next-icon" aria-hidden="true"></span>
+              <span
+                className="carousel-control-next-icon"
+                aria-hidden="true"
+              ></span>
               <span className="visually-hidden">Next</span>
             </button>
           </div>

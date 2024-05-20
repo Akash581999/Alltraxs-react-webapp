@@ -9,22 +9,16 @@ const Contact = ({ mode }) => {
 
   return (
     <div className={`bg-${mode}`}>
-      <div className="container">
+      <div className="container background-radial-gradient overflow-hidden">
         <div className="row">
-          <div className="col-6">
-            <h3 className="text-center mt-5 text-success">Visit us at:</h3>
-            <iframe
-              title="Barca Academy Dlf phase 5"
-              width="560"
-              height="440"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224392.40546310737!2d76.91343667759492!3d28.50569605014158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1945afccd4bd%3A0xe8d79dc10eb572dd!2sBar%C3%A7a%20Academy%20-%20DLF%20Phase%205%2C%20Gurgaon!5e0!3m2!1sen!2sin!4v1715153939780!5m2!1sen!2sin"
-              style={{ marginTop: "80px" }}
-            ></iframe>
-          </div>
-          <div className="col-6">
-            <div className="container">
-              <h3 className="text-center mt-4 text-success">Contact us at:</h3>
-              <form className="form-container bg-glass" onSubmit={handleSubmit}>
+          <div className="col-lg-6 col-md-12 col-sm-12">
+            {/* Adjusting column width for mobile screens */}
+            <div className="my-5">
+              <h3 className="text-center text-success">Contact us at:</h3>
+              <form
+                className="form-container bg-glass my-5 mx-5"
+                onSubmit={handleSubmit}
+              >
                 <div className="mb-3">
                   <label htmlFor="name" className="form-label">
                     Name
@@ -77,12 +71,23 @@ const Contact = ({ mode }) => {
                   ></textarea>
                 </div>
                 <div className="d-flex justify-content-end">
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-success">
                     Submit
                   </button>
                 </div>
               </form>
             </div>
+          </div>
+          <div className="col-lg-6 col-md-12 col-sm-12">
+            {/* Adjusting column width for mobile screens */}
+            <h3 className="text-center mx-3 text-success">Visit us at:</h3>
+            <iframe
+              title="SourceDotCom Pvt Ltd"
+              width="100%"
+              height="500"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224392.40546310737!2d76.91343667759492!3d28.50569605014158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1945afccd4bd%3A0xe8d79dc10eb572dd!2sBar%C3%A7a%20Academy%20-%20DLF%20Phase%205%2C%20Gurgaon!5e0!3m2!1sen!2sin!4v1715153939780!5m2!1sen!2sin"
+              style={{ marginTop: "80px" }}
+            ></iframe>
           </div>
         </div>
       </div>
