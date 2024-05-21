@@ -7,10 +7,12 @@ import SignupScreen from "./pages/SignupScreen";
 import ForgotScreen from "./pages/ForgotScreen";
 import DashBoardScreen from "./pages/DashBoardScreen";
 import SubscriptionScreen from "./pages/SubscriptionScreen";
+// import SongPlayer from "./components/SongPlayer";
 
 function App() {
   return (
     <>
+      {/* <SongPlayer /> */}
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<HomeScreen />} />

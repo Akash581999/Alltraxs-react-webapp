@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-// import Slider from "../components/Slider";
 import ImageGallery from "../components/ImageGallery";
 import "../App.css";
 
@@ -18,7 +17,6 @@ const AboutScreen = () => {
   return (
     <>
       <Header mode={mode} toggleMode={toggleMode} />
-      {/* <Slider mode={mode} toggleMode={toggleMode} /> */}
       <ImageGallery mode={mode} toggleMode={toggleMode} />
       <Footer mode={mode} toggleMode={toggleMode} />
     </>

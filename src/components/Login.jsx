@@ -67,13 +67,11 @@ function Login(props) {
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
                 required
               />
-              <div
-                className="show-pass position-absolute"
-                style={{ top: "114px", left: "382px" }}
-              >
+              <div className="show-pass position-relative">
                 <button
                   type="button"
-                  className="show-pass-button btn btn-border-light"
+                  className="show-pass-button btn btn-border-light position-absolute"
+                  style={{ top: -45, left: 362 }}
                   onClick={togglePasswordVisibility}
                 >
                   <i className="fa fa-eye"></i>

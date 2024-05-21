@@ -1,21 +1,7 @@
 import React from "react";
-import PlaySong from "./PlaySong";
+import SongPlayer from "./SongPlayer";
 
 const Cards = (props) => {
-  // Assuming your images are located in a directory called "images"
-  // const importAll = (r) => {
-  //   let images = {};
-  //   r.keys().map((item, index) => {
-  //     images[item.replace("./", "")] = r(item);
-  //     return null;
-  //   });
-  //   return images;
-  // };
-
-  // const images = importAll(
-  //   require.context("../images", false, /\.(png|jpe?g|svg)$/)
-  // );
-
   return (
     <>
       <div className={`bg-${props.mode}`}>
@@ -27,7 +13,6 @@ const Cards = (props) => {
                 style={{ maxWidth: "360px" }}
               >
                 <img
-                  // src={images[props.imageName]}
                   src={props.images}
                   className="card-img-top rounded"
                   alt="songpic"
@@ -38,10 +23,10 @@ const Cards = (props) => {
                   <p className="card-text">{props.description}</p>
                 </div>
                 <div className="card-footer bg-dark border-success">
-                <small className="text-secondary">{props.status}</small>
-                &nbsp;
+                  <small className="text-secondary">{props.status}</small>
+                  &nbsp;
                   <button
-                    onClick={PlaySong}
+                    onClick={SongPlayer}
                     type="button"
                     className="btn btn-success"
                   >
