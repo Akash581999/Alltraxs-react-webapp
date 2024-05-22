@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import SignUp from "../components/SignUp";
 import "../App.css";
-import { useState } from "react";
 
 const SignupScreen = () => {
   let [mode, setMode] = useState(`light`); //Dark mode

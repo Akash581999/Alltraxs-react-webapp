@@ -1,8 +1,8 @@
 import React from "react";
-// import { GiMusicSpell } from "react-icons/gi";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 import { Link } from "react-router-dom";
-import SearchSongs from "./SearchSongs";
+import SongPlayer from "./SongPlayer";
+// import SearchSongs from "./SearchSongs";
 
 const Header = (props) => {
   return (
@@ -11,7 +11,6 @@ const Header = (props) => {
         className={`navbar sticky-top navbar-expand-lg navbar-dark bg-dark z-1`}
       >
         <div className="container-fluid">
-          {/* <GiMusicSpell /> */}
           <a className="navbar-brand mt-1" href="/">
             <img src={AllTraxslogo} alt="logo" className="mx-3" />
             <span
@@ -54,10 +53,10 @@ const Header = (props) => {
                 </Link>
               </li>
             </ul>
-            <form className="d-flex flex-row justify-content-evenly">
-              {/* Search button */}
+            <div className="d-flex flex-row justify-content-evenly">
               <div className="search">
-                <SearchSongs />
+                {/* <SearchSongs /> */}
+                <SongPlayer />
               </div>
               <div className="d-flex flex-row justify-content-between">
                 {/* Theme switch */}
@@ -70,7 +69,6 @@ const Header = (props) => {
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
-                    unChecked
                   />
                   <label
                     className="form-check-label text-wrap text-secondary"
@@ -84,9 +82,7 @@ const Header = (props) => {
                   <button
                     className="btn btn-primary mx-2"
                     type="submit"
-                    href="/"
                     tabIndex="-1"
-                    aria-disabled="true"
                   >
                     <Link to="/LoginScreen" className="nav-link active">
                       <span>Login</span>
@@ -94,7 +90,7 @@ const Header = (props) => {
                   </button>
                 </div>
               </div>
-            </form>
+            </div>
           </div>
         </div>
       </nav>

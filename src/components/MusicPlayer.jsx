@@ -1,64 +1,15 @@
+// import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import "../styles/musicplayer.css";
-import "../styles/audioplayer.css";
-import song1 from "../audios/song1.mp3";
-import song2 from "../audios/song2.mp3";
-import song3 from "../audios/song3.mp3";
-import song4 from "../audios/song4.mp3";
-import song5 from "../audios/song5.mp3";
-import song6 from "../audios/song6.mp3";
-import song7 from "../audios/song7.mp3";
-import song8 from "../audios/song8.mp3";
 
-const songs = [song1, song2, song3, song4, song5, song6, song7, song8];
-
-//Demo songs object for testing
-// const songs = [
-//   {
-//     song: "Stay",
-//     artist: "The Kid LAROI & Justin Bieber",
-//     pic: "stay_cover.jpg",
-//   },
-//   {
-//     song: "Industry Baby",
-//     artist: "Lil Nas X & Jack Harlow",
-//     pic: "industry_baby_cover.jpg",
-//   },
-//   { song: "Good 4 U",
-//     artist: "Olivia Rodrigo",
-//     pic: "good_4_u_cover.jpg" },
-//   {
-//     song: "Kiss Me More",
-//     artist: "Doja Cat ft. SZA",
-//     pic: "kiss_me_more_cover.jpg",
-//   },
-//   {
-//     song: "Montero (Call Me By Your Name)",
-//     artist: "Lil Nas X",
-//     pic: "montero_cover.jpg",
-//   },
-//   {
-//     song: "Levitating",
-//     artist: "Dua Lipa ft. DaBaby",
-//     pic: "levitating_cover.jpg",
-//   },
-//   { song: "Butter",
-//     artist: "BTS",
-//     pic: "butter_cover.jpg" },
-//   {
-//     song: "Save Your Tears",
-//     artist: "The Weeknd & Ariana Grande",
-//     pic: "save_your_tears_cover.jpg",
-//   },
-// ];
-// console.log(songs);
-
-const MusicPlayer = (props) => {
-  const [audio] = useState(new Audio(songs[0]));
+const songs = [...Array(8)].map((_, index) =>
+  require(`../audios/song${index + 1}.mp3`)
+);
+const MusicPlayer = ({ selectedSong }) => {
+  const [audio] = useState(new Audio(selectedSong.preview_url));
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentVolume, setCurrentVolume] = useState(0.5);
@@ -121,19 +72,22 @@ const MusicPlayer = (props) => {
   };
 
   return (
-    <div className="component bg-dark text-light border-success navbar sticky-bottom z-1">
-      <h2 className="text-light">Playing</h2>
-      <div className="d-flex">
-        <div className="rounded">
+    <div className="component bg-dark text-light border-success navbar fixed-bottom z-1">
+      <div className="d-flex flex-row justify-content-evenly align-items-center flex-nowrap">
+        <h2 className="text-success p-2">Playing</h2>
+        <div className="rounded align-self-center">
           <img
             className="musicCover"
-            src={"https://picsum.photos/100/100"}
+            style={{ width: 100, height: 100 }}
+            src={selectedSong.album.images[0].url}
             alt="songpic"
           />
         </div>
-        <div className="mx-3 mt-3">
-          <h3 className="title text-light">{props.song}Song</h3>
-          <p className="subTitle text-light py-3">{props.artist}Artist</p>
+        <div className="mx-1 mt-3">
+          <h3 className="title text-light">{selectedSong.name}</h3>
+          <p className="subTitle text-light py-3">
+            {selectedSong.artists[0].name}
+          </p>
         </div>
       </div>
       <div className="mx-1">
@@ -142,19 +96,11 @@ const MusicPlayer = (props) => {
             <BiSkipPrevious />
           </IconContext.Provider>
         </button>
-        {!isPlaying ? (
-          <button className="playButton" onClick={togglePlay}>
-            <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
-              <AiFillPlayCircle />
-            </IconContext.Provider>
-          </button>
-        ) : (
-          <button className="playButton" onClick={togglePlay}>
-            <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
-              <AiFillPauseCircle />
-            </IconContext.Provider>
-          </button>
-        )}
+        <button className="playButton" onClick={togglePlay}>
+          <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
+            {isPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
+          </IconContext.Provider>
+        </button>
         <button className="playButton" onClick={playNextSong}>
           <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
             <BiSkipNext />
@@ -196,11 +142,11 @@ const MusicPlayer = (props) => {
           </p>
         </div>
       </div>
-      <div className="mb-1">
-        <Link to="/SubscriptionScreen" className="text-success">
+      <div className="mb-1 d-flex flex-row">
+        <a href="/SubscriptionScreen" className="text-success">
           Get subscription for <br />
           premium features
-        </Link>
+        </a>
       </div>
     </div>
   );

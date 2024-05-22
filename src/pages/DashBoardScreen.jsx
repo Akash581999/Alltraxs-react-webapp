@@ -1,8 +1,6 @@
-import React from "react";
-import "../App.css";
-import { useState } from "react";
+import React, { useState } from "react";
 import DashBoard from "../components/DashBoard";
-import MusicPlayer from "../components/MusicPlayer";
+import "../App.css";
 
 const DashBoardScreen = () => {
   let [mode, setMode] = useState(`light`); //Dark mode
@@ -17,7 +15,6 @@ const DashBoardScreen = () => {
   return (
     <>
       <DashBoard mode={mode} toggleMode={toggleMode} />
-      <MusicPlayer mode={mode} toggleMode={toggleMode} />
     </>
   );
 };

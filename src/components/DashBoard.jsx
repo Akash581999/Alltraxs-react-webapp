@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 import user from "../images/userimg1.jpg";
-import SearchSongs from "./SearchSongs";
 import CardList from "./CardList";
+import SongPlayer from "./SongPlayer";
+// import SearchSongs from "./SearchSongs";
 
 const DashBoard = (props) => {
   return (
@@ -27,7 +28,8 @@ const DashBoard = (props) => {
             </div>
             {/* Search songs bar here */}
             <div className="search col-lg-10 mx-3">
-              <SearchSongs />
+              {/* <SearchSongs /> */}
+              <SongPlayer />
             </div>
             <div className="navbar-nav col-lg-2 mx-3">
               <div className="d-flex justify-content-around">
@@ -93,7 +95,6 @@ const DashBoard = (props) => {
                   <span className="fs-1 text-light">Profile</span>
                 </h5>
                 <img
-                  // src="https://github.com/mdo.png"
                   src={user}
                   alt="profile"
                   width="98"
@@ -215,7 +216,7 @@ const DashBoard = (props) => {
           <div className="row">
             <div className="col-lg-2 col-md-3 col-sm-4">
               <div className="d-flex align-items-start h-100 bg-dark">
-                <div
+                <nav
                   className="nav side-nav d-flex flex-column nav-pills p-2 mx-2 w-100"
                   id="v-pills-tab"
                   role="tablist"
@@ -294,7 +295,7 @@ const DashBoard = (props) => {
                       </button>
                     </li>
                   </ul>
-                </div>
+                </nav>
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8">

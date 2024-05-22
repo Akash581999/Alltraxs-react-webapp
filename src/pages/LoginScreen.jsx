@@ -1,9 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Login from "../components/Login";
 import "../App.css";
-import { useState } from "react";
 
 const LoginScreen = () => {
   let [mode, setMode] = useState(`light`); //Dark mode

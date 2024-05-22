@@ -1,9 +1,8 @@
-import React from "react";
-import { useState } from "react";
-import "../App.css";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import ResetForm from "../components/ResetForm";
+import "../App.css";
 
 const ForgotScreen = () => {
   let [mode, setMode] = useState(`light`); //Dark mode
