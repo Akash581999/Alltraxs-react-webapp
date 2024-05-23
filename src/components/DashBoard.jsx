@@ -217,7 +217,7 @@ const DashBoard = (props) => {
             <div className="col-lg-2 col-md-3 col-sm-4">
               <div className="d-flex align-items-start h-100 bg-dark">
                 <nav
-                  className="nav side-nav d-flex flex-column nav-pills p-2 mx-2 w-100"
+                  className="nav d-flex flex-column align-items-stretch pe-4 nav-pills p-2 w-100 h-100"
                   id="v-pills-tab"
                   role="tablist"
                   aria-orientation="vertical"

@@ -1,8 +1,9 @@
-// import { Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import { AiFillPlayCircle, AiFillPauseCircle } from "react-icons/ai";
 import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
+import { Link } from "react-router-dom";
+import PlaylistAdd from "./PlaylistAdd";
 import "../styles/musicplayer.css";
 
 const songs = [...Array(8)].map((_, index) =>
@@ -14,6 +15,7 @@ const MusicPlayer = ({ selectedSong }) => {
   const [currentTime, setCurrentTime] = useState(0);
   const [currentVolume, setCurrentVolume] = useState(0.5);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
+  const [playlist, setPlaylist] = useState([]);
 
   useEffect(() => {
     if (isPlaying) {
@@ -28,6 +30,18 @@ const MusicPlayer = ({ selectedSong }) => {
     audio.addEventListener("timeupdate", updateCurrentTime);
     return () => audio.removeEventListener("timeupdate", updateCurrentTime);
   }, [audio]);
+
+  const addToPlaylist = (song) => {
+    setPlaylist([...playlist, song]);
+  };
+
+  const removeFromPlaylist = (song) => {
+    setPlaylist(playlist.filter((item) => item !== song));
+  };
+
+  const isInPlaylist = (song) => {
+    return playlist.includes(song);
+  };
 
   const togglePlay = () => setIsPlaying(!isPlaying);
 
@@ -90,6 +104,22 @@ const MusicPlayer = ({ selectedSong }) => {
           </p>
         </div>
       </div>
+      {/* Add to playlist button */}
+      <div className="mx-1">
+        <PlaylistAdd
+          currentSong={selectedSong}
+          addToPlaylist={addToPlaylist}
+          removeFromPlaylist={removeFromPlaylist}
+          isInPlaylist={isInPlaylist}
+        />
+        <ul className="list-group">
+          {playlist.map((index) => (
+            <li className="list-group-item selected text-center" key={index}>
+              Added to Liked songs
+            </li>
+          ))}
+        </ul>
+      </div>
       <div className="mx-1">
         <button className="playButton" onClick={playPreviousSong}>
           <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
@@ -143,10 +173,10 @@ const MusicPlayer = ({ selectedSong }) => {
         </div>
       </div>
       <div className="mb-1 d-flex flex-row">
-        <a href="/SubscriptionScreen" className="text-success">
+        <Link to="/SubscriptionScreen" className="text-success">
           Get subscription for <br />
           premium features
-        </a>
+        </Link>
       </div>
     </div>
   );

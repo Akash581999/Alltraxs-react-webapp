@@ -22,13 +22,13 @@ const SearchSong = ({ handleSearch }) => (
 const PlaySong = ({ selectedSong, handleSongPlay }) => (
   <div
     className="card h-100 text-light bg-dark border-success mt-1"
-    style={{ maxWidth: 360 }}
+    style={{ maxWidth: 280 }}
   >
     <img
       src={selectedSong.album.images[0].url}
       className="card-img-top rounded"
       alt="songimage"
-      style={{ height: 260 }}
+      style={{ height: 240 }}
     />
     <div className="card-body text-light bg-dark border-success">
       <h5 className="card-title text-wrap">{selectedSong.name}</h5>

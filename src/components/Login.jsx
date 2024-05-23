@@ -36,7 +36,7 @@ function Login(props) {
             />
           </div>
           <div className="col-md-6">
-            <h2 className="text-center text-primary my-3">Login</h2>
+            <h2 className="text-center text-primary">Login</h2>
             <form
               className="form-container bg-glass"
               onSubmit={handleSubmit}
@@ -108,12 +108,12 @@ function Login(props) {
                   </Link>
                 </p>
               </div>
-              <button className="btn btn-primary mb-3 w-100">
+              <button className="btn btn-primary w-100">
                 <Link to="/SignupScreen" className="nav-link active">
                   Register
                 </Link>
               </button>
-              <div className="divider d-flex align-items-center my-4">
+              <div className="divider d-flex align-items-center">
                 <p className="text-center text-dark fw-bold mx-3 my-3">OR</p>
               </div>
               <button
