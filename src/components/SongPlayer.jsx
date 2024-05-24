@@ -39,8 +39,8 @@ const PlaySong = ({ selectedSong, handleSongPlay }) => (
     </div>
     <div className="card-footer border-success d-flex flex-row justify-content-between">
       <small className="text-secondary mt-2">
-        {Math.floor(selectedSong.duration_ms / 60 / 60 / 24)}:
-        {Math.floor(selectedSong.duration_ms % 60)} mins
+        {Math.floor((selectedSong.duration_ms / (1000 * 60)) % 60)}:
+        {Math.floor((selectedSong.duration_ms / 1000) % 60)} mins
       </small>
       <small className="text-secondary text-wrap mt-2">
         <svg

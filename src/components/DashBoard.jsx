@@ -2,8 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 import user from "../images/userimg1.jpg";
-import CardList from "./CardList";
 import SongPlayer from "./SongPlayer";
+import Album from "./Album";
+// import CardList from "./CardList";
 // import SearchSongs from "./SearchSongs";
 
 const DashBoard = (props) => {
@@ -299,7 +300,8 @@ const DashBoard = (props) => {
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8">
-              <CardList />
+              {/* <CardList /> */}
+              <Album />
             </div>
           </div>
         </section>
