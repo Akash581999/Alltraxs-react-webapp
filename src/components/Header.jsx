@@ -1,8 +1,8 @@
 import React from "react";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 import { Link } from "react-router-dom";
-import SongPlayer from "./SongPlayer";
-// import SearchSongs from "./SearchSongs";
+import SearchSongs from "./SearchSongs";
+// import SongPlayer from "./SongPlayer";
 
 const Header = (props) => {
   return (
@@ -54,9 +54,20 @@ const Header = (props) => {
               </li>
             </ul>
             <div className="d-flex flex-row justify-content-evenly">
-              <div className="search">
-                {/* <SearchSongs /> */}
-                <SongPlayer />
+              <div className="search mx-2">
+                <SearchSongs />
+                {/* <SongPlayer /> */}
+                {/* <form className="d-flex" role="search">
+                  <input
+                    className="form-control me-2"
+                    type="search"
+                    placeholder="Search"
+                    aria-label="Search"
+                  />
+                  <button className="btn btn-outline-success" type="submit">
+                    <i className="fa fa-search"></i>
+                  </button>
+                </form> */}
               </div>
               <div className="d-flex flex-row justify-content-between">
                 {/* Theme switch */}

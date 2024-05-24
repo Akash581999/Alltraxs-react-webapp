@@ -1,45 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/searchsongs.css";
 
-// Song array with song names
-const songs = [
-  "In the stars",
-  "Let her go",
-  "Hurts so good",
-  "Dandelions",
-  "Until i found you",
-  "A thousand years",
-  "IDFC",
-  "Feel it",
-  "I wanna be yours",
-  "Those eyes",
-  "No surprises",
-  "Starboy",
-  "Night Changes",
-  "The Night We Met",
-  "Another Love",
-  "Fairytale",
-  "Here With Me",
-  "Romantic Homicide",
-];
-
 const SearchSongs = ({ onSearch }) => {
+  const [songs, setSongs] = useState([]);
+  const [token, setToken] = useState("");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
 
+  useEffect(() => {
+    getToken();
+  }, []);
+  const getToken = async () => {
+    try {
+      const clientId = "100f567839434193a748e863eefd7ce5";
+      const clientSecret = "fff3195cb1d1428faee5a8059e17f988";
+
+      const response = await fetch("https://accounts.spotify.com/api/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Basic ${btoa(clientId + ":" + clientSecret)}`,
+        },
+        body: "grant_type=client_credentials",
+      });
+
+      const data = await response.json();
+      setToken(data.access_token);
+    } catch (error) {
+      console.error("Error fetching token:", error);
+    }
+  };
   const handleInputChange = (event) => {
     const inputValue = event.target.value;
     setQuery(inputValue);
-    handleSubmit(inputValue);
+    if (inputValue.trim() === "") {
+      setResults([]);
+      setShowResults(false);
+    } else {
+      handleSearch(inputValue);
+    }
   };
 
-  const handleSubmit = (value) => {
-    const filteredResults = songs.filter((name) =>
-      name.toLowerCase().includes(value.toLowerCase())
-    );
-    setResults(filteredResults);
-    setShowResults(true);
+  const handleSearch = async (searchValue) => {
+    try {
+      const response = await fetch(
+        `https://api.spotify.com/v1/search?q=${searchValue}&type=track`,
+        {
+          method: "GET",
+          headers: { Authorization: `Bearer ${token}` },
+        }
+      );
+
+      const data = await response.json();
+      setResults(data.tracks.items.map((item) => item.name));
+      setShowResults(true);
+    } catch (error) {
+      console.error("Error fetching songs:", error);
+    }
   };
 
   return (
@@ -60,7 +78,7 @@ const SearchSongs = ({ onSearch }) => {
         />
         <button
           className="btn btn-outline-success mx-2"
-          type="submit"
+          type="button"
           onClick={() => setShowResults(!showResults)}
         >
           <i className="fa fa-search"></i>
@@ -69,7 +87,15 @@ const SearchSongs = ({ onSearch }) => {
       {showResults && (
         <div className="results">
           {results.length ? (
-            results.map((name, index) => <div key={index}>{name}</div>)
+            results.map((name, index) => (
+              <div
+                key={index}
+                className="result"
+                onClick={() => console.log(name)}
+              >
+                {name}
+              </div>
+            ))
           ) : (
             <div className="no-results">No results found</div>
           )}
@@ -78,4 +104,5 @@ const SearchSongs = ({ onSearch }) => {
     </div>
   );
 };
+
 export default SearchSongs;

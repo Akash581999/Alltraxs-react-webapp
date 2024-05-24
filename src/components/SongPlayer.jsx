@@ -131,7 +131,7 @@ const SongPlayer = () => {
 
   return (
     <>
-      <div className="container-fluid">
+      <div className="container-fluid position-relative">
         <SearchSong handleSearch={handleSearch} />
         {song ? (
           <SearchResult song={song} handleSongPlay={handleSongPlay} />
@@ -149,6 +149,22 @@ const SongPlayer = () => {
               </li>
             ))}
           </ul>
+          // <div
+          //   className="results position-absolute"
+          //   style={{ width: "90%", left: "25px" }}
+          // >
+          //   {songs.length
+          //     ? songs.map((song) => (
+          //         <div
+          //           className={`${selectedItem === song.id ? "selected" : ""}`}
+          //           key={song.id}
+          //           onClick={() => handleSongClick(song)}
+          //         >
+          //           {song.name}
+          //         </div>
+          //       ))
+          //     : "No results found"}
+          // </div>
         )}
       </div>
       {show ? <MusicPlayer song={song} /> : null}
