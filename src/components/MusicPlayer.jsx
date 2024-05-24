@@ -9,8 +9,8 @@ import "../styles/musicplayer.css";
 const songs = [...Array(8)].map((_, index) =>
   require(`../audios/song${index + 1}.mp3`)
 );
-const MusicPlayer = ({ selectedSong }) => {
-  const [audio] = useState(new Audio(selectedSong.preview_url));
+const MusicPlayer = ({ song }) => {
+  const [audio] = useState(new Audio(song.preview_url));
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [currentVolume, setCurrentVolume] = useState(0.5);
@@ -93,21 +93,19 @@ const MusicPlayer = ({ selectedSong }) => {
           <img
             className="musicCover"
             style={{ width: 100, height: 100 }}
-            src={selectedSong.album.images[0].url}
+            src={song.album.images[0].url}
             alt="songpic"
           />
         </div>
         <div className="mx-1 mt-3">
-          <h3 className="title text-light">{selectedSong.name}</h3>
-          <p className="subTitle text-light py-3">
-            {selectedSong.artists[0].name}
-          </p>
+          <h3 className="title text-light">{song.name}</h3>
+          <p className="subTitle text-light py-3">{song.artists[0].name}</p>
         </div>
       </div>
       {/* Add to playlist button */}
       <div className="mx-1">
         <PlaylistAdd
-          currentSong={selectedSong}
+          currentSong={song}
           addToPlaylist={addToPlaylist}
           removeFromPlaylist={removeFromPlaylist}
           isInPlaylist={isInPlaylist}

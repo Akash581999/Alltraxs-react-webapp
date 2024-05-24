@@ -40,7 +40,7 @@ const Album = (props) => {
 
   const getTracks = async (token) => {
     const result = await fetch(
-      "https://api.spotify.com/v1/playlists/7onEBgm3xaYwq05NyhF59a/tracks",
+      "https://api.spotify.com/v1/playlists/0eOOBZUbFxZg4HMRXucIT5/tracks",
       {
         method: "GET",
         headers: { Authorization: "Bearer " + token },
@@ -63,28 +63,28 @@ const Album = (props) => {
     <div className={`bg-${props.mode}`}>
       <div className="card-list d-flex flex-row justify-content-evenly flex-wrap">
         <div className="row my-2 mx-2">
-          {tracks.map((track) => (
+          {tracks.map((song) => (
             <div
-              key={track.track.id}
+              key={song.track.id}
               className="col-lg-2 col-md-6 col-sm-12 my-2"
             >
               <div className="card h-100 text-light bg-dark border-success">
                 <img
-                  src={track.track.album.images[0].url}
+                  src={song.track.album.images[0].url}
                   className="card-img-top rounded"
                   alt="songimage"
                 />
                 <div className="card-body text-light bg-dark border-success">
-                  <h5 className="card-title">{track.track.name}</h5>
-                  <p className="card-text">{track.track.artists[0].name}</p>
+                  <h5 className="card-title">{song.track.name}</h5>
+                  <p className="card-text">{song.track.artists[0].name}</p>
                   <span className="text-secondary">
-                    {track.track.album.name}
+                    {song.track.album.name}
                   </span>
                 </div>
                 <div className="card-footer border-success d-flex flex-row justify-content-between">
                   <small className="text-secondary mt-1">
-                    {Math.floor((track.track.duration_ms / (1000 * 60)) % 60)}:
-                    {Math.floor((track.track.duration_ms / 1000) % 60)} mins
+                    {Math.floor((song.track.duration_ms / (1000 * 60)) % 60)}:
+                    {Math.floor((song.track.duration_ms / 1000) % 60)} mins
                   </small>
                   <small className="text-secondary mt-1">
                     <svg
@@ -97,7 +97,7 @@ const Album = (props) => {
                     >
                       <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15" />
                     </svg>
-                    {track.track.popularity}
+                    {song.track.popularity}
                   </small>
                   <button
                     type="button"
@@ -108,7 +108,7 @@ const Album = (props) => {
                   </button>
                 </div>
                 <audio controls className="d-none">
-                  <source src={track.track.preview_url} type="audio/mpeg" />
+                  <source src={song.track.preview_url} type="audio/mpeg" />
                   Your browser does not support the audio element.
                 </audio>
               </div>
