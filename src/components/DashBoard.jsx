@@ -12,7 +12,7 @@ const DashBoard = (props) => {
   return (
     <>
       <div className={`bg-${props.mode}`}>
-        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark z-1">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark z-1 position-relative">
           <div className="container row">
             <div className="navbar-brand col-lg-4 d-flex justify-content-center">
               <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />

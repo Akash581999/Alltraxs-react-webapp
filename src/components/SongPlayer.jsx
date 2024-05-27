@@ -21,7 +21,7 @@ const SearchSong = ({ handleSearch }) => (
 
 const SearchResult = ({ song, handleSongPlay }) => (
   <div
-    className="card h-100 text-light bg-dark border-success mt-1"
+    className="card h-100 text-light bg-dark border-success mt-1 position-absolute z-2"
     style={{ maxWidth: 280 }}
   >
     <img
@@ -136,12 +136,11 @@ const SongPlayer = () => {
         {song ? (
           <SearchResult song={song} handleSongPlay={handleSongPlay} />
         ) : (
-          <ul className="list-group">
+          <ul className="list-group position-absolute w-100">
             {songs.map((song) => (
               <li
-                className={`list-group-item ${
-                  selectedItem === song.id ? "selected" : ""
-                }`} // Apply selected class if item is selected
+                className={`list-group-item ${selectedItem === song.id ? "selected" : ""
+                  }`} // Apply selected class if item is selected
                 key={song.id}
                 onClick={() => handleSongClick(song)}
               >
@@ -149,22 +148,6 @@ const SongPlayer = () => {
               </li>
             ))}
           </ul>
-          // <div
-          //   className="results position-absolute"
-          //   style={{ width: "90%", left: "25px" }}
-          // >
-          //   {songs.length
-          //     ? songs.map((song) => (
-          //         <div
-          //           className={`${selectedItem === song.id ? "selected" : ""}`}
-          //           key={song.id}
-          //           onClick={() => handleSongClick(song)}
-          //         >
-          //           {song.name}
-          //         </div>
-          //       ))
-          //     : "No results found"}
-          // </div>
         )}
       </div>
       {show ? <MusicPlayer song={song} /> : null}
