@@ -59,6 +59,7 @@ const Album = (props) => {
 
   const playSong = async (song) => {
     try {
+      alert("Login in to play songs");
       if (!song.preview_url) {
         console.error("No preview URL available for this song.");
         return;
