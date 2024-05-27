@@ -36,20 +36,20 @@ const Header = (props) => {
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-            <ul className="d-flex flex-row justify-content-evenly navbar-nav me-auto mb-2 mb-lg-0">
+            <ul className="d-flex flex-row justify-content-evenly nav-underline navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/" className="nav-link active">
-                  <span>Home</span>
+                <Link to="/" className="nav-link">
+                  <span className="text-info fs-3">Home</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/AboutScreen" className="nav-link active">
-                  <span>About</span>
+                <Link to="/AboutScreen" className="nav-link">
+                  <span className="text-info fs-3">About</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/ContactScreen" className="nav-link active">
-                  <span>Contacts</span>
+                <Link to="/ContactScreen" className="nav-link">
+                  <span className="text-info fs-3">Contacts</span>
                 </Link>
               </li>
             </ul>
@@ -71,7 +71,9 @@ const Header = (props) => {
               </div>
               <div className="d-flex flex-row justify-content-between">
                 {/* Theme switch */}
-                <div
+                <form
+                  id="mode-switch"
+                  name="mode-switch"
                   className={`form-check form-switch text-${props.mode} mt-2`}
                 >
                   <input
@@ -80,6 +82,7 @@ const Header = (props) => {
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
+                    name="flexSwitchCheckDefault"
                   />
                   <label
                     className="form-check-label text-wrap text-secondary"
@@ -87,7 +90,7 @@ const Header = (props) => {
                   >
                     {props.mode}mode
                   </label>
-                </div>
+                </form>
                 {/* Login button */}
                 <div className="login">
                   <button

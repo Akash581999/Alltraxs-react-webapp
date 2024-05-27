@@ -65,24 +65,55 @@ const Footer = () => {
               </div>
             </section>
             <section className="text-center mb-1">
-              <a href="/" className="text-light me-4">
+              <Link
+                to="https://facebook.com/Akashkumar"
+                className="text-light me-4"
+                target="_blank"
+              >
                 <i className="fa fa-facebook"></i>
-              </a>
-              <a href="/" className="text-light me-4">
+              </Link>
+              <Link
+                to="https://twitter.com/58Akash1999"
+                className="text-light me-4"
+                target="_blank"
+              >
                 <i className="fa fa-twitter"></i>
-              </a>
-              <a href="/" className="text-light me-4">
+              </Link>
+              <Link
+                to="https://mail.google.com/"
+                className="text-light me-4"
+                target="_blank"
+              >
                 <i className="fa fa-google"></i>
-              </a>
-              <a href="/" className="text-light me-4">
+              </Link>
+              <Link
+                to="https://www.youtube.com/channel/UCv39Htmah0SkcwDZUzzTcKg"
+                className="text-light me-4"
+                target="_blank"
+              >
+                <i className="fa fa-youtube"></i>
+              </Link>
+              <Link
+                to="https://instagram.com/ganga_nagar_united"
+                className="text-light me-4"
+                target="_blank"
+              >
                 <i className="fa fa-instagram"></i>
-              </a>
-              <a href="/" className="text-light me-4">
+              </Link>
+              <Link
+                to="https://www.linkedin.com/in/akash-kumar-a40b98126/"
+                className="text-light me-4"
+                target="_blank"
+              >
                 <i className="fa fa-linkedin"></i>
-              </a>
-              <a href="/" className="text-light me-4">
+              </Link>
+              <Link
+                to="https://github.com/Akash581999"
+                className="text-light me-4"
+                target="_blank"
+              >
                 <i className="fa fa-github"></i>
-              </a>
+              </Link>
             </section>
             <span>
               <i className="fa fa-phone"> Call us at: +91 9634708314</i>
@@ -97,14 +128,14 @@ const Footer = () => {
 
           <div className="text-center py-3 text-light">
             © 2024 Copyright:
-            <a
+            <Link
               className="text-light mx-1"
-              href="https://sourcedotcom.in/"
+              to="https://AllTraxs-music.com"
               target="_blank"
               rel="noreferrer"
             >
               AllTraxs.com
-            </a>
+            </Link>
           </div>
         </footer>
       </div>

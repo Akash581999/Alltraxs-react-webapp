@@ -6,12 +6,14 @@ const Album = (props) => {
 
   const [tracks, setTracks] = useState([]);
   const [error, setError] = useState(null);
+  const [token, setToken] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const token = await getToken();
-        const tracksData = await getTracks(token);
+        const fetchedToken = await getToken();
+        setToken(fetchedToken);
+        const tracksData = await getTracks(fetchedToken);
         setTracks(tracksData);
       } catch (error) {
         setError("Error fetching data");
@@ -43,7 +45,7 @@ const Album = (props) => {
       "https://api.spotify.com/v1/playlists/0eOOBZUbFxZg4HMRXucIT5/tracks",
       {
         method: "GET",
-        headers: { Authorization: "Bearer " + token },
+        headers: { Authorization: `Bearer ${token}` },
       }
     );
 
@@ -53,6 +55,34 @@ const Album = (props) => {
 
     const data = await result.json();
     return data.items;
+  };
+
+  const playSong = async (song) => {
+    try {
+      if (!song.preview_url) {
+        console.error("No preview URL available for this song.");
+        return;
+      }
+
+      const result = await fetch(`https://api.spotify.com/v1/me/player/play`, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          uris: [song.preview_url],
+        }),
+      });
+
+      if (result.status === 204) {
+        console.log(`Successfully started playing ${song.name}`);
+      } else {
+        console.error(`Failed to play ${song.name}`);
+      }
+    } catch (error) {
+      console.error("Error playing song:", error);
+    }
   };
 
   if (error) {
@@ -102,15 +132,20 @@ const Album = (props) => {
                   <button
                     type="button"
                     className="btn btn-success"
-                    // onClick={() => handleSongClick(track.track)}
+                    onClick={() => playSong(song.track)}
                   >
                     Play now
                   </button>
                 </div>
-                <audio controls className="d-none">
-                  <source src={song.track.preview_url} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
+                {song.track.preview_url && (
+                  <audio
+                    controls
+                    className="d-none mb-2 w-75 d-flex align-self-center"
+                  >
+                    <source src={song.track.preview_url} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                  </audio>
+                )}
               </div>
             </div>
           ))}

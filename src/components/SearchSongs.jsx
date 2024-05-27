@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "../styles/searchsongs.css";
 
 const SearchSongs = ({ onSearch }) => {
-  const [songs, setSongs] = useState([]);
+  // const [songs, setSongs] = useState([]);
   const [token, setToken] = useState("");
   const [query, setQuery] = useState("");
   const [results, setResults] = useState([]);

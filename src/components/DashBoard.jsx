@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 import user from "../images/userimg1.jpg";
 import SongPlayer from "./SongPlayer";
-import Album from "./Album";
-// import CardList from "./CardList";
+// import Album from "./Album";
 // import SearchSongs from "./SearchSongs";
+// import CardList from "./CardList";
+import LikedSongs from "./LikedSongs";
 
 const DashBoard = (props) => {
   return (
@@ -278,7 +279,12 @@ const DashBoard = (props) => {
                         aria-controls="settings"
                         aria-selected="false"
                       >
-                        <i className="fa fa-thumbs-up"></i>&nbsp;Liked songs
+                        <Link
+                          to="./LikedSongs"
+                          className="text-decoration-none"
+                        >
+                          <i className="fa fa-thumbs-up"></i>&nbsp;Liked songs
+                        </Link>
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
@@ -301,7 +307,8 @@ const DashBoard = (props) => {
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8">
               {/* <CardList /> */}
-              <Album />
+              {/* <Album /> */}
+              <LikedSongs />
             </div>
           </div>
         </section>
