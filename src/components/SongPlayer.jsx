@@ -12,7 +12,7 @@ const SearchSong = ({ handleSearch }) => (
         aria-label="Search"
         onChange={handleSearch}
       />
-      <button className="btn btn-outline-success mx-2" type="submit">
+      <button className="btn btn-outline-success mx-2" type="button">
         <i className="fa fa-search"></i>
       </button>
     </form>
@@ -21,26 +21,28 @@ const SearchSong = ({ handleSearch }) => (
 
 const SearchResult = ({ song, handleSongPlay }) => (
   <div
-    className="card h-100 text-light bg-dark border-success mt-1 position-absolute z-2"
-    style={{ maxWidth: 280 }}
+    className="card bg-dark border-success my-1 mx-2 position-absolute d-flex flex-row align-items-center justify-content-center"
+    style={{ width: "95%" }}
   >
-    <img
-      src={song.album.images[0].url}
-      className="card-img-top rounded"
-      alt="songimage"
-      style={{ height: 240 }}
-    />
-    <div className="card-body text-light bg-dark border-success">
+    <div className="mx-1">
+      <img
+        src={song.album.images[0].url}
+        className="card-img-top rounded"
+        alt="songimage"
+        style={{ maxWidth: 100 }}
+      />
+    </div>
+    <div className="card-body text-light bg-dark d-flex flex-column align-items-center justify-content-evenly">
       <h5 className="card-title text-wrap">{song.name}</h5>
       <p className="card-text text-wrap">{song.artists[0].name}</p>
       <span className="text-secondary text-wrap">{song.album.name}</span>
     </div>
-    <div className="card-footer border-success d-flex flex-row justify-content-between">
-      <small className="text-secondary mt-2">
+    <div className="card-footer d-flex flex-column align-items-center">
+      <small className="text-secondary mx-3">
         {Math.floor((song.duration_ms / (1000 * 60)) % 60)}:
         {Math.floor((song.duration_ms / 1000) % 60)} mins
       </small>
-      <small className="text-secondary text-wrap mt-2">
+      <small className="text-secondary my-1">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -55,13 +57,13 @@ const SearchResult = ({ song, handleSongPlay }) => (
       </small>
       <button
         type="button"
-        className="btn btn-success"
+        className="btn btn-success text-wrap"
         onClick={handleSongPlay}
       >
-        Play now
+        Play
       </button>
     </div>
-    <audio controls className="mb-2 w-75 d-flex align-self-center">
+    <audio controls className="d-none align-self-center">
       <source src={song.preview_url} type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
@@ -131,16 +133,23 @@ const SongPlayer = () => {
 
   return (
     <>
-      <div className="container-fluid position-relative">
+      <div
+        className="container-fluid position-relative"
+        style={{ width: "100%" }}
+      >
         <SearchSong handleSearch={handleSearch} />
         {song ? (
           <SearchResult song={song} handleSongPlay={handleSongPlay} />
         ) : (
-          <ul className="list-group position-absolute w-100">
+          <ul
+            className="list-group position-absolute mx-2"
+            style={{ width: "90%" }}
+          >
             {songs.map((song) => (
               <li
-                className={`list-group-item ${selectedItem === song.id ? "selected" : ""
-                  }`} // Apply selected class if item is selected
+                className={`list-group-item ${
+                  selectedItem === song.id ? "selected" : ""
+                }`} // Apply selected class if item is selected
                 key={song.id}
                 onClick={() => handleSongClick(song)}
               >

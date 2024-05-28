@@ -114,7 +114,7 @@ const SongsLibrary = (props) => {
                   </small>
                   <button
                     type="button"
-                    className="btn btn-success"
+                    className="btn btn-success d-none"
                     onClick={() => playSong(song)}
                   >
                     Play now

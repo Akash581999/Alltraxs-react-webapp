@@ -6,15 +6,16 @@ import SongPlayer from "./SongPlayer";
 // import Album from "./Album";
 // import SearchSongs from "./SearchSongs";
 // import CardList from "./CardList";
-import LikedSongs from "./LikedSongs";
+// import LikedSongs from "./LikedSongs";
+import SongsLibrary from "./SongsLibrary";
 
 const DashBoard = (props) => {
   return (
     <>
       <div className={`bg-${props.mode}`}>
-        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark z-1 position-relative">
-          <div className="container row">
-            <div className="navbar-brand col-lg-4 d-flex justify-content-center">
+        <nav className="navbar sticky-top w-100 navbar-expand-lg navbar-dark bg-dark z-1 position-relative">
+          <div className="container row w-100">
+            <div className="navbar-brand col-lg-4 d-flex align-items-center justify-content-center">
               <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />
               <Link className="navbar-brand mb-3" to="/DashBoardScreen">
                 <span
@@ -45,7 +46,6 @@ const DashBoard = (props) => {
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
-                    unChecked
                   />
                   <label
                     className="form-check-label text-wrap text-secondary"
@@ -69,7 +69,7 @@ const DashBoard = (props) => {
                 {/* Logout button here */}
                 <div className="nav-item text-nowrap my-2">
                   <Link to="/LoginScreen">
-                    <button className="btn btn-danger" type="submit">
+                    <button className="btn btn-danger" type="button">
                       {/* Log out <i className="fa fa-sign-out"></i> */}
                       <i className="fa fa-power-off"></i> Log out
                     </button>
@@ -308,7 +308,8 @@ const DashBoard = (props) => {
             <div className="col-lg-10 col-md-9 col-sm-8">
               {/* <CardList /> */}
               {/* <Album /> */}
-              <LikedSongs />
+              {/* <LikedSongs /> */}
+              <SongsLibrary />
             </div>
           </div>
         </section>
