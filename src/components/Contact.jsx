@@ -81,13 +81,8 @@ const Contact = ({ mode }) => {
           <div className="col-lg-6 col-md-12 col-sm-12">
             {/* Adjusting column width for mobile screens */}
             <h3 className="text-center mx-3 text-success">Visit us at:</h3>
-            <iframe
-              title="SourceDotCom Pvt Ltd"
-              width="100%"
-              height="500"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224392.40546310737!2d76.91343667759492!3d28.50569605014158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d1945afccd4bd%3A0xe8d79dc10eb572dd!2sBar%C3%A7a%20Academy%20-%20DLF%20Phase%205%2C%20Gurgaon!5e0!3m2!1sen!2sin!4v1715153939780!5m2!1sen!2sin"
-              style={{ marginTop: "80px" }}
-            ></iframe>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3506.3506241600626!2d77.06736677549596!3d28.499096875737827!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d19ce831a0c89%3A0x5cf4858306f7b28!2sSourceDOTcom%20Pvt%20Ltd!5e0!3m2!1sen!2sin!4v1718118994879!5m2!1sen!2sin" title="SourceDotCom Pvt Ltd" width="100%" height="500" style={{ marginTop: "80px" }}
+              allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
           </div>
         </div>
       </div>
