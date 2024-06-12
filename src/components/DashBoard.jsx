@@ -13,11 +13,11 @@ const DashBoard = (props) => {
   return (
     <>
       <div className={`bg-${props.mode}`}>
-        <nav className="navbar sticky-top w-100 navbar-expand-lg navbar-dark bg-dark z-1 position-relative">
-          <div className="container row w-100">
-            <div className="navbar-brand col-lg-4 d-flex align-items-center justify-content-center">
+        <nav className="navbar sticky-top navbar-expand-lg navbar-dark bg-dark z-1">
+          <div className="container-fluid">
+            <div className="navbar-brand d-flex align-items-center mx-auto">
               <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />
-              <Link className="navbar-brand mb-3" to="/DashBoardScreen">
+              <Link className="navbar-brand" to="/DashBoardScreen">
                 <span
                   style={{
                     color: "#8b08ff",
@@ -29,17 +29,26 @@ const DashBoard = (props) => {
                 </span>
               </Link>
             </div>
-            {/* Search songs bar here */}
-            <div className="search col-lg-10 mx-3">
-              {/* <SearchSongs /> */}
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="search navbar-nav ms-5 w-100">
               <SongPlayer />
             </div>
-            <div className="navbar-nav col-lg-2 mx-3">
-              <div className="d-flex justify-content-around">
-                {/* Theme switch */}
-                <div
-                  className={`form-check form-switch text-${props.mode} mt-3 mx-1`}
-                >
+            <div
+              className="collapse navbar-collapse"
+              id="navbarSupportedContent"
+            >
+              <div className="navbar-nav text-end d-flex flex-row my-3 justify-content-center align-items-center">
+                <div className="form-check form-switch text-light mx-2">
                   <input
                     onClick={props.toggleMode}
                     className="form-check-input"
@@ -54,24 +63,19 @@ const DashBoard = (props) => {
                     {props.mode}mode
                   </label>
                 </div>
-                <div className="mx-1 my-2">
-                  <button
-                    className="btn btn-primary text-nowrap"
-                    type="button"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasExample"
-                    aria-controls="offcanvasExample"
-                  >
-                    <span className="navbar-toggler-icon"></span>
-                    <span className="mt-3">Menu</span>
-                  </button>
-                </div>
-                {/* Logout button here */}
-                <div className="nav-item text-nowrap my-2">
+                <button
+                  className="btn btn-primary text-nowrap mx-2"
+                  type="button"
+                  data-bs-toggle="offcanvas"
+                  data-bs-target="#offcanvasExample"
+                  aria-controls="offcanvasExample"
+                >
+                  <i className="fa fa-list"></i>&nbsp;Menu
+                </button>
+                <div className="nav-item text-nowrap mx-2">
                   <Link to="/LoginScreen">
                     <button className="btn btn-danger" type="button">
-                      {/* Log out <i className="fa fa-sign-out"></i> */}
-                      <i className="fa fa-power-off"></i> Log out
+                      <i className="fa fa-sign-out"></i>&nbsp;Log out
                     </button>
                   </Link>
                 </div>
@@ -216,7 +220,7 @@ const DashBoard = (props) => {
 
         <section>
           <div className="row">
-            <div className="col-lg-2 col-md-3 col-sm-4">
+            <div className="col-lg-2 col-md-3 col-sm-4 col-12">
               <div className="d-flex align-items-start h-100 bg-dark">
                 <nav
                   className="nav d-flex flex-column align-items-stretch pe-4 nav-pills p-2 w-100 h-100"
@@ -227,7 +231,7 @@ const DashBoard = (props) => {
                   <ul className="d-flex flex-column" role="tablist">
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link active w-100"
+                        className="nav-link active w-100 text-light"
                         id="home-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#home"
@@ -236,12 +240,12 @@ const DashBoard = (props) => {
                         aria-controls="home"
                         aria-selected="true"
                       >
-                        <i className="fa fa-home"></i>&nbsp; Home
+                        <i className="fa fa-home text-info"></i>&nbsp; Home
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link w-100"
+                        className="nav-link w-100 text-light"
                         id="profile-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#profile"
@@ -250,13 +254,13 @@ const DashBoard = (props) => {
                         aria-controls="profile"
                         aria-selected="false"
                       >
-                        <i className="fa fa-search"></i>&nbsp;Search
+                        <i className="fa fa-search text-info"></i>&nbsp;Search
                       </button>
                     </li>
                     <hr className="text-secondary" />
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link w-100"
+                        className="nav-link w-100 text-light"
                         id="messages-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#messages"
@@ -265,12 +269,12 @@ const DashBoard = (props) => {
                         aria-controls="messages"
                         aria-selected="false"
                       >
-                        <i className="fa fa-table"></i>&nbsp;Library
+                        <i className="fa fa-table text-info"></i>&nbsp;Library
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link w-100"
+                        className="nav-link w-100 text-light"
                         id="settings-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#settings"
@@ -279,17 +283,13 @@ const DashBoard = (props) => {
                         aria-controls="settings"
                         aria-selected="false"
                       >
-                        <Link
-                          to="./LikedSongs"
-                          className="text-decoration-none"
-                        >
-                          <i className="fa fa-thumbs-up"></i>&nbsp;Liked songs
-                        </Link>
+                        <i className="fa fa-thumbs-up text-info"></i>
+                        &nbsp;Liked songs
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
                       <button
-                        className="nav-link w-100"
+                        className="nav-link w-100 text-light"
                         id="settings-tab"
                         data-bs-toggle="tab"
                         data-bs-target="#settings"
@@ -298,14 +298,14 @@ const DashBoard = (props) => {
                         aria-controls="settings"
                         aria-selected="false"
                       >
-                        <i className="fa fa-music"></i>&nbsp;Playlists
+                        <i className="fa fa-music text-info"></i>&nbsp;Playlists
                       </button>
                     </li>
                   </ul>
                 </nav>
               </div>
             </div>
-            <div className="col-lg-10 col-md-9 col-sm-8">
+            <div className="col-lg-10 col-md-9 col-sm-8 col-12">
               {/* <CardList /> */}
               {/* <Album /> */}
               {/* <LikedSongs /> */}
