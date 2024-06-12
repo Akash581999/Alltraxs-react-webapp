@@ -23,7 +23,7 @@ function Login(props) {
 
     try {
       const response = await fetch("http://localhost:5164/login", {
-        method: "GET",
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -55,6 +55,7 @@ function Login(props) {
   const signInWithFacebook = () => {
     alert("Sign in with Facebook");
   };
+
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
@@ -76,8 +77,8 @@ function Login(props) {
             <form
               className="form-container bg-glass"
               onSubmit={handleLogin}
-              autoComplete="off"
-              spellCheck="false"
+              autoComplete="on"
+              spellCheck="true"
             >
               <label className="text-dark" htmlFor="email">
                 Email:
@@ -90,10 +91,11 @@ function Login(props) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email here"
+                // pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})[a-zA-Z0-9!@#$%^&*]+$"
                 title="Must contain @gmail.com"
                 required
               />
-              <label className="text-dark" htmlFor="pass">
+              <label className="text-dark" htmlFor="password">
                 Password:
               </label>
               <input
@@ -105,17 +107,20 @@ function Login(props) {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password here"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
-                title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                title="Must contain at least one number, one uppercase, one lowercase letter and at least 8 or more characters"
                 required
               />
               <div className="show-pass position-relative">
                 <button
                   type="button"
                   className="show-pass-button btn btn-border-light position-absolute"
-                  style={{ top: -45, left: 362 }}
+                  style={{ top: -45, right: 0 }}
                   onClick={togglePasswordVisibility}
+                  aria-label="Toggle Password Visibility"
                 >
-                  <i className="fa fa-eye"></i>
+                  <i
+                    className={`fa ${showPassword ? "fa-eye-slash" : "fa-eye"}`}
+                  ></i>
                 </button>
               </div>
               <div className="d-flex justify-content-between mb-2">
@@ -138,9 +143,6 @@ function Login(props) {
               </div>
               <button type="submit" className="btn btn-primary mb-3 w-100">
                 Login
-                {/* <Link to="/DashBoardScreen" className="nav-link active">
-                  Login
-                </Link> */}
               </button>
               <div className="form-text mb-2">
                 <p className="text-center text-secondary mb-3">
@@ -161,6 +163,7 @@ function Login(props) {
               <button
                 className="btn btn-danger mb-2 w-100"
                 onClick={signInWithGoogle}
+                aria-label="Sign in with Google"
               >
                 <i className="fa fa-google">&nbsp;</i>
                 Sign in with Google
@@ -168,6 +171,7 @@ function Login(props) {
               <button
                 className="btn btn-primary mb-2 w-100"
                 onClick={signInWithFacebook}
+                aria-label="Sign in with Facebook"
               >
                 <i className="fa fa-facebook">&nbsp;</i>
                 Sign in with Facebook
