@@ -4,6 +4,7 @@ import { BiSkipNext, BiSkipPrevious } from "react-icons/bi";
 import { IconContext } from "react-icons";
 import { Link } from "react-router-dom";
 import PlaylistAdd from "./PlaylistAdd";
+import playingif from "../images/playing.gif";
 import "../styles/musicplayer.css";
 
 const songs = [...Array(8)].map((_, index) =>
@@ -16,12 +17,15 @@ const MusicPlayer = ({ song }) => {
   const [currentVolume, setCurrentVolume] = useState(0.5);
   const [currentSongIndex, setCurrentSongIndex] = useState(0);
   const [playlist, setPlaylist] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     if (isPlaying) {
       audio.play();
+      setIsVisible(true);
     } else {
       audio.pause();
+      setIsVisible(false);
     }
   }, [isPlaying, audio]);
 
@@ -124,7 +128,12 @@ const MusicPlayer = ({ song }) => {
             <BiSkipPrevious />
           </IconContext.Provider>
         </button>
-        <button className="playButton" onClick={togglePlay}>
+        <button
+          className="playButton"
+          onClick={() => {
+            togglePlay();
+          }}
+        >
           <IconContext.Provider value={{ size: "3em", color: "#27AE60" }}>
             {isPlaying ? <AiFillPauseCircle /> : <AiFillPlayCircle />}
           </IconContext.Provider>
@@ -170,6 +179,9 @@ const MusicPlayer = ({ song }) => {
           </p>
         </div>
       </div>
+      {isVisible && (
+        <img src={playingif} alt="playingif" style={{ height: "8vh" }} />
+      )}
       <div className="mb-1 d-flex flex-row">
         <Link to="/SubscriptionScreen" className="text-success">
           Get subscription for <br />

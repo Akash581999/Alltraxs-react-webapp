@@ -93,6 +93,9 @@ input:hover,
       transparent 100%
     );
 }
+.background-bg-cover {
+  background-image: url(../src/images/bgcover.jpg);
+}
 
 #radius-shape-1 {
   height: 220px;
@@ -116,4 +119,14 @@ input:hover,
 .bg-glass {
   background-color: hsla(0, 0%, 100%, 0.9) !important;
   backdrop-filter: saturate(200%) blur(25px);
+}
+/* Custom CSS for card hover effect */
+.card:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transform: scale(1.05);
+}
+
+/* Adjust transition for smoother effect */
+.card {
+  transition: transform 0.2s ease-in-out;
 }
