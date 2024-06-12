@@ -1,19 +1,52 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 import profile from "../images/draw2.svg";
 
 function Login(props) {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
-  };
-
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
     alert("You are welcome");
+
+    const requestData = {
+      eventID: "1001",
+      addInfo: {
+        UserId: email,
+        UserPassword: password,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:5164/login", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log(data, "api data");
+
+      if (response.ok && data.rData.rCode === 0) {
+        setIsLoggedIn(true);
+      } else {
+        alert(data.rData.rMessage || "Invalid email or password");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while trying to log in.");
+    }
   };
+
+  if (isLoggedIn) {
+    return <Navigate to="/DashBoardScreen" />;
+  }
 
   const signInWithGoogle = () => {
     alert("Sign in with Google");
@@ -21,6 +54,9 @@ function Login(props) {
 
   const signInWithFacebook = () => {
     alert("Sign in with Facebook");
+  };
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
   };
 
   return (
@@ -39,7 +75,7 @@ function Login(props) {
             <h2 className="text-center text-primary">Login</h2>
             <form
               className="form-container bg-glass"
-              onSubmit={handleSubmit}
+              onSubmit={handleLogin}
               autoComplete="off"
               spellCheck="false"
             >
@@ -51,7 +87,10 @@ function Login(props) {
                 type="email"
                 id="email"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email here"
+                title="Must contain @gmail.com"
                 required
               />
               <label className="text-dark" htmlFor="pass">
@@ -60,8 +99,10 @@ function Login(props) {
               <input
                 className="form-control mb-2"
                 type={showPassword ? "text" : "password"}
-                id="pass"
-                name="pass"
+                id="password"
+                name="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password here"
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
@@ -96,9 +137,10 @@ function Login(props) {
                 </div>
               </div>
               <button type="submit" className="btn btn-primary mb-3 w-100">
-                <Link to="/DashBoardScreen" className="nav-link active">
+                Login
+                {/* <Link to="/DashBoardScreen" className="nav-link active">
                   Login
-                </Link>
+                </Link> */}
               </button>
               <div className="form-text mb-2">
                 <p className="text-center text-secondary mb-3">
