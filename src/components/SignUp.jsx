@@ -9,7 +9,6 @@ function SignUp(props) {
     email: "",
     phoneNumber: "",
     password: "",
-    confirmPassword: "",
     rememberMe: false,
   });
 
@@ -19,10 +18,42 @@ function SignUp(props) {
     setFormData({ ...formData, [name]: val });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(`Your account created successfully`);
-    // You can add form submission logic here
+
+    const requestData = {
+      eventID: "1002",
+      addInfo: {
+        FirstName: formData.firstName,
+        LastName: formData.lastName,
+        EMAIL_ID: formData.email,
+        MOBILE_NO: formData.phoneNumber,
+        UserPassword: formData.password,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:5164/register", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log(data, "api data");
+      if (response.ok && data.rData.rCode === 0) {
+        alert(data.rData.rMessage || "Account created successfully");
+      } else {
+        alert(
+          data.rData.rMessage || "Email or mobile number already registered!"
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred while trying to register.");
+    }
   };
 
   return (
@@ -61,6 +92,8 @@ function SignUp(props) {
                 <form
                   onSubmit={handleSubmit}
                   className="my-2 bg-glass"
+                  autoComplete="on"
+                  spellCheck="true"
                   style={{ borderRadius: "10px" }}
                 >
                   <div className="p-4">
@@ -69,6 +102,7 @@ function SignUp(props) {
                         className="form-control"
                         type="text"
                         placeholder="First name"
+                        id="firstName"
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
@@ -79,6 +113,7 @@ function SignUp(props) {
                         className="form-control"
                         type="text"
                         placeholder="Last name"
+                        id="lastName"
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
@@ -89,6 +124,7 @@ function SignUp(props) {
                         className="form-control"
                         type="email"
                         placeholder="Email"
+                        id="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
@@ -99,6 +135,7 @@ function SignUp(props) {
                         className="form-control"
                         type="tel"
                         placeholder="Phone number"
+                        id="phoneNumber"
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleChange}
@@ -109,35 +146,29 @@ function SignUp(props) {
                         className="form-control"
                         type="password"
                         placeholder="Password"
+                        id="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                       />
                     </div>
                     <div className="mb-4">
-                      <input
-                        className="form-control"
-                        type="password"
-                        placeholder="Confirm password"
-                        name="confirmPassword"
-                        value={formData.confirmPassword}
-                        onChange={handleChange}
-                      />
-                    </div>
-                    <div className="mb-4">
-                      <input
-                        type="checkbox"
-                        id="confirmDetails"
-                        name="confirmDetails"
-                        checked={formData.confirmDetails}
-                        onChange={handleChange}
-                      />
-                      <label
-                        htmlFor="confirmDetails"
-                        className="form-check-label text-secondary"
-                      >
-                        &nbsp;Accept terms & conditions?
-                      </label>
+                      <div className="form-check">
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
+                          id="rememberMe"
+                          name="rememberMe"
+                          checked={formData.rememberMe}
+                          onChange={handleChange}
+                        />
+                        <label
+                          htmlFor="rememberMe"
+                          className="form-check-label text-secondary"
+                        >
+                          Accept terms & conditions?
+                        </label>
+                      </div>
                     </div>
                     <p className="text-secondary">
                       By creating an account you agree to our&nbsp;
@@ -164,10 +195,13 @@ function SignUp(props) {
                     <hr />
                     <div className="container signin">
                       <p className="mt-1 text-secondary">
-                        Already have an account?{" "}
+                        Already have an account?
                       </p>
-                      <Link to="/LoginScreen" className="nav-link active">
-                        <a href="/LoginScreen">Login now!</a>
+                      <Link
+                        to="/LoginScreen"
+                        className="nav-link active link-underline-primary text-primary"
+                      >
+                        Login now!
                       </Link>
                     </div>
                   </div>

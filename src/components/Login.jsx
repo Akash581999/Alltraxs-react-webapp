@@ -11,8 +11,6 @@ function Login(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    alert("You are welcome");
-
     const requestData = {
       eventID: "1001",
       addInfo: {
@@ -35,8 +33,9 @@ function Login(props) {
 
       if (response.ok && data.rData.rCode === 0) {
         setIsLoggedIn(true);
+        alert(data.rData.rMessage || "Login Successfully!!");
       } else {
-        alert(data.rData.rMessage || "Invalid email or password");
+        alert(data.rData.rMessage || "Invalid Credentials!!");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -106,7 +105,7 @@ function Login(props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password here"
-                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Must contain at least one number, one uppercase, one lowercase letter and at least 8 or more characters"
                 required
               />
