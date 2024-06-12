@@ -105,19 +105,19 @@ const Subscription = (props) => {
                     </th>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
@@ -129,13 +129,13 @@ const Subscription = (props) => {
                     <td></td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
@@ -149,19 +149,19 @@ const Subscription = (props) => {
                     </th>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
@@ -173,13 +173,13 @@ const Subscription = (props) => {
                     <td></td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
@@ -191,13 +191,13 @@ const Subscription = (props) => {
                     <td></td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
@@ -210,7 +210,7 @@ const Subscription = (props) => {
                     <td></td>
                     <td>
                       <i
-                        class="fa fa-check text-primary"
+                        className="fa fa-check text-primary"
                         style={{ fontSize: "24px" }}
                       ></i>
                     </td>
