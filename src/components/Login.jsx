@@ -11,11 +11,12 @@ function Login(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+
     const requestData = {
       eventID: "1001",
       addInfo: {
         UserId: email,
-        UserPassword: password,
+        UserPassword: password
       },
     };
 
@@ -29,13 +30,13 @@ function Login(props) {
       });
 
       const data = await response.json();
-      console.log(data, "api data");
+      console.log(data, "Api response data");
 
       if (response.ok && data.rData.rCode === 0) {
         setIsLoggedIn(true);
-        alert(data.rData.rMessage || "Login Successfully!!");
+        alert(data.rData.rMessage || "Login Successfully!");
       } else {
-        alert(data.rData.rMessage || "Invalid Credentials!!");
+        alert(data.rData.rMessage || "Invalid Credentials!");
       }
     } catch (error) {
       console.error("Error:", error);

@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 
 function SignUp(props) {
+  const [isRegitered, setIsRegitered] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -42,19 +43,22 @@ function SignUp(props) {
       });
 
       const data = await response.json();
-      console.log(data, "api data");
+      console.log(data, "Api response data");
+
       if (response.ok && data.rData.rCode === 0) {
-        alert(data.rData.rMessage || "Account created successfully");
+        setIsRegitered(true);
+        alert(data.rData.rMessage || "Account created successfully!");
       } else {
-        alert(
-          data.rData.rMessage || "Email or mobile number already registered!"
-        );
+        alert(data.rData.rMessage || "Email or mobile number already registered!");
       }
     } catch (error) {
       console.error("Error:", error);
       alert("An error occurred while trying to register.");
     }
   };
+  if (isRegitered) {
+    return <Navigate to="/LoginScreen" />;
+  }
 
   return (
     <>
