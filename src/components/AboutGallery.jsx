@@ -11,17 +11,17 @@ const AboutGallery = (props) => {
     <div className={`bg-${props.mode}`}>
       <div className="container pt-3">
         <div className="accordion" id="accordionExample">
-          <div className="accordion-item">
+          <div className="accordion-item bg-secondary">
             <div className="accordion-header">
               <button
-                className="accordion-button"
+                className="accordion-button bg-primary collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseOne"
-                aria-expanded="true"
+                aria-expanded="false"
                 aria-controls="collapseOne"
               >
-                <h1 className="my-2">About Us</h1>
+                <h1 className="my-2 text-light">About Us</h1>
               </button>
             </div>
             <div
@@ -30,7 +30,7 @@ const AboutGallery = (props) => {
               data-bs-parent="#accordionExample"
             >
               <div className="accordion-body">
-                <p className="lead mb-4">
+                <p className="lead mb-4 text-light">
                   Introducing AllTraxs, your ultimate destination for all things
                   music. AllTraxs offers an unparalleled music streaming
                   experience, combining a vast library of songs from all genres
@@ -54,17 +54,17 @@ const AboutGallery = (props) => {
               </div>
             </div>
           </div>
-          <div className="accordion-item">
+          <div className="accordion-item bg-secondary">
             <div className="accordion-header">
               <button
-                className="accordion-button collapsed"
+                className="accordion-button bg-primary collapsed"
                 type="button"
                 data-bs-toggle="collapse"
                 data-bs-target="#collapseTwo"
                 aria-expanded="false"
                 aria-controls="collapseTwo"
               >
-                <h1 className="my-2">Our Team</h1>
+                <h1 className="my-2 text-light">Our Team</h1>
               </button>
             </div>
             <div
