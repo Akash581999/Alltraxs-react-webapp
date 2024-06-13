@@ -91,7 +91,7 @@ function Login(props) {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter email here"
-                // pattern="^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})[a-zA-Z0-9!@#$%^&*]+$"
+                minLength={5}
                 title="Must contain @gmail.com"
                 required
               />
@@ -106,7 +106,7 @@ function Login(props) {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="Enter password here"
-                // pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+                minLength={5}
                 title="Must contain at least one number, one uppercase, one lowercase letter and at least 8 or more characters"
                 required
               />

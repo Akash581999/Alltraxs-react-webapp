@@ -115,6 +115,7 @@ function SignUp(props) {
                         name="firstName"
                         value={formData.firstName}
                         onChange={handleChange}
+                        required
                       />
                     </div>
                     <div className="mb-4">
@@ -126,6 +127,7 @@ function SignUp(props) {
                         name="lastName"
                         value={formData.lastName}
                         onChange={handleChange}
+                        required
                       />
                     </div>
                     <div className="mb-4">
@@ -137,6 +139,7 @@ function SignUp(props) {
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
+                        required
                       />
                     </div>
                     <div className="mb-4">
@@ -148,6 +151,7 @@ function SignUp(props) {
                         name="phoneNumber"
                         value={formData.phoneNumber}
                         onChange={handleChange}
+                        required
                       />
                     </div>
                     <div className="mb-4">
@@ -159,6 +163,7 @@ function SignUp(props) {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
+                        required
                       />
                       <div className="show-pass position-relative">
                         <button
@@ -185,6 +190,7 @@ function SignUp(props) {
                           name="rememberMe"
                           checked={formData.rememberMe}
                           onChange={handleChange}
+                          required
                         />
                         <label
                           htmlFor="rememberMe"
