@@ -1,6 +1,33 @@
 import React from "react";
+import BgImg1 from "../covers/bgcover1.jpg";
+import BgImg2 from "../covers/bgcover2.jpg";
+import BgImg3 from "../covers/bgcover3.jpg";
+import BgImg4 from "../covers/bgcover4.webp";
 
-const Slider = ({ images, mode }) => {
+const covers = [
+  {
+    url: BgImg1,
+    title: "First Slide",
+    description: "Some description for the first slide",
+  },
+  {
+    url: BgImg2,
+    title: "Second Slide",
+    description: "Some description for the second slide",
+  },
+  {
+    url: BgImg3,
+    title: "Third Slide",
+    description: "Some description for the third slide",
+  },
+  {
+    url: BgImg4,
+    title: "Fourth Slide",
+    description: "Some description for the Fourth slide",
+  },
+];
+
+const Slider = ({ mode }) => {
   return (
     <div className={`bg-${mode}`}>
       <div className="container border-success">
@@ -10,7 +37,7 @@ const Slider = ({ images, mode }) => {
           data-bs-ride="carousel"
         >
           <div className="carousel-indicators rounded">
-            {images.map((image, index) => (
+            {covers.map((_cover, index) => (
               <button
                 key={index}
                 type="button"
@@ -22,19 +49,20 @@ const Slider = ({ images, mode }) => {
             ))}
           </div>
           <div className="carousel-inner rounded">
-            {images.map((image, index) => (
+            {covers.map((cover, index) => (
               <div
                 key={index}
                 className={`carousel-item ${index === 0 ? "active" : ""}`}
               >
                 <img
                   className="musicCover rounded"
-                  src={image.url}
+                  src={cover.url}
                   alt={`Slide ${index + 1}`}
+                  style={{ width: "100%", height: "70vh" }}
                 />
                 <div className="carousel-caption d-none d-md-block">
-                  <h5>{image.title}</h5>
-                  <p>{image.description}</p>
+                  <h5>{cover.title}</h5>
+                  <p>{cover.description}</p>
                 </div>
               </div>
             ))}
