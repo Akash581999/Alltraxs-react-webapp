@@ -74,7 +74,7 @@ const Header = (props) => {
                 <form
                   id="mode-switch"
                   name="mode-switch"
-                  className={`form-check form-switch text-${props.mode} mt-2`}
+                  className={`form-check form-switch text-${props.mode} mt-2 mx-3`}
                 >
                   <input
                     onClick={props.toggleMode}
@@ -88,7 +88,11 @@ const Header = (props) => {
                     className="form-check-label text-wrap text-secondary"
                     htmlFor="flexSwitchCheckDefault"
                   >
-                    {props.mode}mode
+                    {props.mode === "light" ? (
+                      <i className="fas fa-sun-o text-light fs-3"></i>
+                    ) : (
+                      <i className="fa fa-moon-o text-secondary fs-3"></i>
+                    )}
                   </label>
                 </form>
                 {/* Login button */}
