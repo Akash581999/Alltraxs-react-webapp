@@ -3,6 +3,7 @@ import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 
 function SignUp(props) {
+  const [showPassword, setShowPassword] = useState(false);
   const [isRegitered, setIsRegitered] = useState(false);
   const [formData, setFormData] = useState({
     firstName: "",
@@ -18,7 +19,9 @@ function SignUp(props) {
     const val = type === "checkbox" ? checked : value;
     setFormData({ ...formData, [name]: val });
   };
-
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -49,7 +52,9 @@ function SignUp(props) {
         setIsRegitered(true);
         alert(data.rData.rMessage || "Account created successfully!");
       } else {
-        alert(data.rData.rMessage || "Email or mobile number already registered!");
+        alert(
+          data.rData.rMessage || "Email or mobile number already registered!"
+        );
       }
     } catch (error) {
       console.error("Error:", error);
@@ -148,13 +153,28 @@ function SignUp(props) {
                     <div className="mb-4">
                       <input
                         className="form-control"
-                        type="password"
+                        type={showPassword ? "text" : "password"}
                         placeholder="Password"
                         id="password"
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
                       />
+                      <div className="show-pass position-relative">
+                        <button
+                          type="button"
+                          className="show-pass-button btn btn-border-light position-absolute"
+                          style={{ top: -38, right: 0 }}
+                          onClick={togglePasswordVisibility}
+                          aria-label="Toggle Password Visibility"
+                        >
+                          <i
+                            className={`fa ${
+                              showPassword ? "fa-eye-slash" : "fa-eye"
+                            }`}
+                          ></i>
+                        </button>
+                      </div>
                     </div>
                     <div className="mb-4">
                       <div className="form-check">

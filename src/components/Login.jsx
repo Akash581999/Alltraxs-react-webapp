@@ -16,7 +16,7 @@ function Login(props) {
       eventID: "1001",
       addInfo: {
         UserId: email,
-        UserPassword: password
+        UserPassword: password,
       },
     };
 
