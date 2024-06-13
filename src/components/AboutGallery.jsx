@@ -6,7 +6,7 @@ import Dev2 from "../images/userimg2.jpg";
 import Dev3 from "../images/userimg3.png";
 import Dev4 from "../images/userimg4.png";
 
-const ImageGallery = (props) => {
+const AboutGallery = (props) => {
   return (
     <div className={`bg-${props.mode}`}>
       <div className="container pt-3">
@@ -115,4 +115,4 @@ const ImageGallery = (props) => {
   );
 };
 
-export default ImageGallery;
+export default AboutGallery;

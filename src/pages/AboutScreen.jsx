@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import ImageGallery from "../components/ImageGallery";
+import AboutGallery from "../components/AboutGallery";
 import "../App.css";
 
 const AboutScreen = () => {
@@ -17,7 +17,7 @@ const AboutScreen = () => {
   return (
     <>
       <Header mode={mode} toggleMode={toggleMode} />
-      <ImageGallery mode={mode} toggleMode={toggleMode} />
+      <AboutGallery mode={mode} toggleMode={toggleMode} />
       <Footer mode={mode} toggleMode={toggleMode} />
     </>
   );
