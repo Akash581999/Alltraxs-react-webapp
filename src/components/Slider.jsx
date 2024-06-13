@@ -6,24 +6,28 @@ import BgImg4 from "../covers/bgcover4.webp";
 
 const covers = [
   {
-    url: BgImg1,
-    title: "First Slide",
-    description: "Some description for the first slide",
-  },
-  {
-    url: BgImg2,
-    title: "Second Slide",
-    description: "Some description for the second slide",
-  },
-  {
     url: BgImg3,
-    title: "Third Slide",
-    description: "Some description for the third slide",
+    title: "Listen on any device",
+    description:
+      "Listen to your favorite music on smart speakers, smartphones, tablets, and more.",
   },
   {
     url: BgImg4,
-    title: "Fourth Slide",
-    description: "Some description for the Fourth slide",
+    title: "Download songs for offline listening",
+    description:
+      "Download your favorite tracks to listen to them anytime, anywhere, even without an internet connection.",
+  },
+  {
+    url: BgImg2,
+    title: "Discover new music",
+    description:
+      "Explore a vast library of songs and discover new artists, genres, and playlists tailored to your taste.",
+  },
+  {
+    url: BgImg1,
+    title: "Create personalized playlists",
+    description:
+      "Curate your own playlists and mixtapes to match your mood or occasion, and share them with friends.",
   },
 ];
 
@@ -61,8 +65,8 @@ const Slider = ({ mode }) => {
                   style={{ width: "100%", height: "70vh" }}
                 />
                 <div className="carousel-caption d-none d-md-block">
-                  <h5>{cover.title}</h5>
-                  <p>{cover.description}</p>
+                  <h5 className="text-light">{cover.title}</h5>
+                  <p className="text-light">{cover.description}</p>
                 </div>
               </div>
             ))}
