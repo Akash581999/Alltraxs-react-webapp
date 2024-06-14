@@ -135,7 +135,7 @@ const Contact = ({ mode }) => {
                 </div>
                 <div className="d-flex justify-content-end">
                   <button type="submit" className="btn btn-success">
-                    Send
+                    Submit
                   </button>
                 </div>
               </form>
