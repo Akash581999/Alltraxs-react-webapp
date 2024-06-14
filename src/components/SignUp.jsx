@@ -30,8 +30,8 @@ function SignUp(props) {
       addInfo: {
         FirstName: formData.firstName,
         LastName: formData.lastName,
-        EMAIL_ID: formData.email,
-        MOBILE_NO: formData.phoneNumber,
+        Email: formData.email,
+        Mobile: formData.phoneNumber,
         UserPassword: formData.password,
       },
     };

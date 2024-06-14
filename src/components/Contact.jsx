@@ -1,10 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+// import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 
 const Contact = ({ mode }) => {
-  const handleSubmit = (e) => {
+  const [formData, setFormData] = useState({
+    userName: "",
+    email: "",
+    country: "",
+    comments: "",
+  });
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    const val = type === "checkbox" ? checked : value;
+    setFormData({ ...formData, [name]: val });
+  };
+  const handleFeedback = async (e) => {
     e.preventDefault();
-    alert(`Thank you for your response`);
+
+    const requestData = {
+      eventID: "1007",
+      addInfo: {
+        UserName: formData.userName,
+        Email: formData.email,
+        Country: formData.country,
+        Comments: formData.comments,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:5164/contactUs", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log(data, "Api response data");
+
+      if (response.ok && data.rData.rCode === 0) {
+        alert(data.rData.rMessage || "Thank you for your response!");
+      } else {
+        alert(
+          data.rData.rMessage || "User data not found, Kindly register first!"
+        );
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to submit feedback.");
+    }
   };
 
   return (
@@ -16,20 +61,23 @@ const Contact = ({ mode }) => {
               <h3 className="text-center text-success">Contact us at:</h3>
               <form
                 className="form-container bg-glass my-5 mx-5"
-                onSubmit={handleSubmit}
+                onSubmit={handleFeedback}
                 autoComplete="on"
                 spellCheck="true"
               >
                 <div className="mb-3">
-                  <label htmlFor="name" className="form-label">
-                    Name
+                  <label htmlFor="userName" className="form-label">
+                    User Name
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="name"
                     placeholder="Enter name here"
-                    name="name"
+                    id="userName"
+                    name="userName"
+                    value={formData.userName}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
@@ -39,16 +87,26 @@ const Contact = ({ mode }) => {
                   <input
                     type="email"
                     className="form-control"
-                    id="email"
                     placeholder="Enter email here"
+                    id="email"
                     name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
                   />
                 </div>
                 <div className="mb-3">
                   <label htmlFor="country" className="form-label">
                     Country
                   </label>
-                  <select id="country" name="country" className="form-select">
+                  <select
+                    className="form-select"
+                    id="country"
+                    name="country"
+                    value={formData.country}
+                    onChange={handleChange}
+                    required
+                  >
                     <option value="" disabled defaultValue>
                       Select your country
                     </option>
@@ -62,7 +120,7 @@ const Contact = ({ mode }) => {
                 </div>
                 <div className="mb-3">
                   <label htmlFor="comments" className="form-label">
-                    Country
+                    Comments
                   </label>
                   <textarea
                     className="form-control"
@@ -70,11 +128,14 @@ const Contact = ({ mode }) => {
                     id="comments"
                     name="comments"
                     style={{ height: "100px" }}
+                    value={formData.comments}
+                    onChange={handleChange}
+                    required
                   ></textarea>
                 </div>
                 <div className="d-flex justify-content-end">
                   <button type="submit" className="btn btn-success">
-                    Submit
+                    Send
                   </button>
                 </div>
               </form>
