@@ -81,7 +81,17 @@ const SongsLibrary = (props) => {
   return (
     <div className={`bg-${props.mode}`}>
       {loading ? (
-        <div>Loading...</div> //Add loaders or spinners here AND /*Add a tile component to toggle from card view*/
+        <div
+          className="container d-flex justify-content-center align-items-center"
+          style={{ height: "50vh" }}
+        >
+          <div
+            className="spinner-border text-success spinner-large"
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
       ) : (
         <div className="card-list d-flex flex-row justify-content-evenly flex-wrap">
           <div className="row my-2 mx-2">
