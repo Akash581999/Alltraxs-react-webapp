@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-// import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 
-const Contact = (mode) => {
+const Contact = ({ mode }) => {
   const forms = document.querySelectorAll(".needs-validation");
   Array.from(forms).forEach((form) => {
     form.addEventListener(
@@ -24,11 +23,13 @@ const Contact = (mode) => {
     country: "",
     comments: "",
   });
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
     setFormData({ ...formData, [name]: val });
   };
+
   const handleFeedback = async (e) => {
     e.preventDefault();
 
@@ -56,6 +57,7 @@ const Contact = (mode) => {
 
       if (response.ok && data.rData.rCode === 0) {
         alert(data.rData.rMessage || "Thank you for your response!");
+        resetForm();
       } else {
         alert(
           data.rData.rMessage || "User data not found, Kindly register first!"
@@ -67,6 +69,14 @@ const Contact = (mode) => {
     }
   };
 
+  const resetForm = () => {
+    setFormData({
+      userName: "",
+      email: "",
+      country: "",
+      comments: "",
+    });
+  };
   return (
     <div className={`bg-${mode}`}>
       <div className="container background-radial-gradient overflow-hidden">
