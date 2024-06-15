@@ -6,6 +6,7 @@ import profile from "../images/draw2.svg";
 function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -126,12 +127,15 @@ function Login(props) {
               <div className="d-flex justify-content-between mb-2">
                 <div className="form-check align-center">
                   <input
+                    class="form-check-input"
                     type="checkbox"
-                    id="remember"
-                    name="remember"
-                    className="form-check-input"
+                    id="rememberMe"
+                    name="rememberMe"
+                    value={rememberMe}
+                    onChange={(e) => setRememberMe(e.target.value)}
+                    required
                   />
-                  <label htmlFor="remember" className="text-wrap">
+                  <label htmlFor="rememberMe" className="form-check-label">
                     Remember me
                   </label>
                 </div>

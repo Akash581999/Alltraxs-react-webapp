@@ -81,7 +81,7 @@ const SongsLibrary = (props) => {
   return (
     <div className={`bg-${props.mode}`}>
       {loading ? (
-        <div>Loading...</div>//Add loaders or spinners here AND /*Add a tile component to toggle from card view*/
+        <div>Loading...</div> //Add loaders or spinners here AND /*Add a tile component to toggle from card view*/
       ) : (
         <div className="card-list d-flex flex-row justify-content-evenly flex-wrap">
           <div className="row my-2 mx-2">
@@ -125,7 +125,11 @@ const SongsLibrary = (props) => {
                     </button>
                   </div>
                   {song.preview_url && (
-                    <audio controls download className="mb-2 w-75 d-flex align-self-center">
+                    <audio
+                      controls
+                      download
+                      className="mb-2 w-75 d-flex align-self-center"
+                    >
                       <source src={song.preview_url} type="audio/mpeg" />
                       <source src={song.preview_url} type="audio/ogg" />
                       <source src={song.preview_url} type="audio/wav" />

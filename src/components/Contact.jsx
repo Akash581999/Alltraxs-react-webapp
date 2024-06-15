@@ -2,7 +2,22 @@ import React, { useState } from "react";
 // import { Link, Navigate } from "react-router-dom";
 import "../App.css";
 
-const Contact = ({ mode }) => {
+const Contact = (mode) => {
+  const forms = document.querySelectorAll(".needs-validation");
+  Array.from(forms).forEach((form) => {
+    form.addEventListener(
+      "submit",
+      (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add("was-validated");
+      },
+      false
+    );
+  });
+
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
@@ -60,10 +75,11 @@ const Contact = ({ mode }) => {
             <div className="my-5">
               <h3 className="text-center text-success">Contact us at:</h3>
               <form
-                className="form-container bg-glass my-5 mx-5"
+                className="form-container bg-glass my-5 mx-5 needs-validation"
                 onSubmit={handleFeedback}
                 autoComplete="on"
                 spellCheck="true"
+                novalidate
               >
                 <div className="mb-3">
                   <label htmlFor="userName" className="form-label">
@@ -107,7 +123,7 @@ const Contact = ({ mode }) => {
                     onChange={handleChange}
                     required
                   >
-                    <option value="" disabled defaultValue>
+                    <option defaultValue selected disabled value="">
                       Select your country
                     </option>
                     <option value="India">India</option>
