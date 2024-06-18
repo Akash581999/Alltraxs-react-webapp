@@ -19,7 +19,7 @@ function App() {
           <Route path="/Contact" element={<ContactScreen />} />
           <Route path="/Login" element={<LoginScreen />} />
           <Route path="/Signup" element={<SignupScreen />} />
-          <Route path="/ForgotPassword" element={<ForgotScreen />} />
+          <Route path="/ResetPassword" element={<ForgotScreen />} />
           <Route path="/DashBoard" element={<DashBoardScreen />} />
           <Route path="/Subscription" element={<SubscriptionScreen />} />
           <Route path="/NotFound" element={<NotFoundScreen />} />
