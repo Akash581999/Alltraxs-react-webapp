@@ -7,6 +7,7 @@ import SignupScreen from "./pages/SignupScreen";
 import ForgotScreen from "./pages/ForgotScreen";
 import DashBoardScreen from "./pages/DashBoardScreen";
 import SubscriptionScreen from "./pages/SubscriptionScreen";
+import NotFoundScreen from './pages/NotFoundScreen';
 
 function App() {
   return (
@@ -14,13 +15,14 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<HomeScreen />} />
-          <Route path="/AboutScreen" element={<AboutScreen />} />
-          <Route path="/ContactScreen" element={<ContactScreen />} />
-          <Route path="/LoginScreen" element={<LoginScreen />} />
-          <Route path="/SignupScreen" element={<SignupScreen />} />
-          <Route path="/ForgotScreen" element={<ForgotScreen />} />
-          <Route path="/DashBoardScreen" element={<DashBoardScreen />} />
-          <Route path="/SubscriptionScreen" element={<SubscriptionScreen />} />
+          <Route path="/About" element={<AboutScreen />} />
+          <Route path="/Contact" element={<ContactScreen />} />
+          <Route path="/Login" element={<LoginScreen />} />
+          <Route path="/Signup" element={<SignupScreen />} />
+          <Route path="/ForgotPassword" element={<ForgotScreen />} />
+          <Route path="/DashBoard" element={<DashBoardScreen />} />
+          <Route path="/Subscription" element={<SubscriptionScreen />} />
+          <Route path="/NotFound" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
     </>
