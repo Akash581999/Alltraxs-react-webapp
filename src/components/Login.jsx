@@ -127,7 +127,7 @@ function Login(props) {
               <div className="d-flex justify-content-between mb-2">
                 <div className="form-check align-center">
                   <input
-                    class="form-check-input"
+                    className="form-check-input"
                     type="checkbox"
                     id="rememberMe"
                     name="rememberMe"
