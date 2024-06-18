@@ -7,6 +7,7 @@ import SignupScreen from "./pages/SignupScreen";
 import ForgotScreen from "./pages/ForgotScreen";
 import DashBoardScreen from "./pages/DashBoardScreen";
 import SubscriptionScreen from "./pages/SubscriptionScreen";
+import AdminPage from './pages/AdminPage';
 import NotFoundScreen from './pages/NotFoundScreen';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/ResetPassword" element={<ForgotScreen />} />
           <Route path="/DashBoard" element={<DashBoardScreen />} />
           <Route path="/Subscription" element={<SubscriptionScreen />} />
+          <Route path="/AdminPage" element={<AdminPage />} />
           <Route path="/NotFound" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
