@@ -16,13 +16,13 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route index path="/" element={<HomeScreen />} />
-          <Route path="/About" element={<AboutScreen />} />
-          <Route path="/Contact" element={<ContactScreen />} />
-          <Route path="/Login" element={<LoginScreen />} />
-          <Route path="/Signup" element={<SignupScreen />} />
-          <Route path="/ResetPassword" element={<ForgotScreen />} />
-          <Route path="/DashBoard" element={<DashBoardScreen />} />
-          <Route path="/Subscription" element={<SubscriptionScreen />} />
+          <Route path="/AboutScreen" element={<AboutScreen />} />
+          <Route path="/ContactScreen" element={<ContactScreen />} />
+          <Route path="/LoginScreen" element={<LoginScreen />} />
+          <Route path="/SignupScreen" element={<SignupScreen />} />
+          <Route path="/ForgotScreen" element={<ForgotScreen />} />
+          <Route path="/DashBoardScreen" element={<DashBoardScreen />} />
+          <Route path="/SubscriptionScreen" element={<SubscriptionScreen />} />
           <Route path="/AdminPage" element={<AdminPage />} />
           <Route path="*" element={<NotFoundScreen />} />
         </Routes>
