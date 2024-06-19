@@ -24,7 +24,7 @@ function App() {
           <Route path="/DashBoard" element={<DashBoardScreen />} />
           <Route path="/Subscription" element={<SubscriptionScreen />} />
           <Route path="/AdminPage" element={<AdminPage />} />
-          <Route path="/NotFound" element={<NotFoundScreen />} />
+          <Route path="*" element={<NotFoundScreen />} />
         </Routes>
       </BrowserRouter>
     </>
