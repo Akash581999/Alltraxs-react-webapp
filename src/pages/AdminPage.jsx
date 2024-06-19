@@ -3,7 +3,7 @@ import React from "react";
 const AdminPage = () => {
   return (
     <>
-      <div>
+      <div className="container">
         <h2>Upload Song</h2>
         <form
           className="row gy-2 gx-3 align-items-center"
@@ -47,8 +47,7 @@ const AdminPage = () => {
             <button type="submit">Upload Song</button>
           </div>
         </form>
-      </div>
-      <div>
+
         <h2>Search songs here</h2>
         <label for="exampleDataList" className="form-label">
           Datalist example
@@ -66,8 +65,7 @@ const AdminPage = () => {
           <option value="Los Angeles"></option>
           <option value="Chicago"></option>
         </datalist>
-      </div>
-      <div>
+
         <form className="row row-cols-lg-auto g-3 align-items-center">
           <div className="col-12">
             <label
