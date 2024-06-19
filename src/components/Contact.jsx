@@ -89,7 +89,7 @@ const Contact = ({ mode }) => {
                 onSubmit={handleFeedback}
                 autoComplete="on"
                 spellCheck="true"
-                novalidate
+                noValidate
               >
                 <div className="mb-3">
                   <label htmlFor="userName" className="form-label">
@@ -133,7 +133,7 @@ const Contact = ({ mode }) => {
                     onChange={handleChange}
                     required
                   >
-                    <option defaultValue selected disabled value="">
+                    <option defaultValue disabled value="">
                       Select your country
                     </option>
                     <option value="India">India</option>
