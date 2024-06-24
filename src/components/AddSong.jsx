@@ -37,9 +37,10 @@ const AddSong = (props) => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="search navbar-nav ms-5 w-100">
-              {/* <SongPlayer /> */}
+            <div className="search navbar-nav w-100 d-flex justify-content-center">
+              <p className="text-light fs-1">Admin Panel</p>
             </div>
+
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -111,7 +112,7 @@ const AddSong = (props) => {
                         aria-controls="profile"
                         aria-selected="false"
                       >
-                        <i className="fa fa-home text-info"></i>&nbsp;Add song
+                        <i className="fa fa-plus text-info"></i>&nbsp;Add song
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
@@ -126,7 +127,7 @@ const AddSong = (props) => {
                           aria-controls="settings"
                           aria-selected="false"
                         >
-                          <i className="fa fa-music text-info"></i>&nbsp;Edit
+                          <i className="fa fa-edit text-info"></i>&nbsp;Edit
                           song
                         </button>
                       </Link>
@@ -143,7 +144,7 @@ const AddSong = (props) => {
                           aria-controls="settings"
                           aria-selected="false"
                         >
-                          <i className="fa fa-thumbs-up text-info"></i>
+                          <i className="fa fa-trash text-info"></i>
                           &nbsp;Delete song
                         </button>
                       </Link>
@@ -152,7 +153,98 @@ const AddSong = (props) => {
                 </nav>
               </div>
             </div>
-            <div className="col-lg-10 col-md-9 col-sm-8 col-12">ADD SONGS</div>
+            <div className="col-lg-10 col-md-9 col-sm-8 col-12">
+              ADD SONG
+              <form className="row g-3">
+                <div className="col-md-4">
+                  <label htmlFor="validationDefault01" className="form-label">
+                    First name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="validationDefault01"
+                    defaultValue="Mark"
+                    required
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label htmlFor="validationDefault02" className="form-label">
+                    Last name
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="validationDefault02"
+                    defaultValue="Otto"
+                    required
+                  />
+                </div>
+                <div className="col-md-4">
+                  <label
+                    htmlFor="validationDefaultUsername"
+                    className="form-label"
+                  >
+                    Username
+                  </label>
+                  <div className="input-group">
+                    <span className="input-group-text" id="inputGroupPrepend2">
+                      @
+                    </span>
+                    <input
+                      type="text"
+                      className="form-control"
+                      id="validationDefaultUsername"
+                      aria-describedby="inputGroupPrepend2"
+                      required
+                    />
+                  </div>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="validationDefault03" className="form-label">
+                    City
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="validationDefault03"
+                    required
+                  />
+                </div>
+                <div className="col-md-3">
+                  <label htmlFor="validationDefault04" className="form-label">
+                    State
+                  </label>
+                  <select
+                    className="form-select"
+                    id="validationDefault04"
+                    required
+                  >
+                    <option defaultValue disabled>
+                      Choose...
+                    </option>
+                    <option>...</option>
+                  </select>
+                </div>
+                <div className="col-md-3">
+                  <label htmlFor="validationDefault05" className="form-label">
+                    Zip
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="validationDefault05"
+                    required
+                  />
+                </div>
+
+                <div className="col-12">
+                  <button className="btn btn-primary" type="submit">
+                    Add song
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
         </section>
       </div>

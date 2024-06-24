@@ -37,9 +37,10 @@ const EditSong = (props) => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="search navbar-nav ms-5 w-100">
-              {/* <SongPlayer /> */}
+            <div className="search navbar-nav w-100 d-flex justify-content-center">
+              <p className="text-light fs-1">Admin Panel</p>
             </div>
+
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -112,7 +113,7 @@ const EditSong = (props) => {
                           aria-controls="profile"
                           aria-selected="false"
                         >
-                          <i className="fa fa-home text-info"></i>&nbsp;Add song
+                          <i className="fa fa-plus text-info"></i>&nbsp;Add song
                         </button>
                       </Link>
                     </li>
@@ -127,7 +128,7 @@ const EditSong = (props) => {
                         aria-controls="settings"
                         aria-selected="false"
                       >
-                        <i className="fa fa-music text-info"></i>&nbsp;Edit song
+                        <i className="fa fa-edit text-info"></i>&nbsp;Edit song
                       </button>
                     </li>
                     <li className="nav-item" role="presentation">
@@ -142,7 +143,7 @@ const EditSong = (props) => {
                           aria-controls="settings"
                           aria-selected="false"
                         >
-                          <i className="fa fa-thumbs-up text-info"></i>
+                          <i className="fa fa-trash text-info"></i>
                           &nbsp;Delete song
                         </button>
                       </Link>
@@ -151,7 +152,65 @@ const EditSong = (props) => {
                 </nav>
               </div>
             </div>
-            <div className="col-lg-10 col-md-9 col-sm-8 col-12">EDIT SONGS</div>
+            <div className="col-lg-10 col-md-9 col-sm-8 col-12">
+              EDIT SONGS
+              <form className="flex" action="">
+                <div className="add-img-upload flex-col">
+                  <p>Upload Image</p>
+                  <label htmlFor="image">
+                    <img src="/public/upload_area.png" alt="" />
+                  </label>
+                  <input
+                    type="file"
+                    id="image"
+                    name="image"
+                    style={{ display: "none" }}
+                  />
+                </div>
+                <div className="add-product-name flex-col">
+                  <p>Product Name</p>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Type here"
+                    required
+                  />
+                </div>
+                <div className="add-product-description flex-col">
+                  <p>Product Description</p>
+                  <textarea
+                    rows="6"
+                    placeholder="Write Content Here"
+                    required
+                  ></textarea>
+                </div>
+                <div className="add-category-price">
+                  <div className="add-category flex-col">
+                    <p>Product Category</p>
+                    <select name="category" required>
+                      <option value="Salad">Salad</option>
+                      <option value="Rolls">Rolls</option>
+                      <option value="Deserts">Deserts</option>
+                      <option value="SandWich">SandWich</option>
+                      <option value="Cake">Cake</option>
+                      <option value="Pure Veg">Pure Veg</option>
+                      <option value="Pasta">Pasta</option>
+                      <option value="Noodles">Noodles</option>
+                    </select>
+                  </div>
+                  <div className="add-price flex-col">
+                    <p>Product Price</p>
+                    <input type="number" placeholder="$20" required />
+                  </div>
+                </div>
+                <button type="submit" className="add-btn">
+                  ADD
+                </button>
+                <button type="submit" className="add-btn">
+                  Remove
+                </button>
+              </form>
+            </div>
           </div>
         </section>
       </div>

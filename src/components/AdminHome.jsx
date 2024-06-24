@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 // import SongPlayer from "./SongPlayer";
 // import SongsLibrary from "./SongsLibrary";
-import SearchSongs from "./SearchSongs";
+// import SearchSongs from "./SearchSongs";
 // import user from "../images/userimg1.jpg";
 
 const AdminHome = (props) => {
@@ -26,6 +26,7 @@ const AdminHome = (props) => {
                 </span>
               </Link>
             </div>
+
             <button
               className="navbar-toggler"
               type="button"
@@ -37,9 +38,10 @@ const AdminHome = (props) => {
             >
               <span className="navbar-toggler-icon"></span>
             </button>
-            <div className="search navbar-nav ms-5 w-100">
-              {/* <SongPlayer /> */}
+            <div className="search navbar-nav w-100 d-flex justify-content-center">
+              <p className="text-light fs-1">Admin Panel</p>
             </div>
+
             <div
               className="collapse navbar-collapse"
               id="navbarSupportedContent"
@@ -110,7 +112,7 @@ const AdminHome = (props) => {
                           aria-controls="profile"
                           aria-selected="false"
                         >
-                          <i className="fa fa-home text-info"></i>&nbsp;Add song
+                          <i className="fa fa-plus text-info"></i>&nbsp;Add song
                         </button>
                       </Link>
                     </li>
@@ -126,7 +128,7 @@ const AdminHome = (props) => {
                           aria-controls="settings"
                           aria-selected="false"
                         >
-                          <i className="fa fa-music text-info"></i>&nbsp;Edit
+                          <i className="fa fa-edit text-info"></i>&nbsp;Edit
                           song
                         </button>
                       </Link>
@@ -143,7 +145,7 @@ const AdminHome = (props) => {
                           aria-controls="settings"
                           aria-selected="false"
                         >
-                          <i className="fa fa-thumbs-up text-info"></i>
+                          <i className="fa fa-trash text-info"></i>
                           &nbsp;Delete song
                         </button>
                       </Link>
@@ -153,7 +155,28 @@ const AdminHome = (props) => {
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 col-12">
-              <SearchSongs />
+              <form
+                role="search"
+                className="search-form d-flex"
+                // onSubmit={(event) => event.preventDefault()}
+              >
+                <input
+                  className="search-input form-control form-control-dark w-100"
+                  type="search"
+                  placeholder="Search songs or artists..."
+                  aria-label="Search"
+                  // value={query}
+                  // onChange={handleInputChange}
+                  // onFocus={() => setShowResults(true)}
+                />
+                <button
+                  className="btn btn-outline-success mx-2"
+                  type="button"
+                  // onClick={() => setShowResults(!showResults)}
+                >
+                  <i className="fa fa-search"></i>
+                </button>
+              </form>
               {/* <SongPlayer /> */}
               {/* <SongsLibrary /> */}
             </div>
