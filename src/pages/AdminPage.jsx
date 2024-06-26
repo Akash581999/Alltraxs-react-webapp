@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-// import Header from "../components/Header";
+import AdminNav from "../components/AdminNav";
 import AdminHome from "../components/AdminHome";
 import Footer from "../components/Footer";
 import "../App.css";
@@ -16,9 +16,9 @@ const AdminPage = () => {
   };
   return (
     <>
-      {/* <Header /> */}
+      <AdminNav mode={mode} toggleMode={toggleMode} />
       <AdminHome mode={mode} toggleMode={toggleMode} />
-      <Footer />
+      <Footer mode={mode} toggleMode={toggleMode} />
     </>
   );
 };

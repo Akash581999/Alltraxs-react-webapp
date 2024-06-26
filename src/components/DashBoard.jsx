@@ -48,21 +48,30 @@ const DashBoard = (props) => {
               id="navbarSupportedContent"
             >
               <div className="navbar-nav text-end d-flex flex-row my-3 justify-content-center align-items-center">
-                <div className="form-check form-switch text-light mx-2">
+                <form
+                  id="mode-switch"
+                  name="mode-switch"
+                  className={`form-check form-switch text-${props.mode} mt-2 mx-3`}
+                >
                   <input
                     onClick={props.toggleMode}
                     className="form-check-input"
                     type="checkbox"
                     role="switch"
                     id="flexSwitchCheckDefault"
+                    name="flexSwitchCheckDefault"
                   />
                   <label
                     className="form-check-label text-wrap text-secondary"
                     htmlFor="flexSwitchCheckDefault"
                   >
-                    {props.mode}mode
+                    {props.mode === "light" ? (
+                      <i className="fas fa-sun-o text-light fs-3"></i>
+                    ) : (
+                      <i className="fa fa-moon-o text-secondary fs-3"></i>
+                    )}
                   </label>
-                </div>
+                </form>
                 <button
                   className="btn btn-primary text-nowrap mx-2"
                   type="button"
