@@ -14,7 +14,7 @@ const DeleteSong = (props) => {
           <div className="container-fluid">
             <div className="navbar-brand d-flex align-items-center mx-auto">
               <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />
-              <Link className="navbar-brand" to="/DashBoardScreen">
+              <Link className="navbar-brand" to="/AdminHome">
                 <span
                   style={{
                     color: "#8b08ff",
@@ -154,62 +154,119 @@ const DeleteSong = (props) => {
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 col-12">
-              DELETE SONGS
-              <form className="flex" action="">
-                <div className="add-img-upload flex-col">
-                  <p>Upload Image</p>
-                  <label htmlFor="image">
-                    <img src="/public/upload_area.png" alt="" />
+              <p className="fs-3 text-danger text-start mx-3 my-3">
+                DELETE SONG
+              </p>
+              <form className="row g-3 mx-3 my-3">
+                <div className="col-md-6">
+                  <label htmlFor="Title" className="form-label">
+                    Song Title
                   </label>
                   <input
-                    type="file"
-                    id="image"
-                    name="image"
-                    style={{ display: "none" }}
-                  />
-                </div>
-                <div className="add-product-name flex-col">
-                  <p>Product Name</p>
-                  <input
                     type="text"
-                    name="name"
-                    placeholder="Type here"
+                    className="form-control"
+                    id="Title"
                     required
                   />
                 </div>
-                <div className="add-product-description flex-col">
-                  <p>Product Description</p>
+                <div className="col-md-6">
+                  <label htmlFor="Artist" className="form-label">
+                    Song Artist
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="Artist"
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="Album" className="form-label">
+                    Album Name
+                  </label>
                   <textarea
-                    rows="6"
-                    placeholder="Write Content Here"
+                    className="form-control"
+                    id="Album"
+                    name="Album"
+                    rows="1"
                     required
                   ></textarea>
                 </div>
-                <div className="add-category-price">
-                  <div className="add-category flex-col">
-                    <p>Product Category</p>
-                    <select name="category" required>
-                      <option value="Salad">Salad</option>
-                      <option value="Rolls">Rolls</option>
-                      <option value="Deserts">Deserts</option>
-                      <option value="SandWich">SandWich</option>
-                      <option value="Cake">Cake</option>
-                      <option value="Pure Veg">Pure Veg</option>
-                      <option value="Pasta">Pasta</option>
-                      <option value="Noodles">Noodles</option>
-                    </select>
-                  </div>
-                  <div className="add-price flex-col">
-                    <p>Product Price</p>
-                    <input type="number" placeholder="$20" required />
+                <div className="col-md-6">
+                  <label htmlFor="Popularity" className="form-label">
+                    Popularity
+                  </label>
+                  <input
+                    type="number"
+                    id="Popularity"
+                    name="Popularity"
+                    placeholder="Trend pop"
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="Select" className="form-label">
+                    Genre
+                  </label>
+                  <select className="form-select" id="Select" required>
+                    <option disabled>Choose..</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rap">Rap</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Hip-hop">Hip-hop</option>
+                    <option value="Country">Country</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Folk">Folk</option>
+                  </select>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="Duration" className="form-label">
+                    Duration
+                  </label>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">In</span>
+                    <input
+                      type="text"
+                      id="Duration"
+                      name="Duration"
+                      className="form-control"
+                      aria-label="Time in (Mins:Secs format)"
+                      required
+                    />
+                    <span className="input-group-text">secs</span>
                   </div>
                 </div>
-                <button type="submit" className="add-btn">
-                  ADD
-                </button>
-                <button type="submit" className="add-btn">
-                  Remove
-                </button>
+                <div className="col-md-6">
+                  <label htmlFor="songurl" className="form-label">
+                    Upload Song
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="songurl"
+                    aria-describedby="basic-addon3 basic-addon4"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="songpic" className="form-label">
+                    Upload Pic
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="songpic"
+                    required
+                  />
+                </div>
+                <div className="col-12">
+                  <button className="btn btn-danger float-end" type="submit">
+                    Remove
+                  </button>
+                </div>
               </form>
             </div>
           </div>

@@ -14,7 +14,7 @@ const AddSong = (props) => {
           <div className="container-fluid">
             <div className="navbar-brand d-flex align-items-center mx-auto">
               <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />
-              <Link className="navbar-brand" to="/DashBoardScreen">
+              <Link className="navbar-brand" to="/AdminHome">
                 <span
                   style={{
                     color: "#8b08ff",
@@ -154,92 +154,114 @@ const AddSong = (props) => {
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 col-12">
-              ADD SONG
-              <form className="row g-3">
-                <div className="col-md-4">
-                  <label htmlFor="validationDefault01" className="form-label">
-                    First name
+              <p className="fs-3 text-success text-start mx-3 my-3">ADD SONG</p>
+              <form className="row g-3 mx-3 my-3">
+                <div className="col-md-6">
+                  <label htmlFor="Title" className="form-label">
+                    Song Title
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="validationDefault01"
-                    defaultValue="Mark"
+                    id="Title"
                     required
                   />
                 </div>
-                <div className="col-md-4">
-                  <label htmlFor="validationDefault02" className="form-label">
-                    Last name
+                <div className="col-md-6">
+                  <label htmlFor="Artist" className="form-label">
+                    Song Artist
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="validationDefault02"
-                    defaultValue="Otto"
+                    id="Artist"
                     required
                   />
                 </div>
-                <div className="col-md-4">
-                  <label
-                    htmlFor="validationDefaultUsername"
-                    className="form-label"
-                  >
-                    Username
+                <div className="col-md-6">
+                  <label htmlFor="Album" className="form-label">
+                    Album Name
                   </label>
-                  <div className="input-group">
-                    <span className="input-group-text" id="inputGroupPrepend2">
-                      @
-                    </span>
+                  <textarea
+                    className="form-control"
+                    id="Album"
+                    name="Album"
+                    rows="1"
+                    required
+                  ></textarea>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="Popularity" className="form-label">
+                    Popularity
+                  </label>
+                  <input
+                    type="number"
+                    id="Popularity"
+                    name="Popularity"
+                    placeholder="Trend pop"
+                    className="form-control"
+                    required
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="Select" className="form-label">
+                    Genre
+                  </label>
+                  <select className="form-select" id="Select" required>
+                    <option disabled>Choose..</option>
+                    <option value="Pop">Pop</option>
+                    <option value="Rap">Rap</option>
+                    <option value="Rock">Rock</option>
+                    <option value="Jazz">Jazz</option>
+                    <option value="Indie">Indie</option>
+                    <option value="Metal">Metal</option>
+                    <option value="Hip-hop">Hip-hop</option>
+                    <option value="Country">Country</option>
+                    <option value="Classical">Classical</option>
+                    <option value="Folk">Folk</option>
+                  </select>
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="Duration" className="form-label">
+                    Duration
+                  </label>
+                  <div className="input-group mb-3">
+                    <span className="input-group-text">In</span>
                     <input
                       type="text"
+                      id="Duration"
+                      name="Duration"
                       className="form-control"
-                      id="validationDefaultUsername"
-                      aria-describedby="inputGroupPrepend2"
+                      aria-label="Time in (Mins:Secs format)"
                       required
                     />
+                    <span className="input-group-text">secs</span>
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <label htmlFor="validationDefault03" className="form-label">
-                    City
+                  <label htmlFor="songurl" className="form-label">
+                    Upload Song
                   </label>
                   <input
-                    type="text"
+                    type="file"
                     className="form-control"
-                    id="validationDefault03"
+                    id="songurl"
+                    aria-describedby="basic-addon3 basic-addon4"
+                  />
+                </div>
+                <div className="col-md-6">
+                  <label htmlFor="songpic" className="form-label">
+                    Upload Pic
+                  </label>
+                  <input
+                    type="file"
+                    className="form-control"
+                    id="songpic"
                     required
                   />
                 </div>
-                <div className="col-md-3">
-                  <label htmlFor="validationDefault04" className="form-label">
-                    State
-                  </label>
-                  <select
-                    className="form-select"
-                    id="validationDefault04"
-                    required
-                  >
-                    <option defaultValue disabled>
-                      Choose...
-                    </option>
-                    <option>...</option>
-                  </select>
-                </div>
-                <div className="col-md-3">
-                  <label htmlFor="validationDefault05" className="form-label">
-                    Zip
-                  </label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="validationDefault05"
-                    required
-                  />
-                </div>
-
                 <div className="col-12">
-                  <button className="btn btn-primary" type="submit">
+                  <button className="btn btn-success float-end" type="submit">
                     Add song
                   </button>
                 </div>

@@ -14,7 +14,7 @@ const AdminHome = (props) => {
           <div className="container-fluid">
             <div className="navbar-brand d-flex align-items-center mx-auto">
               <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />
-              <Link className="navbar-brand" to="/DashBoardScreen">
+              <Link className="navbar-brand" to="/AdminHome">
                 <span
                   style={{
                     color: "#8b08ff",
@@ -155,6 +155,9 @@ const AdminHome = (props) => {
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 col-12">
+              <p1 className="fs-3 text-primary text-start mx-3 my-3">
+                SEARCH SONGS
+              </p1>
               <form
                 role="search"
                 className="search-form d-flex"
@@ -170,7 +173,7 @@ const AdminHome = (props) => {
                   // onFocus={() => setShowResults(true)}
                 />
                 <button
-                  className="btn btn-outline-success mx-2"
+                  className="btn btn-outline-primary mx-2"
                   type="button"
                   // onClick={() => setShowResults(!showResults)}
                 >
