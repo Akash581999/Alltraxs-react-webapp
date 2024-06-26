@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AllTraxslogo from "../images/AllTraxslogo.png";
-import { Link } from "react-router-dom";
-import SearchSongs from "./SearchSongs";
-// import SongPlayer from "./SongPlayer";
+import { Link, useLocation } from "react-router-dom";
+// import SearchSongs from "./SearchSongs";
+import SongPlayer from "./SongPlayer";
 
 const Header = (props) => {
+  let location = useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location.pathname]);
+
   return (
     <>
       <nav
@@ -38,25 +44,40 @@ const Header = (props) => {
           <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
             <ul className="d-flex flex-row justify-content-evenly nav-underline navbar-nav me-auto mb-2 mb-lg-0">
               <li className="nav-item">
-                <Link to="/" className="nav-link">
+                <Link
+                  to="/"
+                  className={`nav-link ${
+                    location.pathname === "/" ? "active" : ""
+                  }`}
+                >
                   <span className="text-info fs-3">Home</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/AboutScreen" className="nav-link">
+                <Link
+                  to="/AboutScreen"
+                  className={`nav-link ${
+                    location.pathname === "/AboutScreen" ? "active" : ""
+                  }`}
+                >
                   <span className="text-info fs-3">About</span>
                 </Link>
               </li>
               <li className="nav-item">
-                <Link to="/ContactScreen" className="nav-link">
+                <Link
+                  to="/ContactScreen"
+                  className={`nav-link ${
+                    location.pathname === "/ContactScreen" ? "active" : ""
+                  }`}
+                >
                   <span className="text-info fs-3">Contacts</span>
                 </Link>
               </li>
             </ul>
-            <div className="d-flex flex-row justify-content-evenly">
-              <div className="search mx-2">
-                <SearchSongs />
-                {/* <SongPlayer /> */}
+            <div className="d-flex flex-row justify-content-evenly w-100">
+              <div className="search mx-2 w-100">
+                {/* <SearchSongs /> */}
+                <SongPlayer />
                 {/* <form className="d-flex" role="search">
                   <input
                     className="form-control me-2"
@@ -97,15 +118,9 @@ const Header = (props) => {
                 </form>
                 {/* Login button */}
                 <div className="login">
-                  <button
-                    className="btn btn-primary mx-2"
-                    type="submit"
-                    tabIndex="-1"
-                  >
-                    <Link to="/LoginScreen" className="nav-link active">
-                      <span>Login</span>
-                    </Link>
-                  </button>
+                  <Link to="/LoginScreen" className="btn btn-primary mx-2">
+                    <span>Login</span>
+                  </Link>
                 </div>
               </div>
             </div>
