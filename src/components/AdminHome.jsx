@@ -1,12 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import AllTraxslogo from "../images/AllTraxslogo.png";
-// import SongPlayer from "./SongPlayer";
-// import SongsLibrary from "./SongsLibrary";
-// import SearchSongs from "./SearchSongs";
-// import user from "../images/userimg1.jpg";
 
 const AdminHome = (props) => {
+  const [songData, setSongData] = useState({
+    SongId: "",
+    Title: "",
+    Artist: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setSongData({ ...songData, [name]: value });
+  };
+
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const requestData = {
+      eventID: "1011",
+      addInfo: {
+        SongId: songData.SongId,
+        Title: songData.Title,
+        Artist: songData.Artist,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:5164/songs/id", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log(data, "Api response data");
+
+      if (response.ok && data.rData.rCode === 0) {
+        alert(data.rData.rMessage || "Song found!");
+        resetForm();
+      } else {
+        alert(data.rData.rMessage || "Song not found!");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("Failed to search song.");
+    }
+  };
+
+  const resetForm = () => {
+    setSongData({
+      SongId: "",
+      Title: "",
+      Artist: "",
+    });
+  };
+
   return (
     <>
       <div className={`bg-${props.mode}`}>
@@ -155,33 +205,24 @@ const AdminHome = (props) => {
               </div>
             </div>
             <div className="col-lg-10 col-md-9 col-sm-8 col-12">
-              <p1 className="fs-3 text-primary text-start mx-3 my-3">
-                SEARCH SONGS
-              </p1>
-              <form
-                role="search"
-                className="search-form d-flex"
-                // onSubmit={(event) => event.preventDefault()}
-              >
+              <span className="fs-3 text-primary text-start mx-3 my-3">
+                SEARCH SONG
+              </span>
+              <form onSubmit={handleSearch} className="search-form d-flex">
                 <input
-                  className="search-input form-control form-control-dark w-100"
+                  id="searchSongs"
                   type="search"
+                  className="search-input form-control form-control-dark w-100"
                   placeholder="Search songs or artists..."
                   aria-label="Search"
-                  // value={query}
-                  // onChange={handleInputChange}
-                  // onFocus={() => setShowResults(true)}
+                  onChange={handleChange}
+                  value={songData.SongId || songData.Title || songData.Artist}
+                  name="Title"
                 />
-                <button
-                  className="btn btn-outline-primary mx-2"
-                  type="button"
-                  // onClick={() => setShowResults(!showResults)}
-                >
+                <button className="btn btn-outline-success mx-2" type="submit">
                   <i className="fa fa-search"></i>
                 </button>
               </form>
-              {/* <SongPlayer /> */}
-              {/* <SongsLibrary /> */}
             </div>
           </div>
         </section>

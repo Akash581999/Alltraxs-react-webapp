@@ -156,7 +156,12 @@ const EditSong = (props) => {
               <p className="fs-3 text-warning text-start mx-3 my-3">
                 EDIT SONG
               </p>
-              <form className="row g-3 mx-3 my-3">
+              <form
+                className="form-container row g-3 bg-glass my-5 mx-5 needs-validation"
+                autoComplete="on"
+                spellCheck="true"
+                noValidate
+              >
                 <div className="col-md-6">
                   <label htmlFor="Title" className="form-label">
                     Song Title
