@@ -149,7 +149,7 @@ const SongPlayer = () => {
               <li
                 className={`list-group-item ${
                   selectedItem === song.id ? "selected" : ""
-                }`} // Apply selected class if item is selected
+                }`}
                 key={song.id}
                 onClick={() => handleSongClick(song)}
               >

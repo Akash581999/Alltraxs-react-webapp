@@ -9,7 +9,7 @@ const AdminNav = (props) => {
         <div className="container-fluid">
           <div className="navbar-brand d-flex align-items-center mx-auto">
             <img src={AllTraxslogo} alt="logo" className="mx-1 my-1" />
-            <Link className="navbar-brand" to="/AdminHome">
+            <Link className="navbar-brand" to="/AdminScreen">
               <span
                 style={{
                   color: "#8b08ff",

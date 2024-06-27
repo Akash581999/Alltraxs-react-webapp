@@ -4,7 +4,7 @@ import AdminHome from "../components/AdminHome";
 import Footer from "../components/Footer";
 import "../App.css";
 
-const AdminPage = () => {
+const AdminScreen = () => {
   let [mode, setMode] = useState(`light`); //Dark mode
 
   let toggleMode = () => {
@@ -23,4 +23,4 @@ const AdminPage = () => {
   );
 };
 
-export default AdminPage;
+export default AdminScreen;
