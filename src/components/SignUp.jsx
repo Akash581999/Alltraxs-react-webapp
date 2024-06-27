@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link, Navigate } from "react-router-dom";
+import PrivacyPolicy from "./PrivacyPolicy";
 import "../App.css";
 
 function SignUp(props) {
+  const [modalShow, setModalShow] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isRegitered, setIsRegitered] = useState(false);
   const [formData, setFormData] = useState({
@@ -196,13 +198,25 @@ function SignUp(props) {
                           htmlFor="rememberMe"
                           className="form-check-label text-secondary"
                         >
-                          Accept terms & conditions?
+                          I accept terms & conditions?
                         </label>
                       </div>
                     </div>
                     <p className="text-secondary">
                       By creating an account you agree to our&nbsp;
-                      <a href="/">Terms & Privacy</a>.
+                      <Link
+                        to="#"
+                        className="text-primary link-underline-primary"
+                        onClick={() => setModalShow(true)}
+                      >
+                        privacy & policies!
+                      </Link>
+                      <PrivacyPolicy
+                        backdrop="static"
+                        keyboard={false}
+                        show={modalShow}
+                        onHide={() => setModalShow(false)}
+                      />
                     </p>
                     <button className="btn btn-primary w-100 mb-3">
                       Register
