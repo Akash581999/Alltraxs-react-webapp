@@ -233,8 +233,11 @@ const AddSong = (props) => {
               />
             </div>
             <div className="col-12">
-              <button className="btn btn-success float-end" type="submit">
-                Add song
+              <button className="btn btn-success float-end mx-1" type="submit">
+                Add
+              </button>
+              <button className="btn btn-danger float-end mx-1" type="reset">
+                Reset
               </button>
             </div>
           </form>

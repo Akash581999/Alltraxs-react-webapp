@@ -3,9 +3,12 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
-import AddSong from "./AddSong";
 import AdminSearchSong from "./AdminSearchSong";
+import AddSong from "./AddSong";
 import AllSongs from "./AllSongs";
+import AllUsers from "./AllUsers";
+import AllPlaylists from "./AllPlaylists";
+import AllFeedbacks from "./AllFeedbacks";
 
 const AdminHome = (props) => {
   return (
@@ -38,12 +41,19 @@ const AdminHome = (props) => {
                         </span>
                       </Nav.Link>
                     </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="forth">
+                        <span className="text-light center">
+                          <i className="fa fa-envelope">&nbsp;</i>Feedbacks
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
                   </Nav>
                 </Col>
                 <Col sm={10}>
                   <Tab.Content>
                     <Tab.Pane eventKey="first">
-                      Users content coming soon...
+                      <AllUsers />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
                       <AdminSearchSong />
@@ -51,7 +61,10 @@ const AdminHome = (props) => {
                       <AllSongs />
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
-                      Playlists content coming soon...
+                      <AllPlaylists />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="forth">
+                      <AllFeedbacks />
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>

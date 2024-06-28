@@ -1,30 +1,30 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
-const AllSongs = (props) => {
-  const [songsList, setSongsList] = useState([]);
+const AllPlaylists = (props) => {
+  const [playListsRecord, setPlayListsRecord] = useState([]);
 
   useEffect(() => {
-    fetchSongs();
+    fetchplaylistsrecord();
   }, []);
 
-  const fetchSongs = async () => {
+  const fetchplaylistsrecord = async () => {
     const requestData = {
-      eventID: "1020",
+      eventID: "1021",
       addInfo: {
+        Playlist_Id: "",
+        UserId: "",
         Title: "",
-        Artist: "",
-        Album: "",
-        Genre: "",
-        Duration: "",
-        Popularity: "",
-        SongUrl: "",
-        SongPic: "",
+        Description: "",
+        CreatedOn: "",
+        PlaylistImageUrl: "",
+        IsPublic: "",
+        NumSongs: "",
       },
     };
 
     try {
-      const response = await fetch("http://localhost:5164/allsongs", {
+      const response = await fetch("http://localhost:5164/allplaylists", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,20 +40,21 @@ const AllSongs = (props) => {
       console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
-        setSongsList(data.rData.songs || []);
-        // alert(data.rData.rMessage || "All songs retrieved!");
+        setPlayListsRecord(data.rData.playlistsdata || []);
+        // alert(data.rData.rMessage || "All playlists retrieved!");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(`Failed to fetch songs: ${error}`);
-      setSongsList([]);
+      alert(`Failed to fetch playlists: ${error}`);
+      setPlayListsRecord([]);
     }
   };
-
   return (
     <div className={`bg-${props.mode}`}>
       <section>
-        <span className="fs-3 text-info text-start mx-3 my-3">ALL SONGS</span>
+        <span className="fs-3 text-info text-start mx-3 my-3">
+          ALL PLAYLISTS
+        </span>
         <div className="table-responsive">
           <Table
             striped
@@ -64,30 +65,28 @@ const AllSongs = (props) => {
           >
             <thead>
               <tr>
-                <th className="text-info">Song Id</th>
+                <th className="text-info">Plylist Id</th>
+                <th className="text-info">User Id</th>
                 <th className="text-info">Title</th>
-                <th className="text-info">Artist</th>
-                <th className="text-info">Album</th>
-                <th className="text-info">Genre</th>
-                <th className="text-info">Duration</th>
-                <th className="text-info">Popularity</th>
-                <th className="text-info">Song Pic</th>
-                <th className="text-info">Song Url</th>
+                <th className="text-info">Description</th>
+                <th className="text-info">Created On</th>
+                <th className="text-info">Playlist Image</th>
+                <th className="text-info">Public</th>
+                <th className="text-info">Num of Songs</th>
                 <th className="text-info">Options</th>
               </tr>
             </thead>
             <tbody className="text-light">
-              {songsList.map((song, index) => (
+              {playListsRecord.map((playlist, index) => (
                 <tr key={index}>
-                  <td>{index + 1 || song.songId}</td>
-                  <td>{song.title}</td>
-                  <td>{song.artist}</td>
-                  <td>{song.album}</td>
-                  <td>{song.genre}</td>
-                  <td>{song.duration}</td>
-                  <td>{song.popularity}</td>
-                  <td>{song.songPic}</td>
-                  <td>{song.songUrl}</td>
+                  <td>{index + 1 || playlist.playlist_Id}</td>
+                  <td>{playlist.userId}</td>
+                  <td>{playlist.title}</td>
+                  <td>{playlist.description}</td>
+                  <td>{playlist.createdOn}</td>
+                  <td>{playlist.playlistImageUrl}</td>
+                  <td>{playlist.isPublic}</td>
+                  <td>{playlist.numSongs}</td>
                   <td>
                     <button className="btn btn-warning mx-1" type="button">
                       Edit
@@ -106,4 +105,4 @@ const AllSongs = (props) => {
   );
 };
 
-export default AllSongs;
+export default AllPlaylists;
