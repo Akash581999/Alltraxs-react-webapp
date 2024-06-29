@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import EditSong from "./EditSong";
+import DeleteSong from "./DeleteSong";
 
 const AdminSearchSong = (props) => {
   const [songsList, setSongsList] = useState([]);
+  const [editSong, setEditSong] = useState(false);
+  const [deleteSong, setDeleteSong] = useState(false);
+
   const [songData, setSongData] = useState({
     SongId: "",
     Title: "",
@@ -47,6 +52,10 @@ const AdminSearchSong = (props) => {
       console.error("Error:", error);
       alert("Failed to search song.");
     }
+  };
+
+  const handleSongEdit = (id) => {
+    console.log(id);
   };
 
   // const handleSongPlay = (song) => {
@@ -113,11 +122,22 @@ const AdminSearchSong = (props) => {
                       {song.Popularity}
                     </small>
                     <div className="d-flex align-items-center mt-2">
-                      <button type="button" className="btn btn-warning mx-1">
-                        Edit
+                      <button
+                        type="button"
+                        className="btn btn-warning mx-1"
+                        onClick={() => {
+                          handleSongEdit(song.songId);
+                          setEditSong(true);
+                        }}
+                      >
+                        <i className="fas fa-edit">&nbsp;</i>Edit
                       </button>
-                      <button type="button" className="btn btn-danger mx-1">
-                        Delete
+                      <button
+                        type="button"
+                        className="btn btn-danger mx-1"
+                        onClick={() => setDeleteSong(true)}
+                      >
+                        <i className="fas fa-trash">&nbsp;</i>Delete
                       </button>
                     </div>
                   </div>
@@ -133,6 +153,12 @@ const AdminSearchSong = (props) => {
           ))}
         </div>
       </section>
+      {editSong && <EditSong id={songsList.map((song) => song.songId)} />}
+      <DeleteSong
+        show={deleteSong}
+        onHide={() => setDeleteSong(false)}
+        id={songsList.map((song) => song.songId)}
+      />
     </div>
   );
 };

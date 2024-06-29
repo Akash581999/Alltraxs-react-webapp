@@ -90,7 +90,7 @@ const AllUsers = (props) => {
                   <td>{user.createdOn}</td>
                   <td>
                     <button className="btn btn-danger mx-1" type="button">
-                      Delete
+                      <i className="fas fa-trash">&nbsp;</i>Remove
                     </button>
                   </td>
                 </tr>

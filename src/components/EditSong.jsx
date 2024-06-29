@@ -1,22 +1,8 @@
 import React, { useState } from "react";
 
 const EditSong = (props) => {
-  const forms = document.querySelectorAll(".needs-validation");
-  Array.from(forms).forEach((form) => {
-    form.addEventListener(
-      "submit",
-      (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add("was-validated");
-      },
-      false
-    );
-  });
-
   const [songData, setSongData] = useState({
+    SongId: "",
     Title: "",
     Artist: "",
     Album: "",
@@ -24,8 +10,15 @@ const EditSong = (props) => {
     Duration: "",
     Popularity: "",
     SongUrl: "",
-    SongPic: "",
   });
+
+  // console.log(props.id);
+  const [songPic, setSongPic] = useState("");
+  const [songPicFile, setSongPicFile] = useState(null);
+
+  let SongId;
+  props.id.map((songId) => (SongId = songId));
+  // console.log(SongId);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -33,12 +26,25 @@ const EditSong = (props) => {
     setSongData({ ...songData, [name]: val });
   };
 
+  const handleSongPic = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSongPic(reader.result);
+      setSongPicFile(file);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
   const handleAddSong = async (e) => {
     e.preventDefault();
 
     const requestData = {
-      eventID: "1008",
+      eventID: "1010",
       addInfo: {
+        SongId: songData.SongId,
         title: songData.Title,
         artist: songData.Artist,
         album: songData.Album,
@@ -46,13 +52,13 @@ const EditSong = (props) => {
         duration: songData.Duration,
         popularity: songData.Popularity,
         songUrl: songData.SongUrl,
-        songPic: songData.SongPic,
+        songPic: songPicFile,
       },
     };
 
     try {
-      const response = await fetch("http://localhost:5164/songs", {
-        method: "POST",
+      const response = await fetch("http://localhost:5164/songs/id", {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
         },
@@ -60,24 +66,24 @@ const EditSong = (props) => {
       });
 
       const data = await response.json();
-      console.log(data, "Api response data");
+      console.log(data, "API response song data");
 
-      if (response.ok && data.rData.rCode === 0) {
-        alert(data.rData.rMessage || "Thank you for your response!");
+      if (data.rData && data.rData.rCode === 0) {
+        alert(data.rData.rMessage || "Song added successfully!");
         resetForm();
       } else {
-        alert(
-          data.rData.rMessage || "User data not found, Kindly register first!"
-        );
+        alert(data.rData.rMessage || "Failed to add song.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to submit feedback.");
+      alert(`Some error occurred, can't add song now: ${error}`);
+      resetForm();
     }
   };
 
   const resetForm = () => {
     setSongData({
+      SongId: "",
       Title: "",
       Artist: "",
       Album: "",
@@ -85,8 +91,9 @@ const EditSong = (props) => {
       Duration: "",
       Popularity: "",
       SongUrl: "",
-      SongPic: "",
     });
+    setSongPic("");
+    setSongPicFile(null);
   };
 
   return (
@@ -97,13 +104,29 @@ const EditSong = (props) => {
             EDIT SONG
           </span>
           <form
-            className="form-container row g-3 bg-glass my-1 mx-1 needs-validation"
+            className="form-container row g-3 bg-glass my-1 mx-1"
             onSubmit={handleAddSong}
             autoComplete="on"
             spellCheck="true"
             noValidate
           >
-            <div className="col-md-6">
+            <div className="col-md-4">
+              <label htmlFor="SongId" className="form-label">
+                Song Id
+              </label>
+              <input
+                type="text"
+                className="form-control"
+                id="SongId"
+                name="SongId"
+                placeholder="Enter Song Id to edit..."
+                value={SongId}
+                onChange={handleChange}
+                required
+              />
+              {console.log(SongId)}
+            </div>
+            <div className="col-md-4">
               <label htmlFor="Title" className="form-label">
                 Song Title
               </label>
@@ -112,12 +135,13 @@ const EditSong = (props) => {
                 className="form-control"
                 id="Title"
                 name="Title"
+                placeholder="Song Title"
                 value={songData.Title}
                 onChange={handleChange}
                 required
               />
             </div>
-            <div className="col-md-6">
+            <div className="col-md-4">
               <label htmlFor="Artist" className="form-label">
                 Song Artist
               </label>
@@ -126,6 +150,7 @@ const EditSong = (props) => {
                 className="form-control"
                 id="Artist"
                 name="Artist"
+                placeholder="Song Artist"
                 value={songData.Artist}
                 onChange={handleChange}
                 required
@@ -140,6 +165,7 @@ const EditSong = (props) => {
                 rows="1"
                 id="Album"
                 name="Album"
+                placeholder="Song Album"
                 value={songData.Album}
                 onChange={handleChange}
                 required
@@ -152,9 +178,9 @@ const EditSong = (props) => {
               <input
                 type="number"
                 className="form-control"
-                placeholder="Trend pop"
                 id="Popularity"
                 name="Popularity"
+                placeholder="Trend popularity"
                 value={songData.Popularity}
                 onChange={handleChange}
                 required
@@ -168,11 +194,14 @@ const EditSong = (props) => {
                 className="form-select"
                 id="Genre"
                 name="Genre"
+                placeholder="Song Genre"
                 value={songData.Genre}
                 onChange={handleChange}
                 required
               >
-                <option disabled>Choose..</option>
+                <option defaultValue placeholder="Choose Genre...">
+                  Choose..
+                </option>
                 <option value="Pop">Pop</option>
                 <option value="Rap">Rap</option>
                 <option value="Rock">Rock</option>
@@ -196,6 +225,7 @@ const EditSong = (props) => {
                   className="form-control"
                   id="Duration"
                   name="Duration"
+                  placeholder="Song Duration"
                   value={songData.Duration}
                   onChange={handleChange}
                   aria-label="Time in (Mins:Secs format)"
@@ -205,39 +235,48 @@ const EditSong = (props) => {
               </div>
             </div>
             <div className="col-md-6">
-              <label htmlFor="Songurl" className="form-label">
+              <label htmlFor="SongUrl" className="form-label">
                 Upload Song
               </label>
               <input
                 type="file"
                 className="form-control"
-                id="Songurl"
-                name="Songurl"
-                value={songData.Songurl}
+                id="SongUrl"
+                name="SongUrl"
+                value={songData.SongUrl}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="col-md-6">
-              <label htmlFor="Songpic" className="form-label">
+              <label htmlFor="SongPic" className="form-label">
                 Upload Pic
               </label>
               <input
                 type="file"
                 className="form-control"
-                id="Songpic"
-                name="Songpic"
-                value={songData.Songpic}
-                onChange={handleChange}
+                id="SongPic"
+                name="SongPic"
+                onChange={handleSongPic}
                 required
               />
             </div>
-            <div className="col-12">
+            {songPic && (
+              <div className="col-md-6">
+                <label>Selected Song Picture:</label>
+                <img src={songPic} alt="Selected Song" className="img-fluid" />
+              </div>
+            )}
+            <div className="col-md-12">
               <button className="btn btn-success float-end mx-1" type="submit">
-                Save
+                <i className="fas fa-save">&nbsp;</i>Save
               </button>
-              <button className="btn btn-warning float-end mx-1" type="reset">
-                Reset
+              <button
+                className="btn btn-warning float-end mx-1"
+                type="button"
+                onClick={resetForm}
+              >
+                <i className="fas fa-remove">&nbsp;</i>Cancel
               </button>
             </div>
           </form>

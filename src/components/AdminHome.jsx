@@ -6,8 +6,6 @@ import Tab from "react-bootstrap/Tab";
 import AllUsers from "./AllUsers";
 import SearchSong from "./AdminSearchSong";
 import AddSong from "./AddSong";
-// import EditSong from "./EditSong";
-// import DeleteSong from "./DeleteSong";
 import AllSongs from "./AllSongs";
 import AllPlaylists from "./AllPlaylists";
 import AllFeedbacks from "./AllFeedbacks";
@@ -60,8 +58,6 @@ const AdminHome = (props) => {
                     <Tab.Pane eventKey="second">
                       <SearchSong />
                       <AddSong />
-                      {/* <EditSong />
-                      <DeleteSong /> */}
                       <AllSongs />
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">

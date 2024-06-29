@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
+import EditSong from "./EditSong";
+import DeleteSong from "./DeleteSong";
 
 const AllSongs = (props) => {
   const [songsList, setSongsList] = useState([]);
+  const [editSong, setEditSong] = useState(false);
+  const [deleteSong, setDeleteSong] = useState(false);
 
   useEffect(() => {
     fetchSongs();
@@ -50,6 +54,9 @@ const AllSongs = (props) => {
     }
   };
 
+  const handleSongEdit = (id) => {
+    console.log(id);
+  };
   return (
     <div className={`bg-${props.mode}`}>
       <section>
@@ -79,7 +86,7 @@ const AllSongs = (props) => {
             <tbody className="text-light">
               {songsList.map((song, index) => (
                 <tr key={index}>
-                  <td>{index + 1 || song.songId}</td>
+                  <td>{song.songId || index + 1}</td>
                   <td>{song.title}</td>
                   <td>{song.artist}</td>
                   <td>{song.album}</td>
@@ -89,11 +96,22 @@ const AllSongs = (props) => {
                   <td>{song.songPic}</td>
                   <td>{song.songUrl}</td>
                   <td>
-                    <button className="btn btn-warning mx-1" type="button">
-                      Edit
+                    <button
+                      className="btn btn-warning mx-1"
+                      type="button"
+                      onClick={() => {
+                        handleSongEdit(song.songId);
+                        setEditSong(true);
+                      }}
+                    >
+                      <i className="fas fa-edit">&nbsp;</i>
                     </button>
-                    <button className="btn btn-danger mx-1" type="button">
-                      Delete
+                    <button
+                      className="btn btn-danger mx-1"
+                      type="button"
+                      onClick={() => setDeleteSong(true)}
+                    >
+                      <i className="fas fa-trash">&nbsp;</i>
                     </button>
                   </td>
                 </tr>
@@ -102,6 +120,12 @@ const AllSongs = (props) => {
           </Table>
         </div>
       </section>
+      {editSong && <EditSong id={songsList.map((song) => song.songId)} />}
+      <DeleteSong
+        show={deleteSong}
+        onHide={() => setDeleteSong(false)}
+        id={songsList.map((song) => song.songId)}
+      />
     </div>
   );
 };

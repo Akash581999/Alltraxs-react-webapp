@@ -89,10 +89,10 @@ const AllPlaylists = (props) => {
                   <td>{playlist.numSongs}</td>
                   <td>
                     <button className="btn btn-warning mx-1" type="button">
-                      Edit
+                      <i className="fas fa-edit">&nbsp;</i>Edit
                     </button>
                     <button className="btn btn-danger mx-1" type="button">
-                      Delete
+                      <i className="fas fa-trash">&nbsp;</i>Delete
                     </button>
                   </td>
                 </tr>

@@ -84,10 +84,10 @@ const AllFeedbacks = (props) => {
                   <td>{feedback.createdAt}</td>
                   <td>
                     <button className="btn btn-success mx-1" type="button">
-                      Mark Read
+                      <i className="fas fa-edit">&nbsp;</i>Mark Read
                     </button>
                     <button className="btn btn-danger mx-1" type="button">
-                      Delete
+                      <i className="fas fa-trash">&nbsp;</i>Delete
                     </button>
                   </td>
                 </tr>

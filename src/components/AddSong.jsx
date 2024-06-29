@@ -110,6 +110,7 @@ const AddSong = (props) => {
                 className="form-control"
                 id="Title"
                 name="Title"
+                placeholder="Enter Song Title"
                 value={songData.Title}
                 onChange={handleChange}
                 required
@@ -124,6 +125,7 @@ const AddSong = (props) => {
                 className="form-control"
                 id="Artist"
                 name="Artist"
+                placeholder="Enter Song Artist"
                 value={songData.Artist}
                 onChange={handleChange}
                 required
@@ -138,6 +140,7 @@ const AddSong = (props) => {
                 rows="1"
                 id="Album"
                 name="Album"
+                placeholder="Enter Song Album"
                 value={songData.Album}
                 onChange={handleChange}
                 required
@@ -150,9 +153,9 @@ const AddSong = (props) => {
               <input
                 type="number"
                 className="form-control"
-                placeholder="Trend pop"
                 id="Popularity"
                 name="Popularity"
+                placeholder="Select Popularity"
                 value={songData.Popularity}
                 onChange={handleChange}
                 required
@@ -166,6 +169,7 @@ const AddSong = (props) => {
                 className="form-select"
                 id="Genre"
                 name="Genre"
+                placeholder="Song Genre"
                 value={songData.Genre}
                 onChange={handleChange}
                 required
@@ -188,18 +192,19 @@ const AddSong = (props) => {
                 Duration
               </label>
               <div className="input-group mb-3">
-                <span className="input-group-text">In</span>
+                <span className="input-group-text">Time</span>
                 <input
                   type="text"
                   className="form-control"
                   id="Duration"
                   name="Duration"
+                  placeholder="Enter Song Length"
                   value={songData.Duration}
                   onChange={handleChange}
                   aria-label="Time in (Mins:Secs format)"
                   required
                 />
-                <span className="input-group-text">secs</span>
+                <span className="input-group-text">In secs</span>
               </div>
             </div>
             <div className="col-md-6">
@@ -211,6 +216,7 @@ const AddSong = (props) => {
                 className="form-control"
                 id="SongUrl"
                 name="SongUrl"
+                placeholder="Enter Song Url"
                 value={songData.SongUrl}
                 onChange={handleChange}
                 required
@@ -225,6 +231,7 @@ const AddSong = (props) => {
                 className="form-control"
                 id="SongPic"
                 name="SongPic"
+                placeholder="Select Song Picture"
                 onChange={handleSongPic}
                 required
               />
@@ -237,14 +244,14 @@ const AddSong = (props) => {
             )}
             <div className="col-md-12">
               <button className="btn btn-success float-end mx-1" type="submit">
-                Add
+                <i className="fas fa-plus">&nbsp;</i>Add
               </button>
               <button
                 className="btn btn-danger float-end mx-1"
                 type="button"
                 onClick={resetForm}
               >
-                Reset
+                <i className="fa fa-trash">&nbsp;</i>Reset
               </button>
             </div>
           </form>
