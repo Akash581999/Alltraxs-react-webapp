@@ -1,21 +1,6 @@
 import React, { useState } from "react";
 
 const AddSong = (props) => {
-  const forms = document.querySelectorAll(".needs-validation");
-  Array.from(forms).forEach((form) => {
-    form.addEventListener(
-      "submit",
-      (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add("was-validated");
-      },
-      false
-    );
-  });
-
   const [songData, setSongData] = useState({
     Title: "",
     Artist: "",
@@ -26,11 +11,25 @@ const AddSong = (props) => {
     SongUrl: "",
     SongPic: "",
   });
+  const [SongPic, setSongPic] = useState("");
+  const [songPicFile, setSongPicFile] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
     setSongData({ ...songData, [name]: val });
+  };
+
+  const handleSongPic = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSongPic(reader.result);
+      setSongPicFile(file);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
   };
 
   const handleAddSong = async (e) => {
@@ -62,17 +61,16 @@ const AddSong = (props) => {
       const data = await response.json();
       console.log(data, "Api response data");
 
-      if (response.ok && data.rData.rCode === 0) {
-        alert(data.rData.rMessage || "Thank you for your response!");
+      if (data.rData && data.rData.rCode === 0) {
+        alert(data.rData.rMessage || "Song added successfully!");
         resetForm();
       } else {
-        alert(
-          data.rData.rMessage || "User data not found, Kindly register first!"
-        );
+        alert(data.rData.rMessage || "Failed to add song.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to submit feedback.");
+      alert(`Some error occurred, cant add song now: ${error}`);
+      resetForm();
     }
   };
 
@@ -85,8 +83,9 @@ const AddSong = (props) => {
       Duration: "",
       Popularity: "",
       SongUrl: "",
-      SongPic: "",
     });
+    setSongPic("");
+    setSongPicFile(null);
   };
 
   return (
@@ -97,7 +96,7 @@ const AddSong = (props) => {
             ADD SONG
           </span>
           <form
-            className="form-container row g-3 bg-glass my-1 mx-1 needs-validation"
+            className="form-container row g-3 bg-glass my-1 mx-1"
             onSubmit={handleAddSong}
             autoComplete="on"
             spellCheck="true"
@@ -172,7 +171,7 @@ const AddSong = (props) => {
                 onChange={handleChange}
                 required
               >
-                <option disabled>Choose..</option>
+                <option defaultValue>Choose..</option>
                 <option value="Pop">Pop</option>
                 <option value="Rap">Rap</option>
                 <option value="Rock">Rock</option>
@@ -227,12 +226,17 @@ const AddSong = (props) => {
                 className="form-control"
                 id="Songpic"
                 name="Songpic"
-                value={songData.Songpic}
-                onChange={handleChange}
+                onChange={handleSongPic}
                 required
               />
             </div>
-            <div className="col-12">
+            {SongPic && (
+              <div className="col-md-6">
+                <label>Selected Song Picture:</label>
+                <img src={SongPic} alt="Selected Song" className="img-fluid" />
+              </div>
+            )}
+            <div className="col-md-12">
               <button className="btn btn-success float-end mx-1" type="submit">
                 Add
               </button>

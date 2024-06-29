@@ -5,10 +5,10 @@ const AllFeedbacks = (props) => {
   const [feedbacksList, setFeedbacksList] = useState([]);
 
   useEffect(() => {
-    fetchfeedbacks();
+    fetchFeedbacks();
   }, []);
 
-  const fetchfeedbacks = async () => {
+  const fetchFeedbacks = async () => {
     const requestData = {
       eventID: "1024",
       addInfo: {
@@ -38,7 +38,7 @@ const AllFeedbacks = (props) => {
       console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
-        setFeedbacksList(data.rData.feedback || []);
+        setFeedbacksList(data.rData.feedbacks || []);
         // alert(data.rData.rMessage || "All feedbacks retrieved!");
       }
     } catch (error) {

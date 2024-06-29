@@ -3,10 +3,12 @@ import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
 import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
-import AdminSearchSong from "./AdminSearchSong";
-import AddSong from "./AddSong";
-import AllSongs from "./AllSongs";
 import AllUsers from "./AllUsers";
+import SearchSong from "./AdminSearchSong";
+import AddSong from "./AddSong";
+// import EditSong from "./EditSong";
+// import DeleteSong from "./DeleteSong";
+import AllSongs from "./AllSongs";
 import AllPlaylists from "./AllPlaylists";
 import AllFeedbacks from "./AllFeedbacks";
 
@@ -56,8 +58,10 @@ const AdminHome = (props) => {
                       <AllUsers />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
-                      <AdminSearchSong />
+                      <SearchSong />
                       <AddSong />
+                      {/* <EditSong />
+                      <DeleteSong /> */}
                       <AllSongs />
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">

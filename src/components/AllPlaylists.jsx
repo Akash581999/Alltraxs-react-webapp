@@ -5,10 +5,10 @@ const AllPlaylists = (props) => {
   const [playListsRecord, setPlayListsRecord] = useState([]);
 
   useEffect(() => {
-    fetchplaylistsrecord();
+    fetchPlaylistsRecord();
   }, []);
 
-  const fetchplaylistsrecord = async () => {
+  const fetchPlaylistsRecord = async () => {
     const requestData = {
       eventID: "1021",
       addInfo: {
