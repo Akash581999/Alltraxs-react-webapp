@@ -44,7 +44,7 @@ const AddSong = (props) => {
         genre: songData.Genre,
         duration: songData.Duration,
         popularity: songData.Popularity,
-        songUrl: songData.SongUrl,
+        songUrl: songData.Songurl,
         songPic: songData.SongPic,
       },
     };
@@ -226,11 +226,12 @@ const AddSong = (props) => {
                 className="form-control"
                 id="Songpic"
                 name="Songpic"
+                value={SongPic.Songpic}
                 onChange={handleSongPic}
                 required
               />
             </div>
-            {SongPic && (
+            {songPicFile && (
               <div className="col-md-6">
                 <label>Selected Song Picture:</label>
                 <img src={SongPic} alt="Selected Song" className="img-fluid" />
