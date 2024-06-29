@@ -251,7 +251,7 @@ const AddSong = (props) => {
                 type="button"
                 onClick={resetForm}
               >
-                <i className="fa fa-trash">&nbsp;</i>Reset
+                <i className="fa fa-remove">&nbsp;</i>Cancel
               </button>
             </div>
           </form>

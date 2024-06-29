@@ -130,14 +130,14 @@ const AdminSearchSong = (props) => {
                           setEditSong(true);
                         }}
                       >
-                        <i className="fas fa-edit">&nbsp;</i>Edit
+                        <i className="fas fa-edit">&nbsp;</i>
                       </button>
                       <button
                         type="button"
                         className="btn btn-danger mx-1"
                         onClick={() => setDeleteSong(true)}
                       >
-                        <i className="fas fa-trash">&nbsp;</i>Delete
+                        <i className="fas fa-trash">&nbsp;</i>
                       </button>
                     </div>
                   </div>

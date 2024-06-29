@@ -38,7 +38,7 @@ const AllFeedbacks = (props) => {
       console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
-        setFeedbacksList(data.rData.feedbacks || []);
+        setFeedbacksList(data.rData.feedback || []);
         // alert(data.rData.rMessage || "All feedbacks retrieved!");
       }
     } catch (error) {
@@ -76,7 +76,7 @@ const AllFeedbacks = (props) => {
             <tbody className="text-light">
               {feedbacksList.map((feedback, index) => (
                 <tr key={index}>
-                  <td>{index + 1 || feedback.feedback_Id}</td>
+                  <td>{feedback.feedback_Id || index + 1}</td>
                   <td>{feedback.userName}</td>
                   <td>{feedback.email}</td>
                   <td>{feedback.country}</td>

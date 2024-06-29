@@ -53,17 +53,21 @@ const AdminHome = (props) => {
                 <Col sm={10}>
                   <Tab.Content>
                     <Tab.Pane eventKey="first">
+                      {/* Users content coming soon.. */}
                       <AllUsers />
                     </Tab.Pane>
                     <Tab.Pane eventKey="second">
+                      {/* Songs content coming soon.. */}
+                      <AllSongs />
                       <SearchSong />
                       <AddSong />
-                      <AllSongs />
                     </Tab.Pane>
                     <Tab.Pane eventKey="third">
+                      {/* Playlists content coming soon.. */}
                       <AllPlaylists />
                     </Tab.Pane>
                     <Tab.Pane eventKey="forth">
+                      {/* Feedbacks content coming soon.. */}
                       <AllFeedbacks />
                     </Tab.Pane>
                   </Tab.Content>
