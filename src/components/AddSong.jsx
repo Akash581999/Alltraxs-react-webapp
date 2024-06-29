@@ -9,9 +9,8 @@ const AddSong = (props) => {
     Duration: "",
     Popularity: "",
     SongUrl: "",
-    SongPic: "",
   });
-  const [SongPic, setSongPic] = useState("");
+  const [songPic, setSongPic] = useState("");
   const [songPicFile, setSongPicFile] = useState(null);
 
   const handleChange = (e) => {
@@ -44,8 +43,8 @@ const AddSong = (props) => {
         genre: songData.Genre,
         duration: songData.Duration,
         popularity: songData.Popularity,
-        songUrl: songData.Songurl,
-        songPic: songData.SongPic,
+        songUrl: songData.SongUrl,
+        songPic: songPicFile,
       },
     };
 
@@ -59,7 +58,7 @@ const AddSong = (props) => {
       });
 
       const data = await response.json();
-      console.log(data, "Api response data");
+      console.log(data, "API response song data");
 
       if (data.rData && data.rData.rCode === 0) {
         alert(data.rData.rMessage || "Song added successfully!");
@@ -69,7 +68,7 @@ const AddSong = (props) => {
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(`Some error occurred, cant add song now: ${error}`);
+      alert(`Some error occurred, can't add song now: ${error}`);
       resetForm();
     }
   };
@@ -204,44 +203,47 @@ const AddSong = (props) => {
               </div>
             </div>
             <div className="col-md-6">
-              <label htmlFor="Songurl" className="form-label">
+              <label htmlFor="SongUrl" className="form-label">
                 Upload Song
               </label>
               <input
                 type="file"
                 className="form-control"
-                id="Songurl"
-                name="Songurl"
-                value={songData.Songurl}
+                id="SongUrl"
+                name="SongUrl"
+                value={songData.SongUrl}
                 onChange={handleChange}
                 required
               />
             </div>
             <div className="col-md-6">
-              <label htmlFor="Songpic" className="form-label">
+              <label htmlFor="SongPic" className="form-label">
                 Upload Pic
               </label>
               <input
                 type="file"
                 className="form-control"
-                id="Songpic"
-                name="Songpic"
-                value={SongPic.Songpic}
+                id="SongPic"
+                name="SongPic"
                 onChange={handleSongPic}
                 required
               />
             </div>
-            {songPicFile && (
+            {songPic && (
               <div className="col-md-6">
                 <label>Selected Song Picture:</label>
-                <img src={SongPic} alt="Selected Song" className="img-fluid" />
+                <img src={songPic} alt="Selected Song" className="img-fluid" />
               </div>
             )}
             <div className="col-md-12">
               <button className="btn btn-success float-end mx-1" type="submit">
                 Add
               </button>
-              <button className="btn btn-danger float-end mx-1" type="reset">
+              <button
+                className="btn btn-danger float-end mx-1"
+                type="button"
+                onClick={resetForm}
+              >
                 Reset
               </button>
             </div>
