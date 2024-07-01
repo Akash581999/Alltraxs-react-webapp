@@ -1,106 +1,166 @@
 import React from "react";
-import { useState, useEffect } from "react";
-// import { Link, Navigate, useNavigate } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Breadcrumb, Card, Button, ListGroup } from "react-bootstrap";
 
 const UserProfile = () => {
-  let navigate = useNavigate();
+  // let handleLogout = () => {
+  //   localStorage.removeItem("user");
+  //   <Link to="/LoginScreen">DashBoard</Link>;
+  // };
 
-  useEffect(() => {
-    let check = localStorage.getItem("user");
-    if (check === "" || check === null) {
-      navigate("/UserProfile");
-    }
-  }, []);
-
-  const [user, setUser] = useState("");
-
-  useEffect(() => {
-    // Retrieve the data from local storage
-    const userData = localStorage.getItem("user");
-    console.log("userData", userData);
-    if (userData) {
-      try {
-        // Split the hyphen-separated string into an array
-        const userDetailsArray = userData.split(" - ");
-
-        // Map the array values to user properties
-        const [
-          UserId,
-          FirstName,
-          LastName,
-          UserName,
-          Email,
-          Mobile,
-          ProfilePic,
-        ] = userDetailsArray;
-        const user = {
-          UserId,
-          FirstName,
-          LastName,
-          UserName,
-          Email,
-          Mobile,
-          ProfilePic,
-        };
-
-        setUser(user);
-        console.log("user", user);
-      } catch (error) {
-        console.error("Error parsing user data:", error);
-      }
-    } else {
-      console.log("No user data found in local storage");
-    }
-  }, []);
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
-
-  let handleLogout = () => {
-    localStorage.removeItem("user");
-    navigate("/LoginScreen");
-  };
-
-  let handleEditProfile = () => {
-    navigate("/UpdateProfile");
-  };
+  // let handleEditProfile = () => {
+  //   <Link to="/EditProfile">DashBoard</Link>;
+  // };
 
   return (
-    <div className="profile">
-      <div className="profile-body">
-        <div
-          className="profile-body-img"
-          style={{
-            backgroundImage: "url('../Assests/user-profile-logo-img.jpg')",
-          }}
-        ></div>
-        <h1>
-          {user.FirstName} {user.LastName}
-        </h1>
-        <h2>{user.UserName}</h2>
-        <div className="profile-body-details">
-          <div>
-            <h4>Email</h4>:<p>{user.Email}</p>
-          </div>
-          <div>
-            <h4>Phone</h4>:<p>{user.Mobile}</p>
+    <section style={{ backgroundColor: "#eee" }}>
+      <div className="container py-2">
+        <div className="row">
+          <div className="col">
+            <Breadcrumb className="bg-light rounded p-3 my-2">
+              <Breadcrumb.Item>
+                <Link to="/DashBoardScreen">DashBoard</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item>
+                <Link to="/UserProfile">Profile</Link>
+              </Breadcrumb.Item>
+              <Breadcrumb.Item active>User Profile</Breadcrumb.Item>
+            </Breadcrumb>
           </div>
         </div>
-        <div className="profile-edit">
-          <button
-            className="btn-edit-profile"
-            onClick={() => handleEditProfile()}
-          >
-            Edit Profile
-          </button>
-          <button className="btn-logout" onClick={() => handleLogout()}>
-            Logout
-          </button>
+
+        <div className="row">
+          <div className="col-lg-12 col-md-6">
+            <Card className="my-1">
+              <Card.Body className="text-center">
+                <Card.Img
+                  src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                  alt="avatar"
+                  className="rounded-circle img-fluid"
+                  style={{ maxWidth: "150px" }}
+                />
+                <p className="text-muted mb-1">Akash581999</p>
+                <p className="text-muted mb-4">Akash Kumar</p>
+                <div className="d-flex justify-content-center my-2">
+                  <Button>Edit Profile Pic</Button>
+                  <Button variant="outline-secondary" className="ms-1">
+                    Change Password
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </div>
+
+          <div className="col-lg-12 col-md-6">
+            <Card className="my-1">
+              <Card.Body>
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">First Name</p>
+                  </div>
+                  <div className="col-sm-9">
+                    <p className="text-muted">Johnatan</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">Last Name</p>
+                  </div>
+                  <div className="col-sm-9">
+                    <p className="text-muted">Smith</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">Email</p>
+                  </div>
+                  <div className="col-sm-9">
+                    <p className="text-muted">example@example.com</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">Mobile</p>
+                  </div>
+                  <div className="col-sm-9">
+                    <p className="text-muted">(098) 765-4321</p>
+                  </div>
+                </div>
+                <hr />
+                <div className="row">
+                  <div className="col-sm-3">
+                    <p className="mb-0">Address</p>
+                  </div>
+                  <div className="col-sm-9">
+                    <p className="text-muted">Bay Area, San Francisco, CA</p>
+                  </div>
+                </div>
+              </Card.Body>
+            </Card>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col-lg-12 ">
+            <Card className="my-1 mb-lg-0">
+              <Card.Body className="p-0">
+                <ListGroup
+                  variant="flush"
+                  className="d-flex flex-row justify-content-evenly rounded-3"
+                >
+                  {/* <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                    <i className="fas fa-globe fa-lg text-warning"></i>
+                    <span>https://Alltraxs.com</span>
+                  </ListGroup.Item> */}
+                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                    <i
+                      className="fab fa-github fa-lg"
+                      style={{ color: "#333333" }}
+                    ></i>
+                    <span>akash591999</span>
+                  </ListGroup.Item>
+                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                    <i
+                      className="fab fa-twitter fa-lg"
+                      style={{ color: "#55acee" }}
+                    ></i>
+                    <span>@akash591999</span>
+                  </ListGroup.Item>
+                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                    <i
+                      className="fab fa-instagram fa-lg"
+                      style={{ color: "#ac2bac" }}
+                    ></i>
+                    <span>akash591999</span>
+                  </ListGroup.Item>
+                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                    <i
+                      className="fab fa-facebook fa-lg"
+                      style={{ color: "#3b5998" }}
+                    ></i>
+                    <span>akash591999</span>
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card.Body>
+            </Card>
+          </div>
+        </div>
+
+        <div className="row">
+          <div className="col">
+            <div className="d-flex justify-content-center my-2">
+              <Button>Edit</Button>
+              <Button variant="outline-secondary" className="ms-1">
+                Save
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 };
 
