@@ -38,11 +38,9 @@ const AllUsers = (props) => {
       }
 
       const data = await response.json();
-      console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
         setUsersList(data.rData.users || []);
-        // alert(data.rData.rMessage || "All users data retrieved!");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -50,6 +48,7 @@ const AllUsers = (props) => {
       setUsersList([]);
     }
   };
+
   return (
     <div className={`bg-${props.mode}`}>
       <section>
@@ -79,14 +78,14 @@ const AllUsers = (props) => {
             <tbody className="text-light">
               {usersList.map((user, index) => (
                 <tr key={index}>
-                  <td>{index + 1 || user.userId}</td>
+                  <td>{user.userId || index + 1}</td>
                   <td>{user.firstName}</td>
                   <td>{user.lastName}</td>
                   <td>{user.userName}</td>
-                  <td>{user.userPassword}</td>
-                  <td>{user.email}</td>
-                  <td>{user.mobile}</td>
-                  <td>{user.profilePic}</td>
+                  <td className="d-lg-table-cell">{user.userPassword}</td>
+                  <td className="d-lg-table-cell">{user.email}</td>
+                  <td className="d-lg-table-cell">{user.mobile}</td>
+                  <td className="d-lg-table-cell">{user.profilePic}</td>
                   <td>{user.createdOn}</td>
                   <td>
                     <button className="btn btn-danger mx-1" type="button">

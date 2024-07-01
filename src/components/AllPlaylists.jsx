@@ -18,7 +18,7 @@ const AllPlaylists = (props) => {
         Description: "",
         CreatedOn: "",
         PlaylistImageUrl: "",
-        IsPublic: "",
+        Type: "",
         NumSongs: "",
       },
     };
@@ -49,6 +49,7 @@ const AllPlaylists = (props) => {
       setPlayListsRecord([]);
     }
   };
+
   return (
     <div className={`bg-${props.mode}`}>
       <section>
@@ -61,17 +62,17 @@ const AllPlaylists = (props) => {
             bordered
             hover
             variant="dark"
-            className="my-3 mx-auto text-center"
+            className="my-3 mx-auto text-center table-responsive-sm"
           >
             <thead>
               <tr>
-                <th className="text-info">Plylist Id</th>
+                <th className="text-info">Playlist Id</th>
                 <th className="text-info">User Id</th>
                 <th className="text-info">Title</th>
                 <th className="text-info">Description</th>
                 <th className="text-info">Created On</th>
                 <th className="text-info">Playlist Image</th>
-                <th className="text-info">Public</th>
+                <th className="text-info">Playlist Type</th>
                 <th className="text-info">Num of Songs</th>
                 <th className="text-info">Options</th>
               </tr>
@@ -79,20 +80,20 @@ const AllPlaylists = (props) => {
             <tbody className="text-light">
               {playListsRecord.map((playlist, index) => (
                 <tr key={index}>
-                  <td>{index + 1 || playlist.playlist_Id}</td>
+                  <td>{playlist.playlist_Id || index + 1}</td>
                   <td>{playlist.userId}</td>
                   <td>{playlist.title}</td>
                   <td>{playlist.description}</td>
                   <td>{playlist.createdOn}</td>
                   <td>{playlist.playlistImageUrl}</td>
-                  <td>{playlist.isPublic}</td>
+                  <td>{playlist.type}</td>
                   <td>{playlist.numSongs}</td>
                   <td>
                     <button className="btn btn-warning mx-1" type="button">
-                      <i className="fas fa-edit">&nbsp;</i>
+                      <i className="fas fa-edit">&nbsp;</i>Edit
                     </button>
                     <button className="btn btn-danger mx-1" type="button">
-                      <i className="fas fa-trash">&nbsp;</i>
+                      <i className="fas fa-trash">&nbsp;</i>Delete
                     </button>
                   </td>
                 </tr>

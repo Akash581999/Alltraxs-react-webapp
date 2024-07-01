@@ -69,7 +69,7 @@ const AllFeedbacks = (props) => {
                 <th className="text-info">Email</th>
                 <th className="text-info">Country</th>
                 <th className="text-info">Comments</th>
-                <th className="text-info">Created At</th>
+                <th className="text-info">Sent On</th>
                 <th className="text-info">Options</th>
               </tr>
             </thead>
@@ -84,7 +84,7 @@ const AllFeedbacks = (props) => {
                   <td>{feedback.createdAt}</td>
                   <td>
                     <button className="btn btn-success mx-1" type="button">
-                      <i className="fas fa-edit">&nbsp;</i>Mark Read
+                      <i className="fas fa-envelope-open">&nbsp;</i>Mark Read
                     </button>
                     <button className="btn btn-danger mx-1" type="button">
                       <i className="fas fa-trash">&nbsp;</i>Delete

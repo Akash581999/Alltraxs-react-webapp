@@ -69,14 +69,14 @@ const EditSong = (props) => {
       console.log(data, "API response song data");
 
       if (data.rData && data.rData.rCode === 0) {
-        alert(data.rData.rMessage || "Song added successfully!");
+        alert(data.rData.rMessage || "Song updated successfully!");
         resetForm();
       } else {
-        alert(data.rData.rMessage || "Failed to add song.");
+        alert(data.rData.rMessage || "Failed to update song.");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(`Some error occurred, can't add song now: ${error}`);
+      alert(`Some error occurred, can't update song now: ${error}`);
       resetForm();
     }
   };
@@ -124,7 +124,6 @@ const EditSong = (props) => {
                 onChange={handleChange}
                 required
               />
-              {console.log(SongId)}
             </div>
             <div className="col-md-4">
               <label htmlFor="Title" className="form-label">
@@ -194,14 +193,11 @@ const EditSong = (props) => {
                 className="form-select"
                 id="Genre"
                 name="Genre"
-                placeholder="Song Genre"
                 value={songData.Genre}
                 onChange={handleChange}
                 required
               >
-                <option defaultValue placeholder="Choose Genre...">
-                  Choose..
-                </option>
+                <option defaultValue>Choose Genre...</option>
                 <option value="Pop">Pop</option>
                 <option value="Rap">Rap</option>
                 <option value="Rock">Rock</option>
@@ -243,7 +239,6 @@ const EditSong = (props) => {
                 className="form-control"
                 id="SongUrl"
                 name="SongUrl"
-                value={songData.SongUrl}
                 onChange={handleChange}
                 required
               />

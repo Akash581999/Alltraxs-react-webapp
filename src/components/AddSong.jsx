@@ -88,176 +88,168 @@ const AddSong = (props) => {
   };
 
   return (
-    <>
-      <div className={`bg-${props.mode}`}>
-        <section>
-          <span className="fs-3 text-success text-start mx-3 my-3">
-            ADD SONG
-          </span>
-          <form
-            className="form-container row g-3 bg-glass my-1 mx-1"
-            onSubmit={handleAddSong}
-            autoComplete="on"
-            spellCheck="true"
-            noValidate
-          >
-            <div className="col-md-6">
-              <label htmlFor="Title" className="form-label">
-                Song Title
-              </label>
+    <div className={`bg-${props.mode} my-3`}>
+      <section>
+        <span className="fs-3 text-success text-start mx-3 my-3">ADD SONG</span>
+        <form
+          className="form-container row g-3 bg-glass my-1 mx-1"
+          onSubmit={handleAddSong}
+          autoComplete="on"
+          spellCheck="true"
+          noValidate
+        >
+          <div className="col-md-6">
+            <label htmlFor="Title" className="form-label">
+              Song Title
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="Title"
+              name="Title"
+              placeholder="Enter Song Title"
+              value={songData.Title}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="Artist" className="form-label">
+              Song Artist
+            </label>
+            <input
+              type="text"
+              className="form-control"
+              id="Artist"
+              name="Artist"
+              placeholder="Enter Song Artist"
+              value={songData.Artist}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="Album" className="form-label">
+              Album Name
+            </label>
+            <textarea
+              className="form-control"
+              rows="1"
+              id="Album"
+              name="Album"
+              placeholder="Enter Song Album"
+              value={songData.Album}
+              onChange={handleChange}
+              required
+            ></textarea>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="Popularity" className="form-label">
+              Popularity
+            </label>
+            <input
+              type="number"
+              className="form-control"
+              id="Popularity"
+              name="Popularity"
+              placeholder="Select Popularity"
+              value={songData.Popularity}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="Genre" className="form-label">
+              Genre
+            </label>
+            <select
+              className="form-select"
+              id="Genre"
+              name="Genre"
+              value={songData.Genre}
+              onChange={handleChange}
+              required
+            >
+              <option defaultValue>Choose..</option>
+              <option value="Pop">Pop</option>
+              <option value="Rap">Rap</option>
+              <option value="Rock">Rock</option>
+              <option value="Jazz">Jazz</option>
+              <option value="Indie">Indie</option>
+              <option value="Metal">Metal</option>
+              <option value="Hip-hop">Hip-hop</option>
+              <option value="Country">Country</option>
+              <option value="Classical">Classical</option>
+              <option value="Folk">Folk</option>
+            </select>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="Duration" className="form-label">
+              Duration
+            </label>
+            <div className="input-group mb-3">
+              <span className="input-group-text">Time</span>
               <input
                 type="text"
                 className="form-control"
-                id="Title"
-                name="Title"
-                placeholder="Enter Song Title"
-                value={songData.Title}
+                id="Duration"
+                name="Duration"
+                placeholder="Enter Song Length"
+                value={songData.Duration}
                 onChange={handleChange}
+                aria-label="Time in (Mins:Secs format)"
                 required
               />
+              <span className="input-group-text">In secs</span>
             </div>
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="SongUrl" className="form-label">
+              Upload Song
+            </label>
+            <input
+              type="file"
+              className="form-control"
+              id="SongUrl"
+              name="SongUrl"
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="col-md-6">
+            <label htmlFor="SongPic" className="form-label">
+              Upload Pic
+            </label>
+            <input
+              type="file"
+              className="form-control"
+              id="SongPic"
+              name="SongPic"
+              onChange={handleSongPic}
+              required
+            />
+          </div>
+          {songPic && (
             <div className="col-md-6">
-              <label htmlFor="Artist" className="form-label">
-                Song Artist
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                id="Artist"
-                name="Artist"
-                placeholder="Enter Song Artist"
-                value={songData.Artist}
-                onChange={handleChange}
-                required
-              />
+              <label>Selected Song Picture:</label>
+              <img src={songPic} alt="Selected Song" className="img-fluid" />
             </div>
-            <div className="col-md-6">
-              <label htmlFor="Album" className="form-label">
-                Album Name
-              </label>
-              <textarea
-                className="form-control"
-                rows="1"
-                id="Album"
-                name="Album"
-                placeholder="Enter Song Album"
-                value={songData.Album}
-                onChange={handleChange}
-                required
-              ></textarea>
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="Popularity" className="form-label">
-                Popularity
-              </label>
-              <input
-                type="number"
-                className="form-control"
-                id="Popularity"
-                name="Popularity"
-                placeholder="Select Popularity"
-                value={songData.Popularity}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="Genre" className="form-label">
-                Genre
-              </label>
-              <select
-                className="form-select"
-                id="Genre"
-                name="Genre"
-                placeholder="Song Genre"
-                value={songData.Genre}
-                onChange={handleChange}
-                required
-              >
-                <option defaultValue>Choose..</option>
-                <option value="Pop">Pop</option>
-                <option value="Rap">Rap</option>
-                <option value="Rock">Rock</option>
-                <option value="Jazz">Jazz</option>
-                <option value="Indie">Indie</option>
-                <option value="Metal">Metal</option>
-                <option value="Hip-hop">Hip-hop</option>
-                <option value="Country">Country</option>
-                <option value="Classical">Classical</option>
-                <option value="Folk">Folk</option>
-              </select>
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="Duration" className="form-label">
-                Duration
-              </label>
-              <div className="input-group mb-3">
-                <span className="input-group-text">Time</span>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="Duration"
-                  name="Duration"
-                  placeholder="Enter Song Length"
-                  value={songData.Duration}
-                  onChange={handleChange}
-                  aria-label="Time in (Mins:Secs format)"
-                  required
-                />
-                <span className="input-group-text">In secs</span>
-              </div>
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="SongUrl" className="form-label">
-                Upload Song
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                id="SongUrl"
-                name="SongUrl"
-                placeholder="Enter Song Url"
-                value={songData.SongUrl}
-                onChange={handleChange}
-                required
-              />
-            </div>
-            <div className="col-md-6">
-              <label htmlFor="SongPic" className="form-label">
-                Upload Pic
-              </label>
-              <input
-                type="file"
-                className="form-control"
-                id="SongPic"
-                name="SongPic"
-                placeholder="Select Song Picture"
-                onChange={handleSongPic}
-                required
-              />
-            </div>
-            {songPic && (
-              <div className="col-md-6">
-                <label>Selected Song Picture:</label>
-                <img src={songPic} alt="Selected Song" className="img-fluid" />
-              </div>
-            )}
-            <div className="col-md-12">
-              <button className="btn btn-success float-end mx-1" type="submit">
-                <i className="fas fa-plus">&nbsp;</i>Add
-              </button>
-              <button
-                className="btn btn-danger float-end mx-1"
-                type="button"
-                onClick={resetForm}
-              >
-                <i className="fa fa-remove">&nbsp;</i>Cancel
-              </button>
-            </div>
-          </form>
-        </section>
-      </div>
-    </>
+          )}
+          <div className="col-md-12">
+            <button className="btn btn-success float-end mx-1" type="submit">
+              <i className="fas fa-plus">&nbsp;</i>Add
+            </button>
+            <button
+              className="btn btn-danger float-end mx-1"
+              type="button"
+              onClick={resetForm}
+            >
+              <i className="fa fa-remove">&nbsp;</i>Cancel
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
   );
 };
 
