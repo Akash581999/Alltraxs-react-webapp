@@ -8,6 +8,7 @@ import SearchSong from "./AdminSearchSong";
 import AddSong from "./AddSong";
 import AllSongs from "./AllSongs";
 import AllPlaylists from "./AllPlaylists";
+import AddPlaylist from "./AddPlaylist";
 import AllFeedbacks from "./AllFeedbacks";
 
 const AdminHome = (props) => {
@@ -65,6 +66,7 @@ const AdminHome = (props) => {
                     <Tab.Pane eventKey="third">
                       {/* Playlists content coming soon.. */}
                       <AllPlaylists />
+                      <AddPlaylist />
                     </Tab.Pane>
                     <Tab.Pane eventKey="forth">
                       {/* Feedbacks content coming soon.. */}

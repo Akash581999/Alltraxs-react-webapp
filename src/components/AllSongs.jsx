@@ -93,8 +93,15 @@ const AllSongs = (props) => {
                   <td>{song.genre}</td>
                   <td>{song.duration}</td>
                   <td>{song.popularity}</td>
-                  <td>{song.songPic}</td>
                   <td>{song.songUrl}</td>
+                  <td>
+                    <img
+                      src={song.songPic}
+                      alt={song.title}
+                      className="img-fluid"
+                      style={{ height: "10vh", objectFit: "contain" }}
+                    />
+                  </td>
                   <td>
                     <button
                       className="btn btn-warning mx-1"

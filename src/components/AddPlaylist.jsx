@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const AddSong = (props) => {
+const AddPlaylist = (props) => {
   const [songData, setSongData] = useState({
     Title: "",
     Artist: "",
@@ -44,7 +44,7 @@ const AddSong = (props) => {
         duration: songData.Duration,
         popularity: songData.Popularity,
         songUrl: songData.SongUrl,
-        songPic: songPic,
+        songPic: songPicFile,
       },
     };
 
@@ -62,7 +62,6 @@ const AddSong = (props) => {
 
       if (data.rData && data.rData.rCode === 0) {
         alert(data.rData.rMessage || "Song added successfully!");
-        console.log("songpic", songPic);
         resetForm();
       } else {
         alert(data.rData.rMessage || "Failed to add song.");
@@ -91,7 +90,9 @@ const AddSong = (props) => {
   return (
     <div className={`bg-${props.mode} my-3`}>
       <section>
-        <span className="fs-3 text-success text-start mx-3 my-3">ADD SONG</span>
+        <span className="fs-3 text-success text-start mx-3 my-3">
+          ADD PLAYLIST
+        </span>
         <form
           className="form-container row g-3 bg-glass my-1 mx-1"
           onSubmit={handleAddSong}
@@ -254,4 +255,4 @@ const AddSong = (props) => {
   );
 };
 
-export default AddSong;
+export default AddPlaylist;

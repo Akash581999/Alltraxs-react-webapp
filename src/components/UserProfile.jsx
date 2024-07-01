@@ -22,15 +22,15 @@ const UserProfile = () => {
                 <Link to="/DashBoardScreen">DashBoard</Link>
               </Breadcrumb.Item>
               <Breadcrumb.Item>
-                <Link to="/UserProfile">Profile</Link>
+                <Link to="/UserProfile">User</Link>
               </Breadcrumb.Item>
-              <Breadcrumb.Item active>User Profile</Breadcrumb.Item>
+              <Breadcrumb.Item active>Profile</Breadcrumb.Item>
             </Breadcrumb>
           </div>
         </div>
 
         <div className="row">
-          <div className="col-lg-12 col-md-6">
+          <div className="col-lg-12 col-md-6 col-sm-3">
             <Card className="my-1">
               <Card.Body className="text-center">
                 <Card.Img
@@ -51,7 +51,7 @@ const UserProfile = () => {
             </Card>
           </div>
 
-          <div className="col-lg-12 col-md-6">
+          <div className="col-lg-12 col-md-6 col-sm-3">
             <Card className="my-1">
               <Card.Body>
                 <div className="row">
@@ -104,7 +104,7 @@ const UserProfile = () => {
         </div>
 
         <div className="row">
-          <div className="col-lg-12 ">
+          <div className="col-lg-12 col-md-6 col-sm-3">
             <Card className="my-1 mb-lg-0">
               <Card.Body className="p-0">
                 <ListGroup
@@ -115,28 +115,28 @@ const UserProfile = () => {
                     <i className="fas fa-globe fa-lg text-warning"></i>
                     <span>https://Alltraxs.com</span>
                   </ListGroup.Item> */}
-                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                  <ListGroup.Item className="p-3">
                     <i
                       className="fab fa-github fa-lg"
                       style={{ color: "#333333" }}
                     ></i>
                     <span>akash591999</span>
                   </ListGroup.Item>
-                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                  <ListGroup.Item className="p-3">
                     <i
                       className="fab fa-twitter fa-lg"
                       style={{ color: "#55acee" }}
                     ></i>
                     <span>@akash591999</span>
                   </ListGroup.Item>
-                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                  <ListGroup.Item className="p-3">
                     <i
                       className="fab fa-instagram fa-lg"
                       style={{ color: "#ac2bac" }}
                     ></i>
                     <span>akash591999</span>
                   </ListGroup.Item>
-                  <ListGroup.Item className="d-flex justify-content-between align-items-center p-3">
+                  <ListGroup.Item className="p-3">
                     <i
                       className="fab fa-facebook fa-lg"
                       style={{ color: "#3b5998" }}
@@ -150,7 +150,7 @@ const UserProfile = () => {
         </div>
 
         <div className="row">
-          <div className="col">
+          <div className="col-lg-12 col-md-6 col-sm-3">
             <div className="d-flex justify-content-center my-2">
               <Button>Edit</Button>
               <Button variant="outline-secondary" className="ms-1">
