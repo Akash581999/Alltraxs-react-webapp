@@ -12,7 +12,7 @@ const AllSongs = (props) => {
     fetchSongs();
   }, []);
 
-  const fetchSongs = async () => {
+  const fetchSongs = async (e) => {
     const requestData = {
       eventID: "1020",
       addInfo: {
@@ -78,8 +78,8 @@ const AllSongs = (props) => {
                 <th className="text-info">Genre</th>
                 <th className="text-info">Duration</th>
                 <th className="text-info">Popularity</th>
-                <th className="text-info">Song Pic</th>
                 <th className="text-info">Song Url</th>
+                <th className="text-info">Song Pic</th>
                 <th className="text-info">Options</th>
               </tr>
             </thead>
@@ -93,7 +93,17 @@ const AllSongs = (props) => {
                   <td>{song.genre}</td>
                   <td>{song.duration}</td>
                   <td>{song.popularity}</td>
-                  <td>{song.songUrl}</td>
+                  <td>
+                    <audio
+                      controls
+                      // className="w-100"
+                      style={{ width: "10vw", objectFit: "contain" }}
+                    >
+                      <source src={song.songUrl} type="audio/mpeg" />
+                      <source src={song.songUrl} type="audio/ogg" />
+                      Your browser does not support the audio element.
+                    </audio>
+                  </td>
                   <td>
                     <img
                       src={song.songPic}

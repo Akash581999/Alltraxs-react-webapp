@@ -8,15 +8,13 @@ const AddSong = (props) => {
     Genre: "",
     Duration: "",
     Popularity: "",
-    SongUrl: "",
   });
   const [songPic, setSongPic] = useState("");
-  const [songPicFile, setSongPicFile] = useState(null);
+  const [songUrl, setSongUrl] = useState("");
 
   const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    const val = type === "checkbox" ? checked : value;
-    setSongData({ ...songData, [name]: val });
+    const { name, value } = e.target;
+    setSongData({ ...songData, [name]: value });
   };
 
   const handleSongPic = (e) => {
@@ -24,7 +22,17 @@ const AddSong = (props) => {
     const reader = new FileReader();
     reader.onloadend = () => {
       setSongPic(reader.result);
-      setSongPicFile(file);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSongUrl = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSongUrl(reader.result);
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -43,7 +51,7 @@ const AddSong = (props) => {
         genre: songData.Genre,
         duration: songData.Duration,
         popularity: songData.Popularity,
-        songUrl: songData.SongUrl,
+        songUrl: songUrl,
         songPic: songPic,
       },
     };
@@ -62,7 +70,6 @@ const AddSong = (props) => {
 
       if (data.rData && data.rData.rCode === 0) {
         alert(data.rData.rMessage || "Song added successfully!");
-        console.log("songpic", songPic);
         resetForm();
       } else {
         alert(data.rData.rMessage || "Failed to add song.");
@@ -82,10 +89,9 @@ const AddSong = (props) => {
       Genre: "",
       Duration: "",
       Popularity: "",
-      SongUrl: "",
     });
     setSongPic("");
-    setSongPicFile(null);
+    setSongUrl("");
   };
 
   return (
@@ -213,10 +219,28 @@ const AddSong = (props) => {
               className="form-control"
               id="SongUrl"
               name="SongUrl"
-              onChange={handleChange}
+              accept="audio/*"
+              onChange={handleSongUrl}
               required
             />
           </div>
+          {songUrl && (
+            <div className="col-md-6 d-flex align-items-center">
+              <label htmlFor="songUrl" className="mt-3">
+                Selected Song:
+              </label>
+              <audio
+                id="songUrl"
+                className="mt-3"
+                controls
+                style={{ width: "20vw", objectFit: "contain" }}
+              >
+                <source src={songUrl} type="audio/mpeg" />
+                <source src={songUrl} type="audio/ogg" />
+                Your browser does not support the audio element.
+              </audio>
+            </div>
+          )}
           <div className="col-md-6">
             <label htmlFor="SongPic" className="form-label">
               Upload Pic
@@ -226,14 +250,21 @@ const AddSong = (props) => {
               className="form-control"
               id="SongPic"
               name="SongPic"
+              accept="image/*"
               onChange={handleSongPic}
               required
             />
           </div>
           {songPic && (
             <div className="col-md-6">
-              <label>Selected Song Picture:</label>
-              <img src={songPic} alt="Selected Song" className="img-fluid" />
+              <label htmlFor="songPic">Selected Picture:</label>
+              <img
+                id="songPic"
+                src={songPic}
+                alt="Selected Song"
+                className="img-fluid rounded"
+                style={{ height: "10vh", objectFit: "contain" }}
+              />
             </div>
           )}
           <div className="col-md-12">

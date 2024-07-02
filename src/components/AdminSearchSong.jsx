@@ -91,8 +91,9 @@ const AdminSearchSong = (props) => {
                 <div className="col-md-2">
                   <img
                     src={song.SongPic}
-                    className="card-img-top rounded"
-                    alt="songimage"
+                    className="card-img-top rounded p-2"
+                    alt={song.Title}
+                    style={{ height: "10vh", objectFit: "contain" }}
                   />
                 </div>
                 <div className="col-md-6">
