@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
+import EditPlaylist from "./EditPlaylist";
+import DeletePlaylist from "./DeletePlaylist";
 
 const AllPlaylists = (props) => {
-  const [playListsRecord, setPlayListsRecord] = useState([]);
+  const [playlistsRecord, setPlaylistsRecord] = useState([]);
+  const [editPlaylist, setEditPlaylist] = useState(false);
+  const [deletePlaylist, setDeletePlaylist] = useState(false);
 
   useEffect(() => {
     fetchPlaylistsRecord();
@@ -40,14 +44,23 @@ const AllPlaylists = (props) => {
       console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
-        setPlayListsRecord(data.rData.playlistsdata || []);
-        // alert(data.rData.rMessage || "All playlists retrieved!");
+        setPlaylistsRecord(data.rData.playlistsdata || []);
       }
     } catch (error) {
       console.error("Error:", error);
       alert(`Failed to fetch playlists: ${error}`);
-      setPlayListsRecord([]);
+      setPlaylistsRecord([]);
     }
+  };
+
+  const handlePlaylistEdit = (id) => {
+    console.log("Edit this playlist with ID:", id);
+    setEditPlaylist(true);
+  };
+
+  const handlePlaylistDelete = (playlist) => {
+    console.log("Delete this playlist:", playlist);
+    setDeletePlaylist(true);
   };
 
   return (
@@ -78,9 +91,9 @@ const AllPlaylists = (props) => {
               </tr>
             </thead>
             <tbody className="text-light">
-              {playListsRecord.map((playlist, index) => (
+              {playlistsRecord.map((playlist, index) => (
                 <tr key={index}>
-                  <td>{playlist.playlist_Id || index + 1}</td>
+                  <td>{playlist.playlist_Id}</td>
                   <td>{playlist.userId}</td>
                   <td>{playlist.title}</td>
                   <td>{playlist.description}</td>
@@ -96,10 +109,18 @@ const AllPlaylists = (props) => {
                   <td>{playlist.type}</td>
                   <td>{playlist.numSongs}</td>
                   <td>
-                    <button className="btn btn-warning mx-1" type="button">
+                    <button
+                      type="button"
+                      className="btn btn-warning mx-1"
+                      onClick={() => handlePlaylistEdit(playlist.playlist_Id)}
+                    >
                       <i className="fas fa-edit">&nbsp;</i>
                     </button>
-                    <button className="btn btn-danger mx-1" type="button">
+                    <button
+                      type="button"
+                      className="btn btn-danger mx-1"
+                      onClick={() => handlePlaylistDelete(playlist)}
+                    >
                       <i className="fas fa-trash">&nbsp;</i>
                     </button>
                   </td>
@@ -109,6 +130,17 @@ const AllPlaylists = (props) => {
           </Table>
         </div>
       </section>
+      {editPlaylist && (
+        <EditPlaylist
+          id={playlistsRecord.map((playlist) => playlist.playlist_Id)}
+          onClose={() => setEditPlaylist(false)}
+        />
+      )}
+      <DeletePlaylist
+        show={deletePlaylist}
+        onHide={() => setDeletePlaylist(false)}
+        id={playlistsRecord.map((playlist) => playlist.playlist_Id)}
+      />
     </div>
   );
 };

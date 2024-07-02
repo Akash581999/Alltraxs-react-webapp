@@ -12,9 +12,9 @@ const DeletePlaylist = (props) => {
     setShow(false);
   };
 
-  let playlistId;
-  props.id.map((playlistId) => (playlistId = playlistId));
-  console.log(playlistId);
+  let Playlist_Id;
+  props.id.map((playlistId) => (playlistId = Playlist_Id));
+  console.log(Playlist_Id);
 
   // const [show, setShow] = useState(false);
   // const [playlist, setplaylist] = useState(null);
@@ -100,31 +100,29 @@ const DeletePlaylist = (props) => {
         </Modal.Header>
         <Modal.Body variant="left">
           <h4>Delete this playlist!!</h4>
-          <p className="text-info text-center">playlist Id: 1</p>
-          <p className="text-info text-center">Title: In The Stars</p>
-          <p className="text-info text-center">Artist: Benson Boone</p>
-          <p className="text-info text-center">Album: Starry Nights</p>
-          <p className="text-info text-center">Genre: Pop</p>
-          <p className="text-info text-center">Duration: 300</p>
-          <p className="text-info text-center">Popularity: 89</p>
+          <p className="text-info text-center">Playlist Id: 1</p>
+          <p className="text-info text-center">User Id: 1</p>
+          <p className="text-info text-center">Title: My Favorites</p>
           <p className="text-info text-center">
-            playlist Pic: https://alltraxs.com/collection/tracks/pic1
+            Description: A collection of my favorite songs
           </p>
           <p className="text-info text-center">
-            playlist Url: https://alltraxs.com/collection/tracks/url1
+            Created On: 15-06-2024 14:34:31
           </p>
+          <p className="text-info text-center">Playlist Image: 300</p>
+          <p className="text-info text-center">Playlist Type: Public</p>
+          <p className="text-info text-center">Num of Songs: 10</p>
           {/* {playlist ? (
             <>
               <h4>Delete this playlist!!</h4>
-              <p className="text-info">playlist Id: {playlist.playlistId}</p>
-              <p className="text-info">Title: {playlist.Title}</p>
-              <p className="text-info">Artist: {playlist.Artist}</p>
-              <p className="text-info">Album: {playlist.Album}</p>
-              <p className="text-info">Genre: {playlist.Genre}</p>
-              <p className="text-info">Duration: {playlist.Duration}</p>
-              <p className="text-info">Popularity: {playlist.Popularity}</p>
-              <p className="text-info">playlist Pic: {playlist.playlistPic}</p>
-              <p className="text-info">playlist Url: {playlist.playlistUrl}</p>
+              <p className="text-info">Playlist Id: {playlist.playlistId}</p>
+              <p className="text-info">User Id: {playlist.userId}</p>
+              <p className="text-info">Title: {playlist.title}</p>
+              <p className="text-info">Description: {playlist.description}</p>
+              <p className="text-info">Created On: {playlist.createdOn}</p>
+              <p className="text-info">Playlist Image: {playlist.playlistPic}</p>
+              <p className="text-info">Playlist Type: {playlist.type}</p>
+              <p className="text-info">Num of Songs: {playlist.numSongs}</p>
             </>
           ) : (
             <p>Loading playlist details...</p>
