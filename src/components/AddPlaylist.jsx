@@ -93,7 +93,7 @@ const AddPlaylist = (props) => {
         >
           <div className="col-md-6">
             <label htmlFor="UserId" className="form-label">
-              User ID
+              User Id
             </label>
             <input
               type="text"

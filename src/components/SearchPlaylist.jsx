@@ -1,13 +1,13 @@
 import React, { useState } from "react";
-// import Editplaylist from "./Editplaylist";
-// import Deleteplaylist from "./Deleteplaylist";
+import EditPlaylist from "./EditPlaylist";
+import DeletePlaylist from "./DeletePlaylist";
 
 const SearchPlaylist = (props) => {
-  const [playlistsList, setplaylistsList] = useState([]);
-  //   const [editplaylist, setEditplaylist] = useState(false);
-  //   const [deleteplaylist, setDeleteplaylist] = useState(false);
+  const [playlistsRecord, setPlaylistsRecord] = useState([]);
+  const [editPlaylist, setEditPlaylist] = useState(false);
+  const [deletePlaylist, setDeletePlaylist] = useState(false);
 
-  const [playlistData, setplaylistData] = useState({
+  const [playlistData, setPlaylistData] = useState({
     Playlist_Id: "",
     Title: "",
     Description: "",
@@ -15,7 +15,7 @@ const SearchPlaylist = (props) => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setplaylistData({ ...playlistData, [name]: value });
+    setPlaylistData({ ...playlistData, [name]: value });
   };
 
   const handleSearch = async (e) => {
@@ -42,25 +42,29 @@ const SearchPlaylist = (props) => {
       console.log(data, "API response data");
 
       if (response.ok && data.rData && data.rData.rCode === 0) {
-        alert(data.rData.rMessage || "Playlist found succesfully");
-        setplaylistsList([data.rData]);
+        alert(data.rData.rMessage || "Playlist found successfully");
+        setPlaylistsRecord([data.rData]);
       } else {
         alert(data.rData.rMessage || "Playlist not found!");
-        setplaylistsList([]);
+        setPlaylistsRecord([]);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Failed to find playlist.");
+      alert("Failed to search playlist.");
     }
   };
 
-  //   const handleplaylistEdit = (id) => {
-  //     console.log(id);
-  //   };
+  const handlePlaylistEdit = (id) => {
+    console.log("Edit this playlist with ID:", id);
+    // Implement edit functionality here
+    setEditPlaylist(true);
+  };
 
-  // const handleplaylistDelete = (playlist) => {
-  //   console.log("Playing playlist:", playlist);
-  // };
+  const handlePlaylistDelete = (playlist) => {
+    console.log("Delete this playlist:", playlist);
+    // Implement delete functionality here
+    setDeletePlaylist(true);
+  };
 
   return (
     <div className={`bg-${props.mode}`}>
@@ -77,9 +81,9 @@ const SearchPlaylist = (props) => {
             aria-label="Search"
             onChange={handleChange}
             value={
-              playlistData.Title
-              //   playlistData.Description ||
-              //   playlistData.Playlist_Id
+              playlistData.Title ||
+              playlistData.Description ||
+              playlistData.Playlist_Id
             }
             name="Title"
           />
@@ -89,12 +93,10 @@ const SearchPlaylist = (props) => {
         </form>
 
         <div className="card-list my-3 mx-2 w-100">
-          {playlistsList.map((playlist, index) => (
+          {playlistsRecord.map((playlist, index) => (
             <div key={index} className="card bg-dark border-success mb-3">
               <div className="row g-0">
                 <div className="col-md-2">
-                  <h5 className="card-title">{playlist.Playlist_Id}</h5>
-                  <p className="card-text">{playlist.UserId}</p>
                   <img
                     src={playlist.PlaylistImageUrl}
                     className="card-img-top rounded p-2"
@@ -103,47 +105,31 @@ const SearchPlaylist = (props) => {
                   />
                 </div>
                 <div className="col-md-6">
-                  <div className="card-body text-light bg-dark d-flex justify-content-between">
-                    <h5 className="card-title">{playlist.Title}</h5>
-                    <p className="card-text">{playlist.Description}</p>
-                    <span className="text-secondary">{playlist.Type}</span>
+                  <div className="card-body text-light bg-dark d-flex justify-content-between align-items-center">
+                    <h5 className="card-title my-auto">{playlist.Title}</h5>
+                    <p className="card-text my-auto">{playlist.Description}</p>
+                    <span className="text-success">{playlist.Type}</span>
+                    <small className="text-secondary d-flex align-items-center">
+                      <i className="fas fa-music text-info">&nbsp;</i>
+                      {playlist.NumSongs}
+                    </small>
                   </div>
                 </div>
                 <div className="col-md-4">
                   <div className="card-footer bg-dark border-success d-flex justify-content-evenly align-items-center">
-                    {/* <small className="text-secondary">
-                      {Math.floor((playlist.Duration / (1000 * 60)) % 60)}:
-                      {Math.floor((playlist.Duration / 1000) % 60)} mins
-                    </small> */}
                     <span className="text-secondary">{playlist.CreatedOn}</span>
-                    <small className="text-secondary d-flex align-items-center">
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="24"
-                        height="24"
-                        fill="currentColor"
-                        className="bi bi-fire text-success me-1"
-                        viewBox="0 0 16 16"
-                      >
-                        <path d="M8 16c3.314 0 6-2 6-5.5 0-1.5-.5-4-2.5-6 .25 1.5-1.25 2-1.25 2C11 4 9 .5 6 0c.357 2 .5 4-2 6-1.25 1-2 2.729-2 4.5C2 14 4.686 16 8 16m0-1c-1.657 0-3-1-3-2.75 0-.75.25-2 1.25-3C6.125 10 7 10.5 7 10.5c-.375-1.25.5-3.25 2-3.5-.179 1-.25 2 1 3 .625.5 1 1.364 1 2.25C11 14 9.657 15 8 15" />
-                      </svg>
-                      {playlist.NumSongs}
-                    </small>
                     <div className="d-flex align-items-center mt-2">
                       <button
                         type="button"
                         className="btn btn-warning mx-1"
-                        // onClick={() => {
-                        //   handleplaylistEdit(playlist.playlistId);
-                        //   setEditplaylist(true);
-                        // }}
+                        onClick={() => handlePlaylistEdit(playlist.Playlist_Id)}
                       >
                         <i className="fas fa-edit">&nbsp;</i>
                       </button>
                       <button
                         type="button"
                         className="btn btn-danger mx-1"
-                        // onClick={() => setDeleteplaylist(true)}
+                        onClick={() => handlePlaylistDelete(playlist)}
                       >
                         <i className="fas fa-trash">&nbsp;</i>
                       </button>
@@ -151,26 +137,21 @@ const SearchPlaylist = (props) => {
                   </div>
                 </div>
               </div>
-              {/* {playlist.playlistUrl && (
-                <audio controls className="d-none w-100">
-                  <source src={playlist.playlistUrl} type="audio/mpeg" />
-                  Your browser does not support the audio element.
-                </audio>
-              )} */}
             </div>
           ))}
         </div>
       </section>
-      {/* {editplaylist && (
-        <Editplaylist
-          id={playlistsList.map((playlist) => playlist.playlistId)}
+      {editPlaylist && (
+        <EditPlaylist
+          id={playlistsRecord.map((playlist) => playlist.Playlist_Id)}
+          onClose={() => setEditPlaylist(false)}
         />
       )}
-      <Deleteplaylist
-        show={deleteplaylist}
-        onHide={() => setDeleteplaylist(false)}
-        id={playlistsList.map((playlist) => playlist.playlistId)}
-      /> */}
+      <DeletePlaylist
+        show={deletePlaylist}
+        onHide={() => setDeletePlaylist(false)}
+        id={playlistsRecord.map((playlist) => playlist.Playlist_Id)}
+      />
     </div>
   );
 };
