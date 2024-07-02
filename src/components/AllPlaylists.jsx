@@ -85,15 +85,22 @@ const AllPlaylists = (props) => {
                   <td>{playlist.title}</td>
                   <td>{playlist.description}</td>
                   <td>{playlist.createdOn}</td>
-                  <td>{playlist.playlistImageUrl}</td>
+                  <td>
+                    <img
+                      src={playlist.playlistImageUrl}
+                      alt={playlist.title}
+                      className="img-fluid"
+                      style={{ height: "5vh", objectFit: "contain" }}
+                    />
+                  </td>
                   <td>{playlist.type}</td>
                   <td>{playlist.numSongs}</td>
                   <td>
                     <button className="btn btn-warning mx-1" type="button">
-                      <i className="fas fa-edit">&nbsp;</i>Edit
+                      <i className="fas fa-edit">&nbsp;</i>
                     </button>
                     <button className="btn btn-danger mx-1" type="button">
-                      <i className="fas fa-trash">&nbsp;</i>Delete
+                      <i className="fas fa-trash">&nbsp;</i>
                     </button>
                   </td>
                 </tr>
