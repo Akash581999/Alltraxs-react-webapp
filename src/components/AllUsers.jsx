@@ -76,8 +76,8 @@ const AllUsers = (props) => {
       if (data.rData && data.rData.rCode === 0) {
         console.log(data.rData.users);
         alert(`You sure want you delete this user: ${data.email}`);
-        setUsersList(data.rData.users || []);
         alert("User profile deleted successfully" || data.rData.rMessage);
+        // setUsersList(data.rData.users || []);
       }
     } catch (error) {
       console.error("Error:", error);

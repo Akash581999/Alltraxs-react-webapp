@@ -48,6 +48,42 @@ const AllFeedbacks = (props) => {
     }
   };
 
+  const handleDeleteFeedback = async (feedback_Id) => {
+    const requestData = {
+      eventID: "1026",
+      addInfo: {
+        Feedback_Id: `${feedback_Id}`,
+      },
+    };
+
+    try {
+      const response = await fetch("http://localhost:5164/feedback/id", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      if (data.rData && data.rData.rCode === 0) {
+        console.log(data.rData.feedback);
+        alert(`You sure want you delete this feedback: ${data.feedback_Id}`);
+        alert("User Feedback deleted successfully" || data.rData.rMessage);
+        // setFeedbacksList(data.rData.feedback || []);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(`Failed to delete feedback: ${error}`);
+      setFeedbacksList([]);
+    }
+  };
+
   return (
     <div className={`bg-${props.mode}`}>
       <section>
@@ -86,7 +122,13 @@ const AllFeedbacks = (props) => {
                     <button className="btn btn-success mx-1" type="button">
                       <i className="fas fa-envelope-open">&nbsp;</i>Mark Read
                     </button>
-                    <button className="btn btn-danger mx-1" type="button">
+                    <button
+                      className="btn btn-danger mx-1"
+                      type="button"
+                      onClick={(feedback_Id) =>
+                        handleDeleteFeedback(feedback.feedback_Id)
+                      }
+                    >
                       <i className="fas fa-trash">&nbsp;</i>Delete
                     </button>
                   </td>
