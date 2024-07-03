@@ -25,28 +25,30 @@ const AdminHome = (props) => {
                     <Nav.Item>
                       <Nav.Link eventKey="first">
                         <span className="text-light center">
-                          <i className="fa fa-user">&nbsp;</i>Users
+                          <i className="fa fa-users text-info">&nbsp;</i>Users
                         </span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link eventKey="second">
                         <span className="text-light center">
-                          <i className="fa fa-music">&nbsp;</i>Songs
+                          <i className="fa fa-music text-info">&nbsp;</i>Songs
                         </span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link eventKey="third">
                         <span className="text-light center">
-                          <i className="fa fa-list">&nbsp;</i>Playlists
+                          <i className="fa fa-list text-info">&nbsp;</i>
+                          Playlists
                         </span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link eventKey="forth">
                         <span className="text-light center">
-                          <i className="fa fa-envelope">&nbsp;</i>Feedbacks
+                          <i className="fa fa-envelope text-info">&nbsp;</i>
+                          Feedbacks
                         </span>
                       </Nav.Link>
                     </Nav.Item>

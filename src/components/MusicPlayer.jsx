@@ -144,6 +144,10 @@ const MusicPlayer = ({ song }) => {
           </IconContext.Provider>
         </button>
       </div>
+      <button className="btn btn-outline-success" type="button">
+        <span className="text-success">Like</span>&nbsp;
+        <i className="fa fa-thumbs-up text-success"></i>
+      </button>
       <div className="bg-dark">
         <div className="p-1 mb-3">
           <button className="playButton" onClick={decreaseVolume}>
