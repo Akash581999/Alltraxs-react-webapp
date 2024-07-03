@@ -74,10 +74,11 @@ const AllUsers = (props) => {
       const data = await response.json();
 
       if (data.rData && data.rData.rCode === 0) {
-        console.log(data.rData.users);
-        alert(`You sure want you delete this user: ${data.email}`);
+        console.log(data.rData.email);
+        alert(`You sure want you delete this user: ${email}`);
         alert("User profile deleted successfully" || data.rData.rMessage);
-        // setUsersList(data.rData.users || []);
+        window.location.reload();
+        // setUsersList([] || data.rData.user);
       }
     } catch (error) {
       console.error("Error:", error);

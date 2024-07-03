@@ -72,10 +72,11 @@ const AllFeedbacks = (props) => {
       const data = await response.json();
 
       if (data.rData && data.rData.rCode === 0) {
-        console.log(data.rData.feedback);
-        alert(`You sure want you delete this feedback: ${data.feedback_Id}`);
+        console.log(data.rData.feedback_Id);
+        alert(`You sure want you delete feedback: ${feedback_Id}`);
         alert("User Feedback deleted successfully" || data.rData.rMessage);
-        // setFeedbacksList(data.rData.feedback || []);
+        window.location.reload();
+        // setFeedbacksList([] || data.rData.feedback);
       }
     } catch (error) {
       console.error("Error:", error);
