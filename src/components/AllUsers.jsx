@@ -53,7 +53,6 @@ const AllUsers = (props) => {
     const requestData = {
       eventID: "1025",
       addInfo: {
-        UserId: "",
         Email: `${email}`,
       },
     };
