@@ -11,32 +11,34 @@ function Login(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const [adminEmail, setAdminEmail] = useState("");
-  const [adminPassword, setAdminPassword] = useState("");
+  const [AdminEmail, setAdminEmail] = useState("");
+  const [AdminPassword, setAdminPassword] = useState("");
 
   const [rememberMe, setRememberMe] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleLogin = async (e, userType) => {
+  const handleLogin = async (e, Type) => {
     e.preventDefault();
 
     let requestData = {};
 
-    if (userType === "user") {
+    if (Type === "User") {
       requestData = {
         eventID: "1001",
         addInfo: {
+          Role: "User",
           UserId: email,
           UserPassword: password,
         },
       };
-    } else if (userType === "admin") {
+    } else if (Type === "Admin") {
       requestData = {
         eventID: "1001",
         addInfo: {
-          UserId: adminEmail,
-          UserPassword: adminPassword,
+          Role: "Admin",
+          UserId: AdminEmail,
+          UserPassword: AdminPassword,
         },
       };
     }
@@ -52,8 +54,9 @@ function Login(props) {
 
       const data = await response.json();
       console.log(data, "Api response data");
+      // console.log("JWT token", data.rData.rCode);
 
-      if (response.ok && data.rData.rCode === 0) {
+      if (response.ok && data.rData.rCode !== 0) {
         setIsLoggedIn(true);
         alert(data.rData.rMessage || "Login Successfully!");
       } else {
@@ -65,11 +68,13 @@ function Login(props) {
     }
   };
 
-  if (isLoggedIn) {
+  if (isLoggedIn === true) {
     if (email) {
       return <Navigate to="/DashBoardScreen" />;
-    } else if (adminEmail) {
+    } else if (AdminEmail) {
       return <Navigate to="/AdminScreen" />;
+    } else {
+      return <Navigate to="/LoginScreen" />;
     }
   }
 
@@ -139,7 +144,7 @@ function Login(props) {
                           name="email"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
-                          placeholder="Enter user email"
+                          placeholder="Enter User email"
                           minLength={5}
                           title="Must contain @gmail.com"
                           required
@@ -154,7 +159,7 @@ function Login(props) {
                           name="password"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
-                          placeholder="Enter user password"
+                          placeholder="Enter User password"
                           minLength={5}
                           title="Must contain at least one number, one uppercase, one lowercase letter and at least 8 or more characters"
                           required
@@ -203,38 +208,38 @@ function Login(props) {
                         <button
                           type="submit"
                           className="btn btn-primary mb-3 w-100"
-                          onClick={(e) => handleLogin(e, "user")}
+                          onClick={(e) => handleLogin(e, "User")}
                         >
                           Login
                         </button>
                       </Tab.Pane>
                       <Tab.Pane eventKey="Admin">
-                        <label className="text-dark" htmlFor="adminemail">
+                        <label className="text-dark" htmlFor="Adminemail">
                           Admin Email:
                         </label>
                         <input
                           className="form-control mb-2"
                           type="email"
-                          id="adminemail"
-                          name="adminemail"
-                          value={adminEmail}
+                          id="Adminemail"
+                          name="Adminemail"
+                          value={AdminEmail}
                           onChange={(e) => setAdminEmail(e.target.value)}
-                          placeholder="Enter admin email"
+                          placeholder="Enter Admin email"
                           minLength={5}
                           title="Must contain @gmail.com"
                           required
                         />
-                        <label className="text-dark" htmlFor="adminpassword">
+                        <label className="text-dark" htmlFor="Adminpassword">
                           Admin Password:
                         </label>
                         <input
                           className="form-control mb-2"
                           type={showPassword ? "text" : "password"}
-                          id="adminpassword"
-                          name="adminpassword"
-                          value={adminPassword}
+                          id="Adminpassword"
+                          name="Adminpassword"
+                          value={AdminPassword}
                           onChange={(e) => setAdminPassword(e.target.value)}
-                          placeholder="Enter admin password"
+                          placeholder="Enter Admin password"
                           minLength={5}
                           title="Must contain at least one number, one uppercase, one lowercase letter and at least 8 or more characters"
                           required
@@ -267,7 +272,7 @@ function Login(props) {
                         <button
                           type="submit"
                           className="btn btn-primary mb-3 w-100"
-                          onClick={(e) => handleLogin(e, "admin")}
+                          onClick={(e) => handleLogin(e, "Admin")}
                         >
                           Login
                         </button>
