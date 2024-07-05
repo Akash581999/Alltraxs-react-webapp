@@ -11,6 +11,7 @@ import AllPlaylists from "./AllPlaylists";
 import SearchPlaylist from "./SearchPlaylist";
 import AddPlaylist from "./AddPlaylist";
 import AllFeedbacks from "./AllFeedbacks";
+import AllSubscriptions from "./AllSubscriptions";
 
 const AdminHome = (props) => {
   return (
@@ -25,21 +26,21 @@ const AdminHome = (props) => {
                     <Nav.Item>
                       <Nav.Link eventKey="first">
                         <span className="text-light center">
-                          <i className="fa fa-users text-info">&nbsp;</i>Users
+                          <i className="fas fa-users text-info">&nbsp;</i>Users
                         </span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link eventKey="second">
                         <span className="text-light center">
-                          <i className="fa fa-music text-info">&nbsp;</i>Songs
+                          <i className="fas fa-music text-info">&nbsp;</i>Songs
                         </span>
                       </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
                       <Nav.Link eventKey="third">
                         <span className="text-light center">
-                          <i className="fa fa-list text-info">&nbsp;</i>
+                          <i className="fas fa-list text-info">&nbsp;</i>
                           Playlists
                         </span>
                       </Nav.Link>
@@ -47,8 +48,16 @@ const AdminHome = (props) => {
                     <Nav.Item>
                       <Nav.Link eventKey="forth">
                         <span className="text-light center">
-                          <i className="fa fa-envelope text-info">&nbsp;</i>
+                          <i className="fas fa-envelope text-info">&nbsp;</i>
                           Feedbacks
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="fifth">
+                        <span className="text-light center">
+                          <i className="fas fa-rupee text-info">&nbsp;</i>
+                          Subscriptions
                         </span>
                       </Nav.Link>
                     </Nav.Item>
@@ -75,6 +84,10 @@ const AdminHome = (props) => {
                     <Tab.Pane eventKey="forth">
                       {/* Feedbacks content coming soon.. */}
                       <AllFeedbacks />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="fifth">
+                      {/* Subscriptions content coming soon.. */}
+                      <AllSubscriptions />
                     </Tab.Pane>
                   </Tab.Content>
                 </Col>
