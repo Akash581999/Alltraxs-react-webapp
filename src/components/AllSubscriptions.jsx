@@ -2,27 +2,32 @@ import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 const AllSubscriptions = (props) => {
-  const [feedbacksList, setFeedbacksList] = useState([]);
+  const [subscriptionsList, setsubscriptionsList] = useState([]);
 
   useEffect(() => {
-    fetchFeedbacks();
+    fetchsubscriptions();
   }, []);
 
-  const fetchFeedbacks = async () => {
+  const fetchsubscriptions = async () => {
     const requestData = {
-      eventID: "1024",
+      eventID: "1031",
       addInfo: {
-        Feedback_Id: "",
+        SubscriptionId: "",
+        UserId: "",
         UserName: "",
         Email: "",
-        Country: "",
-        Comments: "",
-        CreatedAt: "",
+        PlanType: "",
+        CouponCode: "",
+        PaymentDate: "",
+        StartDate: "",
+        EndDate: "",
+        LastUpdated: "",
+        Active: "",
       },
     };
 
     try {
-      const response = await fetch("http://localhost:5164/allfeedbacks", {
+      const response = await fetch("http://localhost:5164/allsubscriptions", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -38,26 +43,26 @@ const AllSubscriptions = (props) => {
       console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
-        setFeedbacksList(data.rData.feedback || []);
-        // alert(data.rData.rMessage || "All feedbacks retrieved!");
+        setsubscriptionsList(data.rData.Subscriptions || []);
+        // alert(data.rData.rMessage || "All subscriptions retrieved!");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(`Failed to fetch feedbacks: ${error}`);
-      setFeedbacksList([]);
+      alert(`Failed to fetch subscriptions: ${error}`);
+      setsubscriptionsList([]);
     }
   };
 
-  const handleDeleteFeedback = async (feedback_Id) => {
+  const handleDeletesubscription = async (email) => {
     const requestData = {
-      eventID: "1026",
+      eventID: "1030",
       addInfo: {
-        Feedback_Id: `${feedback_Id}`,
+        Email: `${email}`,
       },
     };
 
     try {
-      const response = await fetch("http://localhost:5164/feedback/id", {
+      const response = await fetch("http://localhost:5164/subscriptions/id", {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -72,16 +77,16 @@ const AllSubscriptions = (props) => {
       const data = await response.json();
 
       if (data.rData && data.rData.rCode === 0) {
-        console.log(data.rData.feedback_Id);
-        alert(`You sure want you delete feedback: ${feedback_Id}`);
-        alert("User Feedback deleted successfully" || data.rData.rMessage);
+        console.log(data.rData.email);
+        alert(`You sure want you delete subscription: ${email}`);
+        alert("User subscription deleted successfully" || data.rData.rMessage);
         window.location.reload();
-        // setFeedbacksList([] || data.rData.feedback);
+        // setsubscriptionsList([] || data.rData.subscription);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(`Failed to delete feedback: ${error}`);
-      setFeedbacksList([]);
+      alert(`Failed to delete subscription: ${error}`);
+      setsubscriptionsList([]);
     }
   };
 
@@ -101,40 +106,46 @@ const AllSubscriptions = (props) => {
           >
             <thead>
               <tr>
-                <th className="text-info">Subscription Id</th>
+                <th className="text-info">Sub Id</th>
                 <th className="text-info">User Id</th>
                 <th className="text-info">User Name</th>
                 <th className="text-info">Email</th>
-                <th className="text-info">Plan Type</th>
+                <th className="text-info">Plan</th>
+                <th className="text-info">Coupon</th>
                 <th className="text-info">Payment Date</th>
-                <th className="text-info">Start Date</th>
+                <th className="text-info">Start From</th>
+                <th className="text-info">End On</th>
+                <th className="text-info">Updated On</th>
                 <th className="text-info">Active</th>
                 <th className="text-info">Options</th>
               </tr>
             </thead>
             <tbody className="text-light">
-              {feedbacksList.map((feedback, index) => (
+              {subscriptionsList.map((subscription, index) => (
                 <tr key={index}>
-                  <td>{index + 1}</td>
-                  <td>{feedback.feedback_Id}</td>
-                  <td>{feedback.userName}</td>
-                  <td>{feedback.email}</td>
-                  <td>{feedback.country}</td>
-                  <td>{feedback.createdAt}</td>
-                  <td>{feedback.createdAt}</td>
-                  <td>{feedback.createdAt}</td>
+                  <td>{subscription.subscriptionId || index + 1}</td>
+                  <td>{subscription.userId}</td>
+                  <td>{subscription.userName}</td>
+                  <td>{subscription.email}</td>
+                  <td>{subscription.planType}</td>
+                  <td>{subscription.couponCode}</td>
+                  <td>{subscription.paymentDate}</td>
+                  <td>{subscription.startDate}</td>
+                  <td>{subscription.endDate}</td>
+                  <td>{subscription.lastUpdated}</td>
+                  <td>{subscription.active ? "Yes" : "No"}</td>
                   <td>
                     <button className="btn btn-success mx-1" type="button">
-                      <i className="fas fa-envelope-open">&nbsp;</i>Review
+                      <i className="fas fa-eye"></i>Review
                     </button>
                     <button
                       className="btn btn-danger mx-1"
                       type="button"
-                      onClick={(feedback_Id) =>
-                        handleDeleteFeedback(feedback.feedback_Id)
+                      onClick={(email) =>
+                        handleDeletesubscription(subscription.email)
                       }
                     >
-                      <i className="fas fa-trash">&nbsp;</i>Cancel
+                      <i className="fas fa-remove"></i>Cancel
                     </button>
                   </td>
                 </tr>
