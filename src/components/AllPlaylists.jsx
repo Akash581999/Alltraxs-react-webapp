@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+// import { Navigate } from "react-router-dom";
 import Table from "react-bootstrap/Table";
 import EditPlaylist from "./EditPlaylist";
 import DeletePlaylist from "./DeletePlaylist";
@@ -26,7 +27,6 @@ const AllPlaylists = (props) => {
         NumSongs: "",
       },
     };
-
     try {
       const response = await fetch("http://localhost:5164/allplaylists", {
         method: "POST",
@@ -62,6 +62,7 @@ const AllPlaylists = (props) => {
     console.log("Delete this playlist:", playlist);
     setDeletePlaylist(true);
   };
+  // const navigate = Navigate();
 
   return (
     <div className={`bg-${props.mode}`}>
@@ -113,6 +114,9 @@ const AllPlaylists = (props) => {
                       type="button"
                       className="btn btn-warning mx-1"
                       onClick={() => handlePlaylistEdit(playlist.playlist_Id)}
+                      // onClick={() =>
+                      //   navigate(`/EditPlaylist/${playlist.playlist_Id}`)
+                      // }
                     >
                       <i className="fas fa-edit">&nbsp;</i>
                     </button>
