@@ -9,7 +9,7 @@ import Row from "react-bootstrap/Row";
 import Tab from "react-bootstrap/Tab";
 import "../App.css";
 
-function Login(props) {
+const Login = (props) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -62,9 +62,9 @@ function Login(props) {
       // console.log("JWT token", data.rData.rCode);
 
       if (response.ok && data.rData.rCode !== 0) {
+        setIsLoggedIn(true);
         setShowAlert(true);
         setShowToast(true);
-        setIsLoggedIn(true);
         alert(data.rData.rMessage || "Login Successfully!");
       } else {
         alert(data.rData.rMessage || "Invalid Credentials!");
@@ -99,22 +99,22 @@ function Login(props) {
 
   return (
     <>
+      <Alertify
+        show={showAlert}
+        setShowAlert={setShowAlert}
+        color={"success"}
+        topic="Login Successfully!"
+        message="Welcome, Akash Kumar!"
+        buttonText="OK"
+      />
+      <Toastify
+        show={showToast}
+        setShowToast={setShowToast}
+        color={"info"}
+        topic="Login Successfully!"
+        message="Welcome, Akash Kumar!"
+      />
       <div className={`bg-${props.mode}`}>
-        <Alertify
-          show={showAlert}
-          setShowAlert={setShowAlert}
-          color={"success"}
-          topic="Login Successfully!"
-          message="Welcome, Akash Kumar!"
-          buttonText="OK"
-        />
-        <Toastify
-          show={showToast}
-          setShowToast={setShowToast}
-          color={"info"}
-          topic="Login Successfully!"
-          message="Welcome, Akash Kumar!"
-        />
         <div className="container">
           <div className="row">
             <div className="col-md-6 d-md-block my-3">
@@ -345,6 +345,6 @@ function Login(props) {
       </div>
     </>
   );
-}
+};
 
 export default Login;
