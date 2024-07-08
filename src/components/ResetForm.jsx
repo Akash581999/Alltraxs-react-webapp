@@ -27,14 +27,14 @@ const ResetForm = (props) => {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOTP] = useState("");
   const [confirmationResult, setConfirmationResult] = useState(null);
+  const [otpVerified, setOtpVerified] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSendOTP = async (e, phoneNumber) => {
+  const handleSendOTP = async (e) => {
     e.preventDefault();
     try {
-      const phoneNo = "+919634708314";
-      //   const phoneNo = `+91${phoneNumber}`; //With India country code
+      const phoneNo = `+91${phoneNumber}`; // With India country code
       const appVerifier = new firebase.auth.RecaptchaVerifier("reCaptcha", {
         size: "invisible",
       });
@@ -43,24 +43,22 @@ const ResetForm = (props) => {
         appVerifier
       );
       setConfirmationResult(confirmation);
-      console.log("OTP sent");
       alert("OTP sent to your phone number!");
     } catch (error) {
       console.error("Error sending OTP:", error);
       alert(`Error sending OTP: ${error.message}`);
     }
-    alert("OTP sent to your email or phone number!");
   };
 
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     try {
       await confirmationResult.confirm(otp);
+      setOtpVerified(true); // Set OTP verification status to true
       alert("OTP verified. Proceeding to reset password!");
     } catch (error) {
       alert(`Error verifying OTP: ${error.message}`);
     }
-    alert("OTP verified. Proceeding to next window!");
   };
 
   const handlePasswordReset = async (e) => {
@@ -72,7 +70,7 @@ const ResetForm = (props) => {
     const requestData = {
       eventID: "1005",
       addInfo: {
-        UserId: phoneNumber,
+        Mobile: phoneNumber,
         NewPassword: newPassword,
         ConfirmPassword: confirmPassword,
       },
@@ -118,7 +116,7 @@ const ResetForm = (props) => {
           </div>
           <div className="col-lg-6 col-md-8 col-sm-12">
             <h2 className="text-success my-5 text-center">Reset Password</h2>
-            {!otp ? (
+            {!confirmationResult ? (
               <form
                 onSubmit={handleSendOTP}
                 className="form-container bg-glass"
@@ -138,18 +136,9 @@ const ResetForm = (props) => {
                     onChange={(e) => setPhoneNumber(e.target.value)}
                     required
                   />
+                  <div id="reCaptcha"></div>
                 </div>
-                <div id="reCaptcha"></div>
                 <div className="mb-3 d-flex justify-content-center">
-                  {/* <button
-                    type="submit"
-                    className="btn btn-primary mx-3"
-                    onClick={(e) => {
-                      setConfirmationResult(e.target.value);
-                    }}
-                  >
-                    <Link to="/LoginScreen">Back</Link>
-                  </button> */}
                   <Link to="/LoginScreen" className="btn btn-primary mx-3">
                     Back
                   </Link>
@@ -158,78 +147,73 @@ const ResetForm = (props) => {
                   </button>
                 </div>
               </form>
+            ) : !otpVerified ? (
+              <form
+                onSubmit={handleVerifyOTP}
+                className="form-container bg-glass"
+              >
+                <div className="mb-3">
+                  <label htmlFor="otp" className="form-label">
+                    Enter the OTP received on your email or phone number
+                  </label>
+                  <input
+                    type="text"
+                    className="form-control"
+                    id="otp"
+                    placeholder="Enter OTP here"
+                    name="otp"
+                    value={otp}
+                    onChange={(e) => setOTP(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3 d-flex justify-content-end">
+                  <button type="submit" className="btn btn-success mx-3">
+                    Verify OTP
+                  </button>
+                </div>
+              </form>
             ) : (
-              <>
-                <form
-                  onSubmit={handleVerifyOTP}
-                  className="form-container bg-glass"
-                >
-                  <div className="mb-3">
-                    <label htmlFor="otp" className="form-label">
-                      Enter the OTP received on your email or phone number
-                    </label>
-                    <input
-                      type="text"
-                      className="form-control"
-                      id="otp"
-                      placeholder="Enter OTP here"
-                      name="otp"
-                      value={otp}
-                      onChange={(e) => {
-                        setOTP(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3 d-flex justify-content-end">
-                    <button type="submit" className="btn btn-success mx-3">
-                      Verify OTP
-                    </button>
-                  </div>
-                </form>
-
-                <form
-                  onSubmit={handlePasswordReset}
-                  className="form-container bg-glass"
-                >
-                  <div className="mb-3">
-                    <label htmlFor="newPassword" className="form-label">
-                      Enter new password
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="newPassword"
-                      placeholder="Enter new password here"
-                      name="newPassword"
-                      value={newPassword}
-                      onChange={(e) => {
-                        setNewPassword(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3">
-                    <label htmlFor="confirmPassword" className="form-label">
-                      Confirm new password
-                    </label>
-                    <input
-                      type="password"
-                      className="form-control"
-                      id="confirmPassword"
-                      placeholder="Confirm new password here"
-                      name="confirmPassword"
-                      value={confirmPassword}
-                      onChange={(e) => {
-                        setConfirmPassword(e.target.value);
-                      }}
-                    />
-                  </div>
-                  <div className="mb-3 d-flex justify-content-end">
-                    <button type="submit" className="btn btn-success mx-3">
-                      Reset Password
-                    </button>
-                  </div>
-                </form>
-              </>
+              <form
+                onSubmit={handlePasswordReset}
+                className="form-container bg-glass"
+              >
+                <div className="mb-3">
+                  <label htmlFor="newPassword" className="form-label">
+                    Enter new password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="newPassword"
+                    placeholder="Enter new password here"
+                    name="newPassword"
+                    value={newPassword}
+                    onChange={(e) => setNewPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3">
+                  <label htmlFor="confirmPassword" className="form-label">
+                    Confirm new password
+                  </label>
+                  <input
+                    type="password"
+                    className="form-control"
+                    id="confirmPassword"
+                    placeholder="Confirm new password here"
+                    name="confirmPassword"
+                    value={confirmPassword}
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                    required
+                  />
+                </div>
+                <div className="mb-3 d-flex justify-content-end">
+                  <button type="submit" className="btn btn-success mx-3">
+                    Reset Password
+                  </button>
+                </div>
+              </form>
             )}
           </div>
         </div>
