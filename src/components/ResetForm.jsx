@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, Navigate } from "react-router-dom";
 import rst from "../images/rst1.jpg";
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
@@ -30,11 +30,13 @@ const ResetForm = (props) => {
   const [otpVerified, setOtpVerified] = useState(false);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [resetSuccess, setResetSuccess] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const handleSendOTP = async (e) => {
     e.preventDefault();
     try {
-      const phoneNo = `+91${phoneNumber}`; // With India country code
+      const phoneNo = `+91${phoneNumber}`;
       const appVerifier = new firebase.auth.RecaptchaVerifier("reCaptcha", {
         size: "invisible",
       });
@@ -54,7 +56,7 @@ const ResetForm = (props) => {
     e.preventDefault();
     try {
       await confirmationResult.confirm(otp);
-      setOtpVerified(true); // Set OTP verification status to true
+      setOtpVerified(true);
       alert("OTP verified. Proceeding to reset password!");
     } catch (error) {
       alert(`Error verifying OTP: ${error.message}`);
@@ -63,10 +65,6 @@ const ResetForm = (props) => {
 
   const handlePasswordReset = async (e) => {
     e.preventDefault();
-    if (newPassword !== confirmPassword) {
-      alert("Passwords do not match!");
-      return;
-    }
     const requestData = {
       eventID: "1005",
       addInfo: {
@@ -75,9 +73,12 @@ const ResetForm = (props) => {
         ConfirmPassword: confirmPassword,
       },
     };
-
+    // if (newPassword !== confirmPassword) {
+    //   alert("Passwords do not match!");
+    //   return;
+    // }
     try {
-      await auth.currentUser.updatePassword(newPassword);
+      // await auth.currentUser.updatePassword(newPassword);
       const response = await fetch("http://localhost:5164/resetPassword", {
         method: "PUT",
         headers: {
@@ -91,16 +92,25 @@ const ResetForm = (props) => {
 
       if (response.ok && data.rData && data.rData.rCode === 0) {
         alert(data.rData.rMessage || "Password reset successfully!");
-        setNewPassword([data.rData]);
+        setResetSuccess(true);
+        setNewPassword([]);
+        setConfirmPassword([]);
       } else {
         alert(data.rData.rMessage || "Failed to reset password!!");
         setNewPassword([]);
+        setConfirmPassword([]);
       }
     } catch (error) {
       console.error("Error:", error);
       alert(`Error resetting password: ${error.message}`);
     }
   };
+  const togglePasswordVisibility = () => {
+    setShowPassword(!showPassword);
+  };
+  if (resetSuccess === true) {
+    return <Navigate to="/LoginScreen" />;
+  }
 
   return (
     <div className={`bg-${props.mode}`}>
@@ -154,7 +164,7 @@ const ResetForm = (props) => {
               >
                 <div className="mb-3">
                   <label htmlFor="otp" className="form-label">
-                    Enter the OTP received on your email or phone number
+                    Enter the OTP received on your phone number
                   </label>
                   <input
                     type="text"
@@ -183,30 +193,60 @@ const ResetForm = (props) => {
                     Enter new password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="form-control"
-                    id="newPassword"
                     placeholder="Enter new password here"
+                    id="newPassword"
                     name="newPassword"
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
                   />
+                  <div className="show-pass position-relative">
+                    <button
+                      type="button"
+                      className="show-pass-button btn btn-border-light position-absolute"
+                      style={{ top: -45, right: 0 }}
+                      onClick={togglePasswordVisibility}
+                      aria-label="Toggle Password Visibility"
+                    >
+                      <i
+                        className={`fa ${
+                          showPassword ? "fa-eye-slash" : "fa-eye"
+                        }`}
+                      ></i>
+                    </button>
+                  </div>
                 </div>
                 <div className="mb-3">
                   <label htmlFor="confirmPassword" className="form-label">
                     Confirm new password
                   </label>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"}
                     className="form-control"
-                    id="confirmPassword"
                     placeholder="Confirm new password here"
+                    id="confirmPassword"
                     name="confirmPassword"
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
                   />
+                  <div className="show-pass position-relative">
+                    <button
+                      type="button"
+                      className="show-pass-button btn btn-border-light position-absolute"
+                      style={{ top: -45, right: 0 }}
+                      onClick={togglePasswordVisibility}
+                      aria-label="Toggle Password Visibility"
+                    >
+                      <i
+                        className={`fa ${
+                          showPassword ? "fa-eye-slash" : "fa-eye"
+                        }`}
+                      ></i>
+                    </button>
+                  </div>
                 </div>
                 <div className="mb-3 d-flex justify-content-end">
                   <button type="submit" className="btn btn-success mx-3">
