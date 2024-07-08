@@ -85,7 +85,7 @@ const SearchPlaylist = (props) => {
               playlistData.Description ||
               playlistData.Playlist_Id
             }
-            name="Title"
+            name={"Title" || "Description" || "Playlist_Id"}
           />
           <button className="btn btn-outline-success mx-2" type="submit">
             <i className="fa fa-search"></i>

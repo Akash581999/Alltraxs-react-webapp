@@ -62,12 +62,15 @@ const Login = (props) => {
       // console.log("JWT token", data.rData.rCode);
 
       if (response.ok && data.rData.rCode !== 0) {
+        alert(data.rData.rMessage || "Login Successfully!");
         setIsLoggedIn(true);
         setShowAlert(true);
         setShowToast(true);
-        alert(data.rData.rMessage || "Login Successfully!");
       } else {
         alert(data.rData.rMessage || "Invalid Credentials!");
+        setIsLoggedIn(false);
+        setShowAlert(false);
+        setShowToast(false);
       }
     } catch (error) {
       console.error("Error:", error);

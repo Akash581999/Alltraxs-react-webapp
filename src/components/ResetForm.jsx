@@ -1,30 +1,107 @@
-import { useState } from "react";
-import "../App.css";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import rst from "../images/rst1.jpg";
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "../App.css";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyBpIKtGFO6IRkK72_bQ4fxGAppCHpuzZDE",
+  authDomain: "react-otp-app-1a6df.firebaseapp.com",
+  projectId: "react-otp-app-1a6df",
+  storageBucket: "react-otp-app-1a6df.appspot.com",
+  messagingSenderId: "434954909594",
+  appId: "1:434954909594:web:0bfa09b64e4dc2e33dac23",
+};
+
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+} else {
+  firebase.app();
+}
+
+const auth = firebase.auth();
 
 const ResetForm = (props) => {
-  const [emailOrPhoneNumber, setEmailOrPhoneNumber] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
   const [otp, setOTP] = useState("");
-  const [confirmOTP, setConfirmOTP] = useState("");
+  const [confirmationResult, setConfirmationResult] = useState(null);
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const handleSubmit = (e) => {
+  const handleSendOTP = async (e, phoneNumber) => {
     e.preventDefault();
-    // Implement logic to send OTP to the provided email or phone number
+    try {
+      const phoneNo = "+919634708314";
+      //   const phoneNo = `+91${phoneNumber}`; //With India country code
+      const appVerifier = new firebase.auth.RecaptchaVerifier("reCaptcha", {
+        size: "invisible",
+      });
+      const confirmation = await auth.signInWithPhoneNumber(
+        phoneNo,
+        appVerifier
+      );
+      setConfirmationResult(confirmation);
+      console.log("OTP sent");
+      alert("OTP sent to your phone number!");
+    } catch (error) {
+      console.error("Error sending OTP:", error);
+      alert(`Error sending OTP: ${error.message}`);
+    }
     alert("OTP sent to your email or phone number!");
   };
 
-  const handleOTPSubmit = (e) => {
+  const handleVerifyOTP = async (e) => {
     e.preventDefault();
-    // Implement logic to verify OTP and proceed to reset password
+    try {
+      await confirmationResult.confirm(otp);
+      alert("OTP verified. Proceeding to reset password!");
+    } catch (error) {
+      alert(`Error verifying OTP: ${error.message}`);
+    }
     alert("OTP verified. Proceeding to next window!");
   };
 
-  const handlePasswordReset = (e) => {
+  const handlePasswordReset = async (e) => {
     e.preventDefault();
-    // Implement logic to reset password
-    alert("Password reset successfully!");
+    if (newPassword !== confirmPassword) {
+      alert("Passwords do not match!");
+      return;
+    }
+    const requestData = {
+      eventID: "1005",
+      addInfo: {
+        UserId: phoneNumber,
+        NewPassword: newPassword,
+        ConfirmPassword: confirmPassword,
+      },
+    };
+
+    try {
+      await auth.currentUser.updatePassword(newPassword);
+      const response = await fetch("http://localhost:5164/resetPassword", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+
+      const data = await response.json();
+      console.log(data, "API response data");
+
+      if (response.ok && data.rData && data.rData.rCode === 0) {
+        alert(data.rData.rMessage || "Password reset successfully!");
+        setNewPassword([data.rData]);
+      } else {
+        alert(data.rData.rMessage || "Failed to reset password!!");
+        setNewPassword([]);
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(`Error resetting password: ${error.message}`);
+    }
   };
 
   return (
@@ -42,43 +119,49 @@ const ResetForm = (props) => {
           <div className="col-lg-6 col-md-8 col-sm-12">
             <h2 className="text-success my-5 text-center">Reset Password</h2>
             {!otp ? (
-              <form onSubmit={handleSubmit} className="form-container bg-glass">
+              <form
+                onSubmit={handleSendOTP}
+                className="form-container bg-glass"
+              >
                 <div className="mb-3">
-                  <label htmlFor="emailOrPhoneNumber" className="form-label">
-                    Enter your registered email or phone number :
+                  <label htmlFor="phoneNumber" className="form-label">
+                    Enter your registered phone number :
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    id="emailOrPhoneNumber"
-                    placeholder="Enter email or number here.."
-                    aria-describedby="emailOrPhoneNumberHelp"
-                    name="emailOrPhoneNumber"
-                    value={emailOrPhoneNumber}
-                    onChange={(e) => {
-                      setEmailOrPhoneNumber(e.target.value);
-                    }}
+                    id="phoneNumber"
+                    placeholder="Enter phone number here.."
+                    aria-describedby="phoneNumberHelp"
+                    name="phoneNumber"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    required
                   />
                 </div>
+                <div id="reCaptcha"></div>
                 <div className="mb-3 d-flex justify-content-center">
-                  <button type="submit" className="btn btn-primary mx-3">
-                    Get OTP
-                  </button>
-                  <button
+                  {/* <button
                     type="submit"
-                    className="btn btn-success mx-3"
+                    className="btn btn-primary mx-3"
                     onClick={(e) => {
-                      setConfirmOTP(e.target.value);
+                      setConfirmationResult(e.target.value);
                     }}
                   >
-                    Confirm
+                    <Link to="/LoginScreen">Back</Link>
+                  </button> */}
+                  <Link to="/LoginScreen" className="btn btn-primary mx-3">
+                    Back
+                  </Link>
+                  <button type="submit" className="btn btn-success mx-3">
+                    Send OTP
                   </button>
                 </div>
               </form>
             ) : (
               <>
                 <form
-                  onSubmit={handleOTPSubmit}
+                  onSubmit={handleVerifyOTP}
                   className="form-container bg-glass"
                 >
                   <div className="mb-3">
@@ -110,7 +193,7 @@ const ResetForm = (props) => {
                 >
                   <div className="mb-3">
                     <label htmlFor="newPassword" className="form-label">
-                      Enter your new password
+                      Enter new password
                     </label>
                     <input
                       type="password"
@@ -126,7 +209,7 @@ const ResetForm = (props) => {
                   </div>
                   <div className="mb-3">
                     <label htmlFor="confirmPassword" className="form-label">
-                      Confirm your new password
+                      Confirm new password
                     </label>
                     <input
                       type="password"
