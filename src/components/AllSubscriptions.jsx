@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import Table from "react-bootstrap/Table";
 
 const AllSubscriptions = (props) => {
-  const [subscriptionsList, setsubscriptionsList] = useState([]);
+  const [subscriptionsList, setSubscriptionsList] = useState([]);
 
   useEffect(() => {
-    fetchsubscriptions();
+    fetchSubscriptions();
   }, []);
 
-  const fetchsubscriptions = async () => {
+  const fetchSubscriptions = async () => {
     const requestData = {
       eventID: "1031",
       addInfo: {
@@ -43,17 +43,17 @@ const AllSubscriptions = (props) => {
       console.log(data, "API response data");
 
       if (data.rData && data.rData.rCode === 0) {
-        setsubscriptionsList(data.rData.Subscriptions || []);
+        setSubscriptionsList(data.rData.Subscriptions || []);
         // alert(data.rData.rMessage || "All subscriptions retrieved!");
       }
     } catch (error) {
       console.error("Error:", error);
       alert(`Failed to fetch subscriptions: ${error}`);
-      setsubscriptionsList([]);
+      setSubscriptionsList([]);
     }
   };
 
-  const handleDeletesubscription = async (email) => {
+  const handleDeleteSubscription = async (email) => {
     const requestData = {
       eventID: "1030",
       addInfo: {
@@ -81,12 +81,12 @@ const AllSubscriptions = (props) => {
         alert(`You sure want you delete subscription: ${email}`);
         alert("User subscription deleted successfully" || data.rData.rMessage);
         window.location.reload();
-        // setsubscriptionsList([] || data.rData.subscription);
+        // setSubscriptionsList([] || data.rData.subscription);
       }
     } catch (error) {
       console.error("Error:", error);
       alert(`Failed to delete subscription: ${error}`);
-      setsubscriptionsList([]);
+      setSubscriptionsList([]);
     }
   };
 
@@ -142,7 +142,7 @@ const AllSubscriptions = (props) => {
                       className="btn btn-danger mx-1"
                       type="button"
                       onClick={(email) =>
-                        handleDeletesubscription(subscription.email)
+                        handleDeleteSubscription(subscription.email)
                       }
                     >
                       <i className="fas fa-remove"></i>Cancel

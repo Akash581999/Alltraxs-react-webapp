@@ -30,6 +30,7 @@ function SignUp(props) {
     const requestData = {
       eventID: "1002",
       addInfo: {
+        Role: "User",
         FirstName: formData.firstName,
         LastName: formData.lastName,
         Email: formData.email,
