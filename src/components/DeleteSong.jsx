@@ -70,7 +70,7 @@ const DeleteSong = ({ props, show, onHide, id }) => {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body variant="left">
-          <h4>Delete this song!!</h4>
+          <h4>Delete this song?</h4>
           <p className="text-info">Title: {title}</p>
           {/* {song ? (
             <>

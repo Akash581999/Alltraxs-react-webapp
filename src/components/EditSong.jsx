@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 const EditSong = (props) => {
   const [songData, setSongData] = useState({
@@ -11,14 +11,58 @@ const EditSong = (props) => {
     Popularity: "",
     SongUrl: "",
   });
-
-  // console.log(props.id);
   const [songPic, setSongPic] = useState("");
   const [songPicFile, setSongPicFile] = useState(null);
 
-  let SongId;
-  props.id.map((songId) => (SongId = songId));
-  // console.log(SongId);
+  useEffect(() => {
+    fetchSongDetails();
+  }, [props.id]);
+
+
+  const fetchSongDetails = async () => {
+    const requestData = {
+      eventID: "1011",
+      addInfo: {
+        SongId: props.id,
+        Title: "",
+        Artist: "",
+      },
+    };
+    try {
+      const response = await fetch(`http://localhost:5164/songs/id`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
+      const data = await response.json();
+      console.log("data of seleted song", data);
+
+      if (data.rData.rCode === 0) {
+        const song = data.rData;
+        console.log("song", song);
+        setSongData({
+          SongId: song.SongId,
+          title: song.Title,
+          artist: song.Artist,
+          album: song.Album,
+          genre: song.Genre,
+          duration: song.Duration,
+          popularity: song.Popularity,
+          songUrl: song.SongUrl,
+          // songPic: songPicFile,
+        });
+        setSongPic(song.songPic);
+      } else {
+        alert("Failed to fetch song details.");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert(`Error fetching song details: ${error}`);
+    }
+  };
+
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -38,13 +82,13 @@ const EditSong = (props) => {
     }
   };
 
-  const handleAddSong = async (e) => {
+  const handleEditSong = async (e) => {
     e.preventDefault();
 
     const requestData = {
       eventID: "1010",
       addInfo: {
-        SongId: songData.SongId,
+        SongId: props.id,
         title: songData.Title,
         artist: songData.Artist,
         album: songData.Album,
@@ -105,7 +149,7 @@ const EditSong = (props) => {
           </span>
           <form
             className="form-container row g-3 bg-glass my-1 mx-1"
-            onSubmit={handleAddSong}
+            onSubmit={handleEditSong}
             autoComplete="on"
             spellCheck="true"
             noValidate
@@ -120,9 +164,9 @@ const EditSong = (props) => {
                 id="SongId"
                 name="SongId"
                 placeholder="Enter Song Id to edit..."
-                value={SongId}
-                onChange={handleChange}
-                required
+                value={songData.SongId}
+                // onChange={handleChange}
+                readOnly
               />
             </div>
             <div className="col-md-4">
@@ -217,7 +261,7 @@ const EditSong = (props) => {
               <div className="input-group mb-3">
                 <span className="input-group-text">In</span>
                 <input
-                  type="text"
+                  type="number"
                   className="form-control"
                   id="Duration"
                   name="Duration"

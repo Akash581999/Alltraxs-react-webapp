@@ -6,6 +6,7 @@ const AdminSearchSong = (props) => {
   const [songsList, setSongsList] = useState([]);
   const [editSong, setEditSong] = useState(false);
   const [deleteSong, setDeleteSong] = useState(false);
+  const [seletedId, setSeletedId] = useState("");
 
   const [songData, setSongData] = useState({
     SongId: "",
@@ -42,7 +43,7 @@ const AdminSearchSong = (props) => {
       console.log(data, "API response data");
 
       if (response.ok && data.rData && data.rData.rCode === 0) {
-        alert(data.rData.rMessage || "Song found!");
+        alert(data.rData.rMessage || "Song found successfully!");
         setSongsList([data.rData]);
       } else {
         alert(data.rData.rMessage || "Song not found!");
@@ -56,13 +57,12 @@ const AdminSearchSong = (props) => {
 
   const handleSongEdit = (id) => {
     console.log("Edit this Song with ID:", id);
-    // Implement edit functionality here
+    setSeletedId(id);
     setEditSong(true);
   };
 
   const handleSongDelete = (song) => {
     console.log("Delete this Song:", song);
-    // Implement delete functionality here
     setDeleteSong(true);
   };
   return (
@@ -154,7 +154,7 @@ const AdminSearchSong = (props) => {
           ))}
         </div>
       </section>
-      {editSong && <EditSong id={songsList.map((song) => song.songId)} />}
+      {editSong && <EditSong id={seletedId} onClose={() => setEditSong(false)} />}
       <DeleteSong
         show={deleteSong}
         onHide={() => setDeleteSong(false)}
