@@ -55,13 +55,16 @@ const AdminSearchSong = (props) => {
   };
 
   const handleSongEdit = (id) => {
-    console.log(id);
+    console.log("Edit this Song with ID:", id);
+    // Implement edit functionality here
+    setEditSong(true);
   };
 
-  // const handleSongPlay = (song) => {
-  //   console.log("Playing song:", song);
-  // };
-
+  const handleSongDelete = (song) => {
+    console.log("Delete this Song:", song);
+    // Implement delete functionality here
+    setDeleteSong(true);
+  };
   return (
     <div className={`bg-${props.mode}`}>
       <section>
@@ -126,17 +129,14 @@ const AdminSearchSong = (props) => {
                       <button
                         type="button"
                         className="btn btn-warning mx-1"
-                        onClick={() => {
-                          handleSongEdit(song.songId);
-                          setEditSong(true);
-                        }}
+                        onClick={() => handleSongEdit(song.songId)}
                       >
                         <i className="fas fa-edit">&nbsp;</i>
                       </button>
                       <button
                         type="button"
                         className="btn btn-danger mx-1"
-                        onClick={() => setDeleteSong(true)}
+                        onClick={() => handleSongDelete(song)}
                       >
                         <i className="fas fa-trash">&nbsp;</i>
                       </button>
@@ -158,7 +158,7 @@ const AdminSearchSong = (props) => {
       <DeleteSong
         show={deleteSong}
         onHide={() => setDeleteSong(false)}
-        id={songsList.map((song) => song.songId)}
+        id={songsList.map((song) => song.Title)}
       />
     </div>
   );
