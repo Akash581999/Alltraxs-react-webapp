@@ -8,9 +8,9 @@ const SearchPlaylist = (props) => {
   const [deletePlaylist, setDeletePlaylist] = useState(false);
 
   const [playlistData, setPlaylistData] = useState({
-    Playlist_Id: "",
-    Title: "",
-    Description: "",
+    playlist_Id: "",
+    title: "",
+    description: "",
   });
 
   const handleChange = (e) => {
@@ -23,9 +23,9 @@ const SearchPlaylist = (props) => {
     const requestData = {
       eventID: "1015",
       addInfo: {
-        Playlist_Id: playlistData.Playlist_Id,
-        Title: playlistData.Title,
-        Description: playlistData.Description,
+        Playlist_Id: playlistData.playlist_Id,
+        Title: playlistData.title,
+        Description: playlistData.description,
       },
     };
 
@@ -81,11 +81,11 @@ const SearchPlaylist = (props) => {
             aria-label="Search"
             onChange={handleChange}
             value={
-              playlistData.Title ||
-              playlistData.Description ||
-              playlistData.Playlist_Id
+              playlistData.title ||
+              playlistData.description ||
+              playlistData.playlist_Id
             }
-            name={"Title" || "Description" || "Playlist_Id"}
+            name={"title" || "description" || "playlist_Id"}
           />
           <button className="btn btn-outline-success mx-2" type="submit">
             <i className="fa fa-search"></i>
@@ -150,7 +150,7 @@ const SearchPlaylist = (props) => {
       <DeletePlaylist
         show={deletePlaylist}
         onHide={() => setDeletePlaylist(false)}
-        id={playlistsRecord.map((playlist) => playlist.Playlist_Id)}
+        id={playlistsRecord.map((playlist) => playlist.Title)}
       />
     </div>
   );

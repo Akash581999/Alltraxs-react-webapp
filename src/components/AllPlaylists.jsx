@@ -53,15 +53,18 @@ const AllPlaylists = (props) => {
     }
   };
 
-  const handlePlaylistEdit = (playlist_Id) => {
-    console.log("Edit this playlist with ID:", playlist_Id);
+  const handlePlaylistEdit = (id) => {
+    console.log("Edit this playlist with ID:", id);
+    // Implement edit functionality here
     setEditPlaylist(true);
   };
 
   const handlePlaylistDelete = (playlist) => {
     console.log("Delete this playlist:", playlist);
+    // Implement delete functionality here
     setDeletePlaylist(true);
   };
+
   // const navigate = Navigate();
 
   return (
@@ -123,7 +126,7 @@ const AllPlaylists = (props) => {
                     <button
                       type="button"
                       className="btn btn-danger mx-1"
-                      onClick={() => handlePlaylistDelete(playlist.title)}
+                      onClick={() => handlePlaylistDelete(playlist)}
                     >
                       <i className="fas fa-trash">&nbsp;</i>
                     </button>
@@ -136,14 +139,14 @@ const AllPlaylists = (props) => {
       </section>
       {editPlaylist && (
         <EditPlaylist
-          id={playlistsRecord.map((playlist) => playlist.playlist_Id)}
+          id={playlistsRecord.map((playlist) => playlist.Playlist_Id)}
           onClose={() => setEditPlaylist(false)}
         />
       )}
       <DeletePlaylist
         show={deletePlaylist}
         onHide={() => setDeletePlaylist(false)}
-        id={playlistsRecord.map((playlist) => playlist.title)}
+        id={playlistsRecord.map((playlist) => playlist.Title)}
       />
     </div>
   );
