@@ -6,6 +6,7 @@ const SearchPlaylist = (props) => {
   const [playlistsRecord, setPlaylistsRecord] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState(false);
   const [deletePlaylist, setDeletePlaylist] = useState(false);
+  const [seletedId, setSeletedId] = useState("");
 
   const [playlistData, setPlaylistData] = useState({
     playlist_Id: "",
@@ -56,13 +57,12 @@ const SearchPlaylist = (props) => {
 
   const handlePlaylistEdit = (id) => {
     console.log("Edit this playlist with ID:", id);
-    // Implement edit functionality here
+    setSeletedId(id);
     setEditPlaylist(true);
   };
 
   const handlePlaylistDelete = (playlist) => {
     console.log("Delete this playlist:", playlist);
-    // Implement delete functionality here
     setDeletePlaylist(true);
   };
 
@@ -142,10 +142,7 @@ const SearchPlaylist = (props) => {
         </div>
       </section>
       {editPlaylist && (
-        <EditPlaylist
-          id={playlistsRecord.map((playlist) => playlist.Playlist_Id)}
-          onClose={() => setEditPlaylist(false)}
-        />
+        <EditPlaylist id={seletedId} onClose={() => setEditPlaylist(false)} />
       )}
       <DeletePlaylist
         show={deletePlaylist}

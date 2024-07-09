@@ -10,26 +10,34 @@ const EditPlaylist = (props) => {
     NumSongs: "",
   });
   const [playlistPic, setPlaylistPic] = useState("");
-  const [playlistId, setPlaylistId] = useState("");
 
   useEffect(() => {
-    if (props.id.length > 0) {
-      setPlaylistId(props.id[0]);
-      fetchPlaylistDetails(props.id[0]);
-    }
+    fetchPlaylistDetails();
   }, [props.id]);
 
-  const fetchPlaylistDetails = async (id) => {
+  const fetchPlaylistDetails = async () => {
+    const requestData = {
+      eventID: "1015",
+      addInfo: {
+        Playlist_Id: props.id,
+        Title: "",
+        Description: "",
+      },
+    };
     try {
-      const response = await fetch(`http://localhost:5164/playlists/${id}`, {
-        method: "GET",
+      const response = await fetch(`http://localhost:5164/playlists/id`, {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
+        body: JSON.stringify(requestData),
       });
       const data = await response.json();
-      if (response.ok) {
-        const playlist = data.playlist;
+      console.log("data of seleted playlist", data);
+
+      if (data.rData.rCode === 0) {
+        const playlist = data.rData;
+        console.log("playlist", playlist);
         setPlaylistData({
           PlaylistId: playlist.Playlist_Id,
           UserId: playlist.UserId,
@@ -69,26 +77,26 @@ const EditPlaylist = (props) => {
     e.preventDefault();
 
     const requestData = {
-      Playlist_Id: playlistId,
-      UserId: playlistData.UserId,
-      Title: playlistData.Title,
-      Description: playlistData.Description,
-      Type: playlistData.Type,
-      NumSongs: playlistData.NumSongs,
-      PlaylistImageUrl: playlistPic,
+      eventID: "1014",
+      addInfo: {
+        Playlist_Id: props.id,
+        UserId: playlistData.UserId,
+        Title: playlistData.Title,
+        Description: playlistData.Description,
+        Type: playlistData.Type,
+        NumSongs: playlistData.NumSongs,
+        PlaylistImageUrl: playlistPic,
+      },
     };
 
     try {
-      const response = await fetch(
-        `http://localhost:5164/playlists/${playlistId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(requestData),
-        }
-      );
+      const response = await fetch(`http://localhost:5164/playlists/id`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestData),
+      });
 
       const data = await response.json();
       console.log(data, "API response playlist data");
