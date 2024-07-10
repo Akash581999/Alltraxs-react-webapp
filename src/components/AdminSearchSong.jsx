@@ -58,13 +58,13 @@ const AdminSearchSong = (props) => {
   };
 
   const handleSongEdit = (id) => {
-    console.log("Edit this Song with ID:", id);
+    console.log("Edit this song with ID:", id);
     setSeletedId(id);
     setEditSong(true);
   };
 
   const handleSongDelete = (song) => {
-    console.log("Delete this Song:", song);
+    console.log("Delete this song:", song);
     setDeleteSong(true);
   };
   return (
@@ -91,7 +91,10 @@ const AdminSearchSong = (props) => {
 
         <div className="card-list my-3 mx-2 w-100">
           {songsList.map((song, index) => (
-            <div key={index} className="card bg-dark border-success mb-3">
+            <div
+              key={song.SongId || index}
+              className="card bg-dark border-success mb-3"
+            >
               <div className="row g-0">
                 <div className="col-md-2">
                   <img
@@ -131,7 +134,7 @@ const AdminSearchSong = (props) => {
                       <button
                         type="button"
                         className="btn btn-warning mx-1"
-                        onClick={() => handleSongEdit(song.songId)}
+                        onClick={() => handleSongEdit(song.SongId)}
                       >
                         <i className="fas fa-edit">&nbsp;</i>
                       </button>

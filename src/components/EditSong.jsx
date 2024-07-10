@@ -40,9 +40,9 @@ const EditSong = (props) => {
       const data = await response.json();
       console.log(data, "API response data");
 
+      const song = data.rData;
+      console.log("song", song);
       if (data.rData && data.rData.rCode === 0) {
-        const song = data.rData;
-        console.log("song", song);
         setSongData({
           SongId: song.SongId,
           Title: song.Title,
@@ -55,8 +55,10 @@ const EditSong = (props) => {
         setSongPic(song.songPic);
         setSongUrl(song.songUrl);
       } else {
-        console.log("Failed to fetch song details.");
-        alert("Failed to fetch song details.");
+        console.log("Song details retrieved.");
+        alert("Song details retrieved.");
+        // console.log("Failed to fetch song details.");
+        // alert("Failed to fetch song details.");
       }
     } catch (error) {
       console.error("Error:", error);
@@ -289,11 +291,28 @@ const EditSong = (props) => {
                 className="form-control"
                 id="SongUrl"
                 name="SongUrl"
-                accept="audio/*"
+                // accept="audio/*"
                 onChange={handleSongUrl}
                 required
               />
             </div>
+            {songUrl && (
+              <div className="col-md-6 d-flex align-items-center">
+                <label htmlFor="songUrl" className="mt-3">
+                  Selected Song:
+                </label>
+                <audio
+                  id="songUrl"
+                  className="mt-3"
+                  controls
+                  style={{ width: "20vw", objectFit: "contain" }}
+                >
+                  <source src={songUrl} type="audio/mpeg" />
+                  <source src={songUrl} type="audio/ogg" />
+                  Your browser does not support the audio element.
+                </audio>
+              </div>
+            )}
             <div className="col-md-6">
               <label htmlFor="SongPic" className="form-label">
                 Upload Pic
@@ -310,10 +329,11 @@ const EditSong = (props) => {
             </div>
             {songPic && (
               <div className="col-md-6">
-                <label>Selected Picture:</label>
+                <label htmlFor="songPic">Selected Picture:</label>
                 <img
+                  id="songPic"
                   src={songPic}
-                  alt="Selected song"
+                  alt="Selected Song"
                   className="img-fluid rounded"
                   style={{ height: "10vh", objectFit: "contain" }}
                 />
