@@ -9,15 +9,13 @@ const EditSong = (props) => {
     Genre: "",
     Duration: "",
     Popularity: "",
-    SongUrl: "",
   });
   const [songPic, setSongPic] = useState("");
-  const [songPicFile, setSongPicFile] = useState(null);
+  const [songUrl, setSongUrl] = useState("");
 
   useEffect(() => {
     fetchSongDetails();
   }, [props.id]);
-
 
   const fetchSongDetails = async () => {
     const requestData = {
@@ -36,25 +34,28 @@ const EditSong = (props) => {
         },
         body: JSON.stringify(requestData),
       });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       const data = await response.json();
-      console.log("data of seleted song", data);
+      console.log(data, "API response data");
 
-      if (data.rData.rCode === 0) {
+      if (data.rData && data.rData.rCode === 0) {
         const song = data.rData;
         console.log("song", song);
         setSongData({
           SongId: song.SongId,
-          title: song.Title,
-          artist: song.Artist,
-          album: song.Album,
-          genre: song.Genre,
-          duration: song.Duration,
-          popularity: song.Popularity,
-          songUrl: song.SongUrl,
-          // songPic: songPicFile,
+          Title: song.Title,
+          Artist: song.Artist,
+          Album: song.Album,
+          Genre: song.Genre,
+          Duration: song.Duration,
+          Popularity: song.Popularity,
         });
         setSongPic(song.songPic);
+        setSongUrl(song.songUrl);
       } else {
+        console.log("Failed to fetch song details.");
         alert("Failed to fetch song details.");
       }
     } catch (error) {
@@ -63,19 +64,26 @@ const EditSong = (props) => {
     }
   };
 
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
     const val = type === "checkbox" ? checked : value;
     setSongData({ ...songData, [name]: val });
   };
-
+  const handleSongUrl = (e) => {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+    reader.onloadend = () => {
+      setSongUrl(reader.result);
+    };
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  };
   const handleSongPic = (e) => {
     const file = e.target.files[0];
     const reader = new FileReader();
     reader.onloadend = () => {
       setSongPic(reader.result);
-      setSongPicFile(file);
     };
     if (file) {
       reader.readAsDataURL(file);
@@ -95,8 +103,8 @@ const EditSong = (props) => {
         genre: songData.Genre,
         duration: songData.Duration,
         popularity: songData.Popularity,
-        songUrl: songData.SongUrl,
-        songPic: songPicFile,
+        songUrl: songUrl,
+        songPic: songPic,
       },
     };
 
@@ -134,10 +142,9 @@ const EditSong = (props) => {
       Genre: "",
       Duration: "",
       Popularity: "",
-      SongUrl: "",
     });
     setSongPic("");
-    setSongPicFile(null);
+    setSongUrl("");
   };
 
   return (
@@ -163,9 +170,8 @@ const EditSong = (props) => {
                 className="form-control"
                 id="SongId"
                 name="SongId"
-                placeholder="Enter Song Id to edit..."
+                placeholder="Enter Song Id"
                 value={songData.SongId}
-                // onChange={handleChange}
                 readOnly
               />
             </div>
@@ -283,7 +289,8 @@ const EditSong = (props) => {
                 className="form-control"
                 id="SongUrl"
                 name="SongUrl"
-                onChange={handleChange}
+                accept="audio/*"
+                onChange={handleSongUrl}
                 required
               />
             </div>
@@ -296,14 +303,20 @@ const EditSong = (props) => {
                 className="form-control"
                 id="SongPic"
                 name="SongPic"
+                accept="image/*"
                 onChange={handleSongPic}
                 required
               />
             </div>
             {songPic && (
               <div className="col-md-6">
-                <label>Selected Song Picture:</label>
-                <img src={songPic} alt="Selected Song" className="img-fluid" />
+                <label>Selected Picture:</label>
+                <img
+                  src={songPic}
+                  alt="Selected song"
+                  className="img-fluid rounded"
+                  style={{ height: "10vh", objectFit: "contain" }}
+                />
               </div>
             )}
             <div className="col-md-12">

@@ -39,10 +39,12 @@ const AdminSearchSong = (props) => {
         body: JSON.stringify(requestData),
       });
 
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       const data = await response.json();
       console.log(data, "API response data");
-
-      if (response.ok && data.rData && data.rData.rCode === 0) {
+      if (data.rData && data.rData.rCode === 0) {
         alert(data.rData.rMessage || "Song found successfully!");
         setSongsList([data.rData]);
       } else {
@@ -154,7 +156,9 @@ const AdminSearchSong = (props) => {
           ))}
         </div>
       </section>
-      {editSong && <EditSong id={seletedId} onClose={() => setEditSong(false)} />}
+      {editSong && (
+        <EditSong id={seletedId} onClose={() => setEditSong(false)} />
+      )}
       <DeleteSong
         show={deleteSong}
         onHide={() => setDeleteSong(false)}

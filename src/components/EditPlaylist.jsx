@@ -32,10 +32,13 @@ const EditPlaylist = (props) => {
         },
         body: JSON.stringify(requestData),
       });
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
       const data = await response.json();
-      console.log("data of seleted playlist", data);
+      console.log(data, "API response data");
 
-      if (data.rData.rCode === 0) {
+      if (data.rData && data.rData.rCode === 0) {
         const playlist = data.rData;
         console.log("playlist", playlist);
         setPlaylistData({
@@ -48,6 +51,7 @@ const EditPlaylist = (props) => {
         });
         setPlaylistPic(playlist.PlaylistImageUrl);
       } else {
+        console.log("Failed to fetch playlist details.");
         alert("Failed to fetch playlist details.");
       }
     } catch (error) {
@@ -101,7 +105,7 @@ const EditPlaylist = (props) => {
       const data = await response.json();
       console.log(data, "API response playlist data");
 
-      if (response.ok) {
+      if (data.rData && data.rData.rCode === 0) {
         alert(data.message || "Playlist updated successfully!");
         resetForm();
       } else {
@@ -209,7 +213,7 @@ const EditPlaylist = (props) => {
               onChange={handleChange}
               required
             >
-              <option value="">Select..</option>
+              <option defaultValue>Select..</option>
               <option value="Public">Public</option>
               <option value="Private">Private</option>
             </select>
