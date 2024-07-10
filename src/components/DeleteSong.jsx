@@ -2,7 +2,7 @@
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-const DeleteSong = ({ props, show, onHide, id }) => {
+const DeleteSong = ({ show, onHide, id }) => {
   // const [Song, setSong] = useState(null);
 
   if (!id || id.length === 0) {
@@ -59,7 +59,6 @@ const DeleteSong = ({ props, show, onHide, id }) => {
       <Modal
         show={show}
         onHide={handleClose}
-        {...props}
         size="md"
         aria-labelledby="contained-modal-title-vcenter"
         centered

@@ -7,6 +7,8 @@ const AllSongs = (props) => {
   const [songsList, setSongsList] = useState([]);
   const [editSong, setEditSong] = useState(false);
   const [deleteSong, setDeleteSong] = useState(false);
+  const [selectEditId, setEditSeletedId] = useState("");
+  // const [selectDeleteId, setDeleteSeletedId] = useState("");
 
   useEffect(() => {
     fetchSongs();
@@ -55,7 +57,15 @@ const AllSongs = (props) => {
   };
 
   const handleSongEdit = (id) => {
-    console.log(id);
+    console.log("Edit this song with ID:", id);
+    setEditSeletedId(id);
+    setEditSong(true);
+  };
+
+  const handleSongDelete = (song) => {
+    console.log("Delete this song:", song);
+    // setDeleteSeletedId(id);
+    setDeleteSong(true);
   };
   return (
     <div className={`bg-${props.mode}`}>
@@ -114,19 +124,16 @@ const AllSongs = (props) => {
                   </td>
                   <td>
                     <button
-                      className="btn btn-warning mx-1"
                       type="button"
-                      onClick={() => {
-                        handleSongEdit(song.songId);
-                        setEditSong(true);
-                      }}
+                      className="btn btn-warning mx-1"
+                      onClick={() => handleSongEdit(song.songId)}
                     >
                       <i className="fas fa-edit">&nbsp;</i>
                     </button>
                     <button
-                      className="btn btn-danger mx-1"
                       type="button"
-                      onClick={() => setDeleteSong(true)}
+                      className="btn btn-danger mx-1"
+                      onClick={() => handleSongDelete(song.title)}
                     >
                       <i className="fas fa-trash">&nbsp;</i>
                     </button>
@@ -137,11 +144,14 @@ const AllSongs = (props) => {
           </Table>
         </div>
       </section>
-      {editSong && <EditSong id={songsList.map((song) => song.songId)} />}
+      {editSong && (
+        <EditSong id={selectEditId} onClose={() => setEditSong(false)} />
+      )}
       <DeleteSong
         show={deleteSong}
         onHide={() => setDeleteSong(false)}
-        id={songsList.map((song) => song.songId)}
+        id={songsList.map((song) => song.title)}
+        // id={selectDeleteId}
       />
     </div>
   );

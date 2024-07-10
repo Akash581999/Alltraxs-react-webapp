@@ -8,6 +8,7 @@ const AllPlaylists = (props) => {
   const [playlistsRecord, setPlaylistsRecord] = useState([]);
   const [editPlaylist, setEditPlaylist] = useState(false);
   const [deletePlaylist, setDeletePlaylist] = useState(false);
+  const [selectedPlaylist, setSelectedPlaylist] = useState("");
 
   useEffect(() => {
     fetchPlaylistsRecord();
@@ -55,17 +56,15 @@ const AllPlaylists = (props) => {
 
   const handlePlaylistEdit = (id) => {
     console.log("Edit this playlist with ID:", id);
-    // Implement edit functionality here
+    setSelectedPlaylist(id);
     setEditPlaylist(true);
   };
 
   const handlePlaylistDelete = (playlist) => {
     console.log("Delete this playlist:", playlist);
-    // Implement delete functionality here
+    setSelectedPlaylist(playlist);
     setDeletePlaylist(true);
   };
-
-  // const navigate = Navigate();
 
   return (
     <div className={`bg-${props.mode}`}>
@@ -117,9 +116,6 @@ const AllPlaylists = (props) => {
                       type="button"
                       className="btn btn-warning mx-1"
                       onClick={() => handlePlaylistEdit(playlist.playlist_Id)}
-                      // onClick={() =>
-                      //   navigate(`/EditPlaylist/${playlist.playlist_Id}`)
-                      // }
                     >
                       <i className="fas fa-edit">&nbsp;</i>
                     </button>
@@ -139,14 +135,14 @@ const AllPlaylists = (props) => {
       </section>
       {editPlaylist && (
         <EditPlaylist
-          id={playlistsRecord.map((playlist) => playlist.Playlist_Id)}
+          id={selectedPlaylist}
           onClose={() => setEditPlaylist(false)}
         />
       )}
       <DeletePlaylist
         show={deletePlaylist}
         onHide={() => setDeletePlaylist(false)}
-        id={playlistsRecord.map((playlist) => playlist.Title)}
+        id={playlistsRecord.map((playlist) => playlist.title)}
       />
     </div>
   );
