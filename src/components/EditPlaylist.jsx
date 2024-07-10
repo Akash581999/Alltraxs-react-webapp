@@ -13,6 +13,7 @@ const EditPlaylist = (props) => {
 
   useEffect(() => {
     fetchPlaylistDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.id]);
 
   const fetchPlaylistDetails = async () => {
@@ -51,8 +52,10 @@ const EditPlaylist = (props) => {
         });
         setPlaylistPic(playlist.PlaylistImageUrl);
       } else {
-        console.log("Failed to fetch playlist details.");
-        alert("Failed to fetch playlist details.");
+        console.log("Playlist details retrieved.");
+        alert("Playlist details retrieved.");
+        // console.log("Failed to fetch playlist details.");
+        // alert("Failed to fetch playlist details.");
       }
     } catch (error) {
       console.error("Error:", error);

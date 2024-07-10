@@ -15,6 +15,7 @@ const EditSong = (props) => {
 
   useEffect(() => {
     fetchSongDetails();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props.id]);
 
   const fetchSongDetails = async () => {
@@ -52,8 +53,8 @@ const EditSong = (props) => {
           Duration: song.Duration,
           Popularity: song.Popularity,
         });
-        setSongPic(song.songPic);
-        setSongUrl(song.songUrl);
+        setSongPic(song.SongPic);
+        setSongUrl(song.SongUrl);
       } else {
         console.log("Song details retrieved.");
         alert("Song details retrieved.");
@@ -291,9 +292,8 @@ const EditSong = (props) => {
                 className="form-control"
                 id="SongUrl"
                 name="SongUrl"
-                // accept="audio/*"
+                accept="audio/*"
                 onChange={handleSongUrl}
-                required
               />
             </div>
             {songUrl && (
@@ -324,7 +324,6 @@ const EditSong = (props) => {
                 name="SongPic"
                 accept="image/*"
                 onChange={handleSongPic}
-                required
               />
             </div>
             {songPic && (
