@@ -2,12 +2,16 @@ import React from "react";
 import { Link } from "react-router-dom";
 import AllTraxslogo from "../images/AllTraxslogo.png";
 import user from "../images/userimg1.jpg";
-import SongPlayer from "./SongPlayer";
-// import Album from "./Album";
 // import SearchSongs from "./SearchSongs";
-// import CardList from "./CardList";
-// import LikedSongs from "./LikedSongs";
+import SongPlayer from "./SongPlayer";
+import Album from "./Album";
+import CardList from "./CardList";
+import LikedSongs from "./LikedSongs";
 import SongsLibrary from "./SongsLibrary";
+import Col from "react-bootstrap/Col";
+import Nav from "react-bootstrap/Nav";
+import Row from "react-bootstrap/Row";
+import Tab from "react-bootstrap/Tab";
 
 const DashBoard = (props) => {
   return (
@@ -41,7 +45,7 @@ const DashBoard = (props) => {
               <span className="navbar-toggler-icon"></span>
             </button>
             <div className="search navbar-nav ms-5 w-100">
-              <SongPlayer />
+              {/* <SongPlayer /> */}
             </div>
             <div
               className="collapse navbar-collapse"
@@ -189,9 +193,9 @@ const DashBoard = (props) => {
                   aria-labelledby="dropdownUser1"
                 >
                   <li>
-                    <a className="dropdown-item" href="/">
+                    <Link className="dropdown-item" to="/UserProfile">
                       <i className="fa fa-user"></i>&nbsp; Profile
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <a className="dropdown-item" href="/">
@@ -228,98 +232,76 @@ const DashBoard = (props) => {
         </article>
 
         <section>
-          <div className="row">
-            <div className="col-lg-2 col-md-3 col-sm-4 col-12">
-              <div className="d-flex align-items-start h-100 bg-dark">
-                <nav
-                  className="nav d-flex flex-column align-items-stretch pe-4 nav-pills p-2 w-100 h-100"
-                  id="v-pills-tab"
-                  role="tablist"
-                  aria-orientation="vertical"
-                >
-                  <ul className="d-flex flex-column" role="tablist">
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link active w-100 text-light"
-                        id="home-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#home"
-                        type="button"
-                        role="tab"
-                        aria-controls="home"
-                        aria-selected="true"
-                      >
-                        <i className="fa fa-home text-info"></i>&nbsp; Home
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link w-100 text-light"
-                        id="profile-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#profile"
-                        type="button"
-                        role="tab"
-                        aria-controls="profile"
-                        aria-selected="false"
-                      >
-                        <i className="fa fa-search text-info"></i>&nbsp;Search
-                      </button>
-                    </li>
-                    <hr className="text-secondary" />
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link w-100 text-light"
-                        id="messages-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#messages"
-                        type="button"
-                        role="tab"
-                        aria-controls="messages"
-                        aria-selected="false"
-                      >
-                        <i className="fa fa-table text-info"></i>&nbsp;Library
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link w-100 text-light"
-                        id="settings-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#settings"
-                        type="button"
-                        role="tab"
-                        aria-controls="settings"
-                        aria-selected="false"
-                      >
-                        <i className="fa fa-thumbs-up text-info"></i>
-                        &nbsp;Liked songs
-                      </button>
-                    </li>
-                    <li className="nav-item" role="presentation">
-                      <button
-                        className="nav-link w-100 text-light"
-                        id="settings-tab"
-                        data-bs-toggle="tab"
-                        data-bs-target="#settings"
-                        type="button"
-                        role="tab"
-                        aria-controls="settings"
-                        aria-selected="false"
-                      >
-                        <i className="fa fa-music text-info"></i>&nbsp;Playlists
-                      </button>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-            </div>
-            <div className="col-lg-10 col-md-9 col-sm-8 col-12">
-              {/* <CardList /> */}
-              {/* <Album /> */}
-              {/* <LikedSongs /> */}
-              <SongsLibrary />
-            </div>
+          <div className="row" style={{ minHeight: "100vh" }}>
+            <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+              <Row>
+                <Col sm={2} className="bg-dark">
+                  <Nav variant="pills" className="flex-column">
+                    <Nav.Item>
+                      <Nav.Link eventKey="first">
+                        <span className="text-light center">
+                          {/* <i className="fas fa-users text-info">&nbsp;</i>Users */}
+                          <i className="fa fa-home text-info"></i>&nbsp; Home
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="second">
+                        <span className="text-light center">
+                          {/* <i className="fas fa-music text-info">&nbsp;</i>Songs */}
+                          <i className="fa fa-search text-info"></i>&nbsp;Search
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="third">
+                        <span className="text-light center">
+                          <i className="fa fa-table text-info"></i>&nbsp;Library
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="forth">
+                        <span className="text-light center">
+                          {/* <i className="fas fa-envelope text-info">&nbsp;</i>
+                          Feedbacks */}
+                          <i className="fas fa-list text-info">&nbsp;</i>Playlists
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="fifth">
+                        <span className="text-light center">
+                          {/* <i className="fas fa-rupee text-info">&nbsp;</i>
+                          Subscriptions */}
+                          <i className="fa fa-thumbs-up text-info"></i>&nbsp;Liked songs
+                        </span>
+                      </Nav.Link>
+                    </Nav.Item>
+                  </Nav>
+                </Col>
+                <Col sm={10}>
+                  <Tab.Content>
+                    <Tab.Pane eventKey="first">
+                      <SongsLibrary />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="second">
+                      {/* <SearchSongs /> */}
+                      <SongPlayer />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="third">
+                      <Album />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="forth">
+                      <CardList />
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="fifth">
+                      <LikedSongs />
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Col>
+              </Row>
+            </Tab.Container>
           </div>
         </section>
       </div>
